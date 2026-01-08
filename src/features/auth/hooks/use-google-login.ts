@@ -1,19 +1,33 @@
 import { useUser } from "@/src/contexts/use-user";
-import { auth } from "@/src/features/auth/config/firebase";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import {
-  GoogleAuthProvider,
-  signInWithCredential,
-  UserCredential,
-} from "firebase/auth";
+  AuthResponse,
+  useFetchUserByGoogleToken,
+} from "@/src/features/auth/hooks/use-fetch-user-by-google-token";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useState } from "react";
 
 export const useGoogleLogin = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingGoogleSignIn, setIsLoadingGoogleSignIn] =
+    useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
+  const {
+    mutateAsync: verifyGoogleToken,
+    isPending: isLoadingVerifyGoogleToken,
+  } = useFetchUserByGoogleToken({
+    onSuccess: (data: AuthResponse) => {
+      const user = data.user;
+
+      setUserStorage(user);
+    },
+    onError: (error: Error) => {
+      setError(error);
+    },
+  });
+
   const { setUserStorage } = useUser();
-  const login = async (): Promise<UserCredential | undefined> => {
-    setIsLoading(true);
+
+  const login = async (): Promise<AuthResponse | undefined> => {
+    setIsLoadingGoogleSignIn(true);
     setError(null);
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     try {
@@ -21,25 +35,16 @@ export const useGoogleLogin = () => {
       if (!result.data?.idToken) {
         throw new Error("Google Sign-In failed: No idToken returned");
       }
-      const idToken = result.data?.idToken;
-      // Transforme en credential Firebase
-      const credential = GoogleAuthProvider.credential(idToken);
-
-      // Connecte Firebase
-      const userCredential = await signInWithCredential(auth, credential);
-      const user = {
-        id: userCredential.user.uid,
-        name: userCredential.user.displayName,
-        email: userCredential.user.email,
-        avatar: userCredential.user.photoURL,
-      };
-      setUserStorage(user);
+      const { idToken } = result.data;
+      return verifyGoogleToken(idToken);
     } catch (error: any) {
+      console.log("error", error);
       setError(error);
       return undefined;
     } finally {
-      setIsLoading(false);
+      setIsLoadingGoogleSignIn(false);
     }
   };
+  const isLoading = isLoadingVerifyGoogleToken || isLoadingGoogleSignIn;
   return { login, isLoading, error };
 };

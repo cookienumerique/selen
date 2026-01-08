@@ -3,11 +3,12 @@ import { useUser } from "@/src/contexts/use-user";
 import { Image, View } from "react-native";
 export const UserAvatarName = () => {
   const { user } = useUser();
+
   if (!user) return null;
   return (
     <View style={{ justifyContent: "center", alignItems: "center", gap: 16 }}>
       <Image
-        source={{ uri: user.avatar ?? "" }}
+        source={{ uri: user.picture ?? "" }}
         style={{ width: 100, height: 100, borderRadius: 50 }}
       />
       <View

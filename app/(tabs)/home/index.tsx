@@ -6,7 +6,7 @@ import HaloButton from "@/src/components/shared/halo-button";
 import { Text } from "@/src/components/texts";
 import { Title } from "@/src/components/texts/title";
 import { Colors } from "@/src/constants/theme";
-import { useCapsules } from "@/src/contexts/use-capsules";
+// import { useCapsules } from "@/src/contexts/use-capsules";
 import { useUser } from "@/src/contexts/use-user";
 import HelloGreeting from "@/src/features/auth/components/user-greeting";
 import { LoginButton } from "@/src/features/home/components/login-button";
@@ -16,7 +16,7 @@ import { View } from "react-native";
 
 export default function HomeScreen() {
   const { user } = useUser();
-  const { clearCapsulesAnswered } = useCapsules();
+  // const { clearCapsulesAnswered } = useCapsules();
   const handleDiscoverCapsule = () => {
     router.push("/unlock-capsule");
   };

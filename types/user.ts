@@ -1,6 +1,8 @@
 export type User = {
-  id: string | null;
+  uid: string | null;
   email: string | null;
+  roles: string[];
   name: string | null;
-  avatar: string | null;
+  picture?: string | null;
+  createdAt: string;
 };
