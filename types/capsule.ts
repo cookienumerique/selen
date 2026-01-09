@@ -1,4 +1,5 @@
 export type Capsule = {
   id: string;
-  question: string;
+  content: string;
+  createdAt: string;
 };

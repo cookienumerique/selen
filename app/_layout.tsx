@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import React, { useEffect } from "react";
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

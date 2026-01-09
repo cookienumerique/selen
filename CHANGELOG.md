@@ -1,8 +1,15 @@
 # Changelog
 
-## [1.0.2] – 2026-01-05
+## [1.2.0] – 2026-01-09
 
-### Fixed
+### Added
+
+- Save the token in the storage at connection
+- fetch capsules from selen API
+
+## [1.1.0] – 2026-01-05
+
+### Added
 
 - Save the user after connection in database
 

@@ -1,4 +1,4 @@
-import capsulesJSON from "@/src/features/capsule/capsules.json";
+import { useFetchCapsules } from "@/src/features/capsule/hooks/use-fetch-capsules";
 import { Capsule } from "@/types/capsule";
 import { CapsuleAnswer } from "@/types/capsule-answer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,7 +23,8 @@ const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
 );
 
 export function CapsulesProvider({ children }: { children: ReactNode }) {
-  const [capsules] = useState<Capsule[]>(capsulesJSON);
+  const { data } = useFetchCapsules();
+  const capsules = data?.capsules || [];
   const [capsulesAnswered, setCapsulesAnswered] = useState<CapsuleAnswer[]>([]);
   const CAPSULES_STORAGE_KEY = "selen_capsules";
 

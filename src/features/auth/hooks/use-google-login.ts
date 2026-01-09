@@ -1,12 +1,14 @@
+import { VerifyGoogleTokenResponse } from "@/src/api/authentification/verify-google-token";
 import { useUser } from "@/src/contexts/use-user";
-import {
-  AuthResponse,
-  useFetchUserByGoogleToken,
-} from "@/src/features/auth/hooks/use-fetch-user-by-google-token";
+import { useFetchUserByGoogleToken } from "@/src/features/auth/hooks/use-fetch-user-by-google-token";
+import { useTokenStorage } from "@/src/features/user/hooks/use-token-storage";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useState } from "react";
 
 export const useGoogleLogin = () => {
+  const { setToken } = useTokenStorage();
+  const { setUserStorage } = useUser();
+
   const [isLoadingGoogleSignIn, setIsLoadingGoogleSignIn] =
     useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
@@ -14,17 +16,14 @@ export const useGoogleLogin = () => {
     mutateAsync: verifyGoogleToken,
     isPending: isLoadingVerifyGoogleToken,
   } = useFetchUserByGoogleToken({
-    onSuccess: (data: AuthResponse) => {
-      const user = data.user;
-
+    onSuccess: ({ user, token }: VerifyGoogleTokenResponse) => {
+      setToken(token);
       setUserStorage(user);
     },
     onError: (error: Error) => {
       setError(error);
     },
   });
-
-  const { setUserStorage } = useUser();
 
   const login = async (): Promise<AuthResponse | undefined> => {
     setIsLoadingGoogleSignIn(true);
@@ -36,6 +35,7 @@ export const useGoogleLogin = () => {
         throw new Error("Google Sign-In failed: No idToken returned");
       }
       const { idToken } = result.data;
+      console.log("idToken", idToken);
       return verifyGoogleToken(idToken);
     } catch (error: any) {
       console.log("error", error);

@@ -88,7 +88,7 @@ export default function UnLockCapsule() {
               color: Colors.slateRoot,
             }}
           >
-            {capsuleToUnlock?.question}
+            {capsuleToUnlock?.content}
           </Text>
           <Controller
             control={form.control}
