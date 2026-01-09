@@ -12,10 +12,10 @@ import HelloGreeting from "@/src/features/auth/components/user-greeting";
 import { LoginButton } from "@/src/features/home/components/login-button";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 
 export default function HomeScreen() {
-  const { user } = useUser();
+  const { user, isLoadingUser } = useUser();
   // const { clearCapsulesAnswered } = useCapsules();
   const handleDiscoverCapsule = () => {
     router.push("/unlock-capsule");
@@ -34,55 +34,70 @@ export default function HomeScreen() {
           paddingBottom: 16,
         }}
       >
-        <View style={{ flex: 1, justifyContent: "center", gap: 32 }}>
-          <Title
-            style={{
-              zIndex: 2,
-              color: Colors.oakHoney,
-              textAlign: "center",
-              fontSize: 32,
-              lineHeight: 48,
-            }}
-          >
-            Bienvenue dans ton moment de clarté intérieure 🌿
-          </Title>
-
-          <Text
-            style={{
-              zIndex: 2,
-              textAlign: "center",
-              fontSize: 20,
-              color: Colors.slateRoot,
-            }}
-          >
-            Un espace pour ralentir, écrire, respirer… et te reconnecter à
-            toi-même
-          </Text>
-        </View>
-
-        {!user && <LoginButton />}
-        {user && (
-          <View style={{ position: "relative" }}>
-            <HaloButton />
-            <Button style={{ width: "100%" }} onPress={handleDiscoverCapsule}>
-              <View
+        {isLoadingUser && (
+          <View style={{ flex: 1, justifyContent: "center", gap: 16 }}>
+            <ActivityIndicator />
+            <Text style={{ textAlign: "center" }}>
+              Chargement des données...
+            </Text>
+          </View>
+        )}
+        {!isLoadingUser && (
+          <>
+            <View style={{ flex: 1, justifyContent: "center", gap: 32 }}>
+              <Title
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 16,
+                  zIndex: 2,
+                  color: Colors.oakHoney,
+                  textAlign: "center",
+                  fontSize: 32,
+                  lineHeight: 48,
                 }}
               >
-                <FontAwesome5
-                  name="capsules"
-                  size={22}
-                  color={Colors.oakHoneyDark}
-                />
-                <Text style={{ fontSize: 16, color: Colors.oakHoneyDark }}>
-                  Je découvre ma capsule
-                </Text>
+                Bienvenue dans ton moment de clarté intérieure 🌿
+              </Title>
+
+              <Text
+                style={{
+                  zIndex: 2,
+                  textAlign: "center",
+                  fontSize: 20,
+                  color: Colors.slateRoot,
+                }}
+              >
+                Un espace pour ralentir, écrire, respirer… et te reconnecter à
+                toi-même
+              </Text>
+            </View>
+
+            {!user && <LoginButton />}
+            {user && (
+              <View style={{ position: "relative" }}>
+                <HaloButton />
+                <Button
+                  style={{ width: "100%" }}
+                  onPress={handleDiscoverCapsule}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 16,
+                    }}
+                  >
+                    <FontAwesome5
+                      name="capsules"
+                      size={22}
+                      color={Colors.oakHoneyDark}
+                    />
+                    <Text style={{ fontSize: 16, color: Colors.oakHoneyDark }}>
+                      Je découvre ma capsule
+                    </Text>
+                  </View>
+                </Button>
               </View>
-            </Button>
-          </View>
+            )}
+          </>
         )}
       </View>
       {/* <Button onPress={() => clearCapsulesAnswered()}>

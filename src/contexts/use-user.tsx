@@ -56,7 +56,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   return (
     <UserContext.Provider
-      value={{ logout, user, setUserStorage, bearerTokenSelen, isLoadingUser }}
+      value={{
+        logout,
+        user,
+        setUserStorage,
+        bearerTokenSelen,
+        isLoadingUser,
+      }}
     >
       {children}
     </UserContext.Provider>

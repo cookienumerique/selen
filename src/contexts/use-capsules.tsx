@@ -12,6 +12,7 @@ import {
 } from "react";
 type CapsulesContextReturn = {
   capsules: Capsule[];
+  isLoadingCapsules: boolean;
   saveCapsule: (capsule: CapsuleAnswer) => Promise<void>;
   capsulesAnswered: CapsuleAnswer[];
   clearCapsulesAnswered: () => Promise<void>;
@@ -23,7 +24,7 @@ const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
 );
 
 export function CapsulesProvider({ children }: { children: ReactNode }) {
-  const { data } = useFetchCapsules();
+  const { data, isLoading: isLoadingCapsules } = useFetchCapsules();
   const capsules = data?.capsules || [];
   const [capsulesAnswered, setCapsulesAnswered] = useState<CapsuleAnswer[]>([]);
   const CAPSULES_STORAGE_KEY = "selen_capsules";
@@ -63,6 +64,7 @@ export function CapsulesProvider({ children }: { children: ReactNode }) {
     <CapsulesContext.Provider
       value={{
         capsules,
+        isLoadingCapsules,
         saveCapsule,
         capsulesAnswered,
         clearCapsulesAnswered,
