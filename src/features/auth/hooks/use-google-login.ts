@@ -35,7 +35,7 @@ export const useGoogleLogin = () => {
         throw new Error("Google Sign-In failed: No idToken returned");
       }
       const { idToken } = result.data;
-      console.log("idToken", idToken);
+      // console.log("idToken", idToken);
       return verifyGoogleToken(idToken);
     } catch (error: any) {
       console.log("error", error);

@@ -20,7 +20,6 @@ export const useTokenStorage = (): UseTokenStorageReturn => {
 
   const setToken = async (token: string): Promise<void> => {
     await AsyncStorage.setItem(TOKEN_STORAGE_KEY, token);
-    setToken(token);
   };
 
   const removeToken = async (): Promise<void> => {
