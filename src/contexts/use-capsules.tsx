@@ -26,6 +26,7 @@ const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
 export function CapsulesProvider({ children }: { children: ReactNode }) {
   const { data, isLoading: isLoadingCapsules } = useFetchCapsules();
   const capsules = data?.capsules || [];
+
   const [capsulesAnswered, setCapsulesAnswered] = useState<CapsuleAnswer[]>([]);
   const CAPSULES_STORAGE_KEY = "selen_capsules";
 

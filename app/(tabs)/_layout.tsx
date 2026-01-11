@@ -4,7 +4,9 @@ import React from "react";
 import { Colors } from "@/src/constants/theme";
 import { FontAwesome5, Octicons } from "@expo/vector-icons";
 import MaterialDesignIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
   const iconSize = 24;
   const iconColor = Colors.oakHoneyDark;
   return (
@@ -14,7 +16,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          height: 72,
+          height: 72 + insets.bottom,
           backgroundColor: Colors.oakHoney,
           opacity: 0.8,
         },

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1] – 2026-01-11
+
+### Added
+
+- a connection is require for opening capsules
+- UI menu is fixed when navigation with buttons
+
 ## [1.2.0] – 2026-01-09
 
 ### Added

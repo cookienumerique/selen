@@ -13,10 +13,8 @@ export const useFetchCapsules = (
 
   return useQuery<FetchCapsulesResponse, Error>({
     queryKey: ["capsules"],
-    queryFn: async () =>
-      fetchCapsules({
-        headers: { Authorization: `Bearer ${bearerTokenSelen}` },
-      }),
+    queryFn: async () => fetchCapsules(),
+    enabled: !!bearerTokenSelen,
     ...props,
   });
 };

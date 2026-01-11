@@ -3,6 +3,7 @@ import { useUser } from "@/src/contexts/use-user";
 import { useFetchUserByGoogleToken } from "@/src/features/auth/hooks/use-fetch-user-by-google-token";
 import { useTokenStorage } from "@/src/features/user/hooks/use-token-storage";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { router } from "expo-router";
 import { useState } from "react";
 
 export const useGoogleLogin = () => {
@@ -19,13 +20,14 @@ export const useGoogleLogin = () => {
     onSuccess: ({ user, token }: VerifyGoogleTokenResponse) => {
       setToken(token);
       setUserStorage(user);
+      router.replace("/");
     },
     onError: (error: Error) => {
       setError(error);
     },
   });
 
-  const login = async (): Promise<AuthResponse | undefined> => {
+  const login = async (): Promise<VerifyGoogleTokenResponse | undefined> => {
     setIsLoadingGoogleSignIn(true);
     setError(null);
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });

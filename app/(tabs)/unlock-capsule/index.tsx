@@ -5,6 +5,7 @@ import { MoonBackground } from "@/src/components/layout/moon-background";
 import HaloButton from "@/src/components/shared/halo-button";
 import { Colors } from "@/src/constants/theme";
 import { useCapsules } from "@/src/contexts/use-capsules";
+import { useUser } from "@/src/contexts/use-user";
 import { FontAwesome6 } from "@expo/vector-icons";
 import Entypo from "@expo/vector-icons/Entypo";
 import dayjs from "dayjs";
@@ -34,8 +35,9 @@ export default function UnLockCapsule() {
     hasUnlockedCapsuleToday,
     isLoadingCapsules,
   } = useCapsules();
-
+  const { user, isLoadingUser } = useUser();
   const capsuleIndex = capsulesAnswered.length;
+
   const capsuleToUnlock = capsules[capsuleIndex] ?? undefined;
   const form = useForm<UnlockCapsuleFormValues>({
     defaultValues: {
@@ -45,6 +47,12 @@ export default function UnLockCapsule() {
   });
 
   useEffect(() => {
+    if (!user && !isLoadingUser) {
+      router.replace("/capsule/connection-required-screen");
+
+      return;
+    }
+
     if (hasUnlockedCapsuleToday) {
       router.replace("/capsule/capsule-already-unlock-today");
       return;
@@ -54,7 +62,7 @@ export default function UnLockCapsule() {
       router.replace("/capsule/all-capsules-unlocked");
       return;
     }
-  }, [hasUnlockedCapsuleToday, capsuleToUnlock]);
+  }, [hasUnlockedCapsuleToday, capsuleToUnlock, user, isLoadingUser]);
 
   const handleAnswer = ({ answer, date }: UnlockCapsuleFormValues) => {
     const capsule = {
