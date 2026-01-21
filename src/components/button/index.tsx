@@ -1,26 +1,25 @@
 import { Colors } from "@/src/constants/theme";
 import React from "react";
-import { ButtonProps, Button as PaperButton } from "react-native-paper";
+import { Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
+
+type ButtonProps = Omit<PressableProps, "style"> & {
+  style?: StyleProp<ViewStyle>;
+};
 
 export function Button({ style, disabled, ...rest }: ButtonProps) {
   return (
-    <PaperButton
+    <Pressable
       disabled={disabled}
-      mode="contained"
-      style={[
-        {
-          alignItems: "center",
-          justifyContent: "center",
-          paddingVertical: 8,
-          paddingHorizontal: 16,
-          borderRadius: 100,
-          width: "100%",
-          gap: 16,
-          backgroundColor: Colors.oakHoney,
-          opacity: disabled ? 0.5 : 1,
-        },
-        style,
-      ]}
+      style={[{
+        backgroundColor: Colors.oakHoney,
+        paddingVertical: 16,
+        paddingHorizontal: 16,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 100,
+        gap: 16,
+      }, style]}
       {...rest}
     />
   );

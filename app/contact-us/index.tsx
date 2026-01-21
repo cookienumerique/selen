@@ -87,12 +87,10 @@ export default function ContactUs() {
           onPress={form.handleSubmit(handleContactUs)}
           disabled={!form.formState.isValid}
         >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 16 }}>
-            <FontAwesome name="send" size={16} color={Colors.oakHoneyDark} />
-            <Text style={{ fontSize: 16, color: Colors.oakHoneyDark }}>
-              Envoyer
-            </Text>
-          </View>
+          <FontAwesome name="send" size={14} color={Colors.oakHoneyDark} />
+          <Text style={{ fontSize: 14, color: Colors.oakHoneyDark }}>
+            Envoyer
+          </Text>
         </Button>
       </View>
     </Container>

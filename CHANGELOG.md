@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0] – 2026-01-21
+
+### Added
+
+- user can respond to capsule
+
 ## [1.2.1] – 2026-01-11
 
 ### Added

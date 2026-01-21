@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export const useGoogleLogin = () => {
   const { setToken } = useTokenStorage();
-  const { setUserStorage } = useUser();
+  const { setUser } = useUser();
 
   const [isLoadingGoogleSignIn, setIsLoadingGoogleSignIn] =
     useState<boolean>(false);
@@ -19,7 +19,7 @@ export const useGoogleLogin = () => {
   } = useFetchUserByGoogleToken({
     onSuccess: ({ user, token }: VerifyGoogleTokenResponse) => {
       setToken(token);
-      setUserStorage(user);
+      setUser(user);
       router.replace("/");
     },
     onError: (error: Error) => {
@@ -37,7 +37,7 @@ export const useGoogleLogin = () => {
         throw new Error("Google Sign-In failed: No idToken returned");
       }
       const { idToken } = result.data;
-      // console.log("idToken", idToken);
+      console.log("idToken", idToken);
       return verifyGoogleToken(idToken);
     } catch (error: any) {
       console.log("error", error);

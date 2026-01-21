@@ -1,5 +1,5 @@
 export type Capsule = {
-  id: string;
+  id: number;
   content: string;
   createdAt: string;
 };

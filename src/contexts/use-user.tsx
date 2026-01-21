@@ -1,7 +1,6 @@
-import { useFetchMe } from "@/src/features/user/hooks/use-fetch-me";
+import { selenAPIClient } from "@/src/api/axios";
 import { useTokenStorage } from "@/src/features/user/hooks/use-token-storage";
 import { User } from "@/types/user";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   createContext,
   ReactNode,
@@ -12,7 +11,7 @@ import {
 type UserContextReturn = {
   bearerTokenSelen: string | null;
   user: User | null;
-  setUserStorage: (user: User) => Promise<User>;
+  setUser: (user: User) => void;
   logout: () => Promise<void>;
   isLoadingUser: boolean;
 };
@@ -21,45 +20,41 @@ const UserContext = createContext<UserContextReturn | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [bearerTokenSelen, setBearerTokenSelen] = useState<string | null>(null);
-
   const { removeToken, getToken } = useTokenStorage();
-  const { data: dataUser, isLoading: isLoadingUser } =
-    useFetchMe(bearerTokenSelen);
-  const { user: userDataAPI } = dataUser || {};
-
-  const USER_STORAGE_KEY = "selen_user";
-
-  const setUserStorage = async (user: User): Promise<User> => {
-    await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
-    setUser(user);
-    return user;
-  };
 
   const logout = async (): Promise<void> => {
-    await AsyncStorage.removeItem(USER_STORAGE_KEY);
     setUser(null);
+    setBearerTokenSelen(null)
     removeToken();
   };
 
   useEffect(() => {
     getToken().then((token) => {
       setBearerTokenSelen(token);
+      setIsLoadingUser(true);
+      try {
+        if (user || !token) return;
+        console.log("fetching user", user, token)
+        selenAPIClient.get("/users/me", { headers: { Authorization: `Bearer ${token}` } }).then((response) => {
+          setUser(response.data);
+        });
+      } catch (error) {
+        console.error(error);
+        setIsLoadingUser(false);
+      } finally {
+        setIsLoadingUser(false);
+      }
     });
-  }, [getToken]);
-
-  useEffect(() => {
-    if (userDataAPI) {
-      setUser(userDataAPI);
-    }
-  }, [userDataAPI]);
+  }, [getToken, user]);
 
   return (
     <UserContext.Provider
       value={{
         logout,
         user,
-        setUserStorage,
+        setUser,
         bearerTokenSelen,
         isLoadingUser,
       }}

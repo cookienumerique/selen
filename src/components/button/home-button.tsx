@@ -3,14 +3,13 @@ import { Text } from "@/src/components/texts";
 import { Colors } from "@/src/constants/theme";
 import { Octicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { View } from "react-native";
 
 export default function HomeButton() {
   const handleReturnToHome = () => {
     router.replace("/");
   };
 
-  const fontSize = 18;
+  const fontSize = 14;
   return (
     <Button
       onPress={handleReturnToHome}
@@ -20,17 +19,15 @@ export default function HomeButton() {
         backgroundColor: Colors.warmSand,
       }}
     >
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 16 }}>
-        <Octicons name="home" size={fontSize} color={Colors.oakHoneyDark} />
-        <Text
-          style={{
-            fontSize: fontSize,
-            color: Colors.oakHoneyDark,
-          }}
-        >
-          Revenir à l&apos;accueil
-        </Text>
-      </View>
+      <Octicons name="home" size={fontSize} color={Colors.oakHoneyDark} />
+      <Text
+        style={{
+          fontSize: fontSize,
+          color: Colors.oakHoneyDark,
+        }}
+      >
+        Revenir à l&apos;accueil
+      </Text>
     </Button>
   );
 }

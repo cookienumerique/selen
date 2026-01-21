@@ -1,6 +1,7 @@
 import { Button } from "@/src/components/button";
 import { Text } from "@/src/components/texts";
 import { env } from "@/src/config/env";
+import { Colors } from "@/src/constants/theme";
 import { useGoogleLogin } from "@/src/features/auth/hooks/use-google-login";
 import * as MailComposer from "expo-mail-composer";
 import { Image, TouchableOpacity, View } from "react-native";
@@ -32,21 +33,16 @@ export const LoginButton = () => {
         onPress={handleLogin}
         disabled={isLoading}
         style={{
-          backgroundColor: "white",
-          flexDirection: "row",
-          borderWidth: 1,
-          borderColor: "gray",
+          backgroundColor: 'white',
         }}
       >
-        <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
-          <Image
-            source={require("@/assets/images/google-logo.svg")}
-            style={{ width: 20, height: 20 }}
-          />
-          <Text style={{ color: "gray", fontWeight: "bold" }}>
-            Se connecter avec Google
-          </Text>
-        </View>
+        <Image
+          source={require("@/assets/images/google-logo.svg")}
+          style={{ width: 20, height: 20 }}
+        />
+        <Text style={{ color: Colors.gray, fontWeight: "600" }}>
+          Se connecter avec Google
+        </Text>
       </Button>
       {error && (
         <TouchableOpacity onPress={handleContactSupport}>

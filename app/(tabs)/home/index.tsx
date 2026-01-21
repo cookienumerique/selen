@@ -16,7 +16,6 @@ import { ActivityIndicator, View } from "react-native";
 
 export default function HomeScreen() {
   const { user, isLoadingUser } = useUser();
-  // const { clearCapsulesAnswered } = useCapsules();
   const handleDiscoverCapsule = () => {
     router.push("/unlock-capsule");
   };
@@ -78,31 +77,20 @@ export default function HomeScreen() {
                   style={{ width: "100%" }}
                   onPress={handleDiscoverCapsule}
                 >
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 16,
-                    }}
-                  >
-                    <FontAwesome5
-                      name="capsules"
-                      size={22}
-                      color={Colors.oakHoneyDark}
-                    />
-                    <Text style={{ fontSize: 16, color: Colors.oakHoneyDark }}>
-                      Je découvre ma capsule
-                    </Text>
-                  </View>
+                  <FontAwesome5
+                    name="capsules"
+                    size={14}
+                    color={Colors.oakHoneyDark}
+                  />
+                  <Text style={{ fontSize: 14, color: Colors.oakHoneyDark }}>
+                    Je découvre ma capsule
+                  </Text>
                 </Button>
               </View>
             )}
           </>
         )}
       </View>
-      {/* <Button onPress={() => clearCapsulesAnswered()}>
-        <Text>Effacer</Text>
-      </Button> */}
     </Container>
   );
 }

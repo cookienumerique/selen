@@ -1,16 +1,10 @@
-import { Container } from "@/src/components/layout/container";
-import { HaloBackground } from "@/src/components/layout/halo-background";
-import { Header } from "@/src/components/layout/header";
 import { Colors } from "@/src/constants/theme";
 import { LoginButton } from "@/src/features/home/components/login-button";
 import { Image, Text, View } from "react-native";
 
-export default function ConnectionRequiredScreen() {
+export default function ConnectionRequired() {
   return (
-    <Container>
-      <HaloBackground />
-      <Header />
-
+    <>
       <View
         style={{
           flex: 1,
@@ -47,6 +41,6 @@ export default function ConnectionRequiredScreen() {
         </Text>
       </View>
       <LoginButton />
-    </Container>
+    </>
   );
 }
