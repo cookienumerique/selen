@@ -1,14 +1,15 @@
-import { selenAPIClient } from "@/src/api/axios";
-import { useTokenStorage } from "@/src/features/user/hooks/use-token-storage";
-import { User } from "@/types/user";
+import { selenAPIClient } from '@/src/api/axios';
+import { useTokenStorage } from '@/src/features/user/hooks/use-token-storage';
+import { User } from '@/types/user';
 import {
   createContext,
   ReactNode,
   useContext,
   useEffect,
   useState,
-} from "react";
-type UserContextReturn = {
+} from 'react';
+
+export type UserContextReturn = {
   bearerTokenSelen: string | null;
   user: User | null;
   setUser: (user: User) => void;
@@ -26,7 +27,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const logout = async (): Promise<void> => {
     setUser(null);
-    setBearerTokenSelen(null)
+    setBearerTokenSelen(null);
     removeToken();
   };
 
@@ -36,10 +37,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
       setIsLoadingUser(true);
       try {
         if (user || !token) return;
-        console.log("fetching user", user, token)
-        selenAPIClient.get("/users/me", { headers: { Authorization: `Bearer ${token}` } }).then((response) => {
-          setUser(response.data);
-        });
+        selenAPIClient
+          .get('/users/me', { headers: { Authorization: `Bearer ${token}` } })
+          .then((response) => {
+            setUser(response.data?.user);
+          });
       } catch (error) {
         console.error(error);
         setIsLoadingUser(false);
@@ -67,7 +69,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 export function useUser() {
   const ctx = useContext(UserContext);
   if (!ctx) {
-    throw new Error("useUser must be used inside <UserProvider>");
+    throw new Error('useUser must be used inside <UserProvider>');
   }
   return ctx;
 }

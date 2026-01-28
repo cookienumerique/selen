@@ -1,5 +1,5 @@
-import { Colors, Fonts } from "@/src/constants/theme";
-import { Text, type TextProps } from "react-native";
+import { Colors, Fonts } from '@/src/constants/theme';
+import { Text, type TextProps } from 'react-native';
 
 export function Title({ style, ...rest }: TextProps) {
   return (

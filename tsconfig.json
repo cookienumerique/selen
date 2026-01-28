@@ -3,14 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "app/my-account-user"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "app/my-account-user"]
 }

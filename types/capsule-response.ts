@@ -1,5 +1,5 @@
-import { Capsule } from "@/types/capsule";
-import { User } from "@/types/user";
+import { Capsule } from '@/types/capsule';
+import { User } from '@/types/user';
 
 export type CapsuleResponse = {
   id: number;

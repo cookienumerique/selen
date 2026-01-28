@@ -1,6 +1,6 @@
-import { env } from "@/src/config/env";
-import { useUser } from "@/src/contexts/use-user";
-import axios, { AxiosError } from "axios";
+import { env } from '@/src/config/env';
+import { useUser } from '@/src/contexts/use-user';
+import axios, { AxiosError } from 'axios';
 
 export const selenAPIClient = axios.create({
   baseURL: env.SELEN_API,
@@ -15,7 +15,7 @@ export const useAxios = () => {
   selenAPIClient.interceptors.request.use(
     (config) => {
       if (debug) {
-        console.log("➡️ API REQUEST", {
+        console.log('➡️ API REQUEST', {
           method: config.method?.toUpperCase(),
           url: (config?.baseURL ?? '') + (config?.url ?? ''),
           headers: config.headers,
@@ -31,10 +31,10 @@ export const useAxios = () => {
     },
     (error) => {
       if (debug) {
-        console.error("❌ API REQUEST ERROR", error);
+        console.error('❌ API REQUEST ERROR', error);
       }
       return Promise.reject(error);
-    }
+    },
   );
 
   /**
@@ -43,7 +43,7 @@ export const useAxios = () => {
   selenAPIClient.interceptors.response.use(
     (response) => {
       if (debug) {
-        console.log("✅ API RESPONSE", {
+        console.log('✅ API RESPONSE', {
           url: response.config.url,
           status: response.status,
           data: response.data,
@@ -53,7 +53,7 @@ export const useAxios = () => {
     },
     (error: AxiosError<any>) => {
       if (debug) {
-        console.error("🚨 API RESPONSE ERROR", {
+        console.error('🚨 API RESPONSE ERROR', {
           url: error.config?.url,
           method: error.config?.method,
           status: error.response?.status,
@@ -63,9 +63,8 @@ export const useAxios = () => {
       }
 
       return Promise.reject(error);
-    }
+    },
   );
 
   return selenAPIClient;
-}
-
+};

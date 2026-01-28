@@ -1,10 +1,17 @@
-import { CapsulesProvider } from "@/src/contexts/use-capsules";
-import { UserProvider } from "@/src/contexts/use-user";
-import { configureGoogleSignIn } from "@/src/features/auth/config/google-signin";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useFonts } from "expo-font";
-import { Slot } from "expo-router";
-import React, { useEffect } from "react";
+import { toastConfig } from '@/src/components/toast/selen-toast';
+import { CapsulesProvider } from '@/src/contexts/use-capsules';
+import { UserProvider } from '@/src/contexts/use-user';
+import { configureGoogleSignIn } from '@/src/features/auth/config/google-signin';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import 'dayjs/locale/fr';
+import { useFonts } from 'expo-font';
+import { Slot } from 'expo-router';
+import React, { useEffect } from 'react';
+import Toast from 'react-native-toast-message';
+
+dayjs.locale('fr');
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -16,8 +23,8 @@ const queryClient = new QueryClient({
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    "OpenSans-Regular": require("../assets/fonts/OpenSans-Regular.ttf"),
-    "OpenSans-Bold": require("../assets/fonts/OpenSans-Bold.ttf"),
+    'OpenSans-Regular': require('../assets/fonts/OpenSans-Regular.ttf'),
+    'OpenSans-Bold': require('../assets/fonts/OpenSans-Bold.ttf'),
   });
 
   useEffect(() => {
@@ -30,6 +37,7 @@ export default function RootLayout() {
       <UserProvider>
         <CapsulesProvider>
           <Slot />
+          <Toast config={toastConfig} bottomOffset={200} />
         </CapsulesProvider>
       </UserProvider>
     </QueryClientProvider>

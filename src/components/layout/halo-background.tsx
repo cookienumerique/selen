@@ -1,4 +1,4 @@
-import { Image, ImageProps, View } from "react-native";
+import { Image, ImageProps, View } from 'react-native';
 
 type HaloBackgroundProps = ImageProps;
 export const HaloBackground = (props: HaloBackgroundProps) => {
@@ -6,18 +6,18 @@ export const HaloBackground = (props: HaloBackgroundProps) => {
   return (
     <View
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
         zIndex: 0,
       }}
     >
       <Image
-        source={require("@/assets/images/halo.png")}
+        source={require('@/assets/images/halo.png')}
         style={[
           {
             width: 350,

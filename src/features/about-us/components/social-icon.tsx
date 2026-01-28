@@ -1,4 +1,4 @@
-import { Linking, TouchableOpacity } from "react-native";
+import { Linking, TouchableOpacity } from 'react-native';
 
 type SocialIconProps = {
   url: string;
@@ -29,8 +29,8 @@ const SocialIcon = ({ url, appURL, icon }: SocialIconProps) => {
       style={{
         width: 40,
         height: 40,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       {icon}

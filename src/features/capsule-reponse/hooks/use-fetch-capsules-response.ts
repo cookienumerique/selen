@@ -1,27 +1,44 @@
-import { useAxios } from "@/src/api/axios";
-import { useUser } from "@/src/contexts/use-user";
-import { CapsuleResponse } from "@/types/capsule-response";
-import { QueryOptions, useQuery } from "@tanstack/react-query";
+import { useAxios } from '@/src/api/axios';
+import { useUser } from '@/src/contexts/use-user';
+import { CapsuleResponse } from '@/types/capsule-response';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
+import Toast from 'react-native-toast-message';
 
 type FetchCapsulesResponse = {
   items: CapsuleResponse[];
 };
 
 export const useFetchCapsulesResponse = (
-  props?: QueryOptions<CapsuleResponse[], Error>
+  props?: UseQueryOptions<CapsuleResponse[], Error>,
 ) => {
   const { bearerTokenSelen } = useUser();
   const axios = useAxios();
 
-  const { data, ...rest } = useQuery<CapsuleResponse[], Error>({
-    queryKey: ["capsules-responses"],
+  const toastShownRef = useRef(false);
+
+  const query = useQuery<CapsuleResponse[], Error>({
+    queryKey: ['capsules-responses'],
     queryFn: async () => {
-      const { data } = await axios.get<FetchCapsulesResponse>("/capsules-response");
-      return data.items || [];
+      const { data } =
+        await axios.get<FetchCapsulesResponse>('/capsules-response');
+      return data.items ?? [];
     },
     enabled: !!bearerTokenSelen,
     ...props,
   });
 
-  return { data, ...rest };
+  useEffect(() => {
+    if (!query.error) return;
+    if (toastShownRef.current) return;
+    toastShownRef.current = true;
+    Toast.show({
+      type: 'error',
+      text1: 'Erreur lors du chargement des capsules',
+      position: 'bottom',
+      autoHide: false,
+    });
+  }, [query.error]);
+
+  return query;
 };

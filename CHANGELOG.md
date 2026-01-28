@@ -1,36 +1,42 @@
 # Changelog
 
+## [1.4.0] – 2026-01-22
+
+### Added
+
+- Users can view previously responded capsules
+
 ## [1.3.0] – 2026-01-21
 
 ### Added
 
-- user can respond to capsule
+- Users can respond to capsules
 
 ## [1.2.1] – 2026-01-11
 
 ### Added
 
-- a connection is require for opening capsules
-- UI menu is fixed when navigation with buttons
+- Authentication is required to open capsules
+- Fixed the UI menu when navigating with buttons
 
 ## [1.2.0] – 2026-01-09
 
 ### Added
 
-- Save the token in the storage at connection
-- fetch capsules from selen API
+- Token is stored locally upon login
+- Capsules are fetched from the Selen API
 
 ## [1.1.0] – 2026-01-05
 
 ### Added
 
-- Save the user after connection in database
+- Users are saved in the database after login
 
 ## [1.0.2] – 2026-01-05
 
 ### Fixed
 
-- Fixed the version in the UI
+- Fixed version display in the UI
 
 ## [1.0.1] – 2026-01-05
 

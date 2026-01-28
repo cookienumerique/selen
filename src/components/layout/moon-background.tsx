@@ -1,4 +1,4 @@
-import { Image, ImageProps, View } from "react-native";
+import { Image, ImageProps, View } from 'react-native';
 
 type MoonBackgroundProps = ImageProps;
 export const MoonBackground = (props: MoonBackgroundProps) => {
@@ -6,18 +6,18 @@ export const MoonBackground = (props: MoonBackgroundProps) => {
   return (
     <View
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
         zIndex: 0,
       }}
     >
       <Image
-        source={require("@/assets/images/selen-logo.png")}
+        source={require('@/assets/images/selen-logo.png')}
         style={[
           {
             width: 350,

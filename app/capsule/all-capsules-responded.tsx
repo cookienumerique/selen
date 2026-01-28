@@ -1,5 +1,5 @@
-import HomeButton from "@/src/components/button/home-button";
-import { Text, View } from "react-native";
+import HomeButton from '@/src/components/button/home-button';
+import { Text, View } from 'react-native';
 export default function AllCapsulesResponded() {
   return (
     <>

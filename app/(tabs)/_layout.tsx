@@ -1,17 +1,18 @@
-import { Tabs } from "expo-router";
-import React from "react";
+import { Tabs } from 'expo-router';
+import React from 'react';
 
-import { Colors } from "@/src/constants/theme";
-import { FontAwesome5, Octicons } from "@expo/vector-icons";
-import MaterialDesignIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Colors } from '@/src/constants/theme';
+import { FontAwesome5, Ionicons, Octicons } from '@expo/vector-icons';
+import MaterialDesignIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
   const iconSize = 24;
   const iconColor = Colors.oakHoneyDark;
   return (
     <Tabs
-      initialRouteName="my-account/index"
+      initialRouteName="home/index"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
@@ -21,8 +22,8 @@ export default function TabLayout() {
           opacity: 0.8,
         },
         tabBarItemStyle: {
-          justifyContent: "center",
-          alignItems: "center",
+          justifyContent: 'center',
+          alignItems: 'center',
         },
         tabBarIconStyle: {
           marginTop: 16,
@@ -37,17 +38,29 @@ export default function TabLayout() {
           ),
         }}
       />
-
       <Tabs.Screen
-        name="unlock-capsule/index"
+        name="calendar/index"
+        options={{
+          tabBarIcon: () => (
+            <Ionicons
+              name="calendar-outline"
+              size={iconSize}
+              color={iconColor}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="open-capsule/index"
         options={{
           tabBarIcon: () => (
             <FontAwesome5 name="capsules" size={iconSize} color={iconColor} />
           ),
         }}
       />
+
       <Tabs.Screen
-        name="my-account/index"
+        name="settings/index"
         options={{
           tabBarIcon: () => (
             <MaterialDesignIcons

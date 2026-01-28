@@ -1,19 +1,19 @@
-import { Colors } from "@/src/constants/theme";
-import SectionTitle from "@/src/features/about-us/components/section-title";
-import SocialIcon from "@/src/features/about-us/components/social-icon";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Entypo from "@expo/vector-icons/Entypo";
-import { View } from "react-native";
+import { Colors } from '@/src/constants/theme';
+import SectionTitle from '@/src/features/about-us/components/section-title';
+import SocialIcon from '@/src/features/about-us/components/social-icon';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Entypo from '@expo/vector-icons/Entypo';
+import { View } from 'react-native';
 
 function FollowUs() {
   return (
     <View
       style={{
-        alignItems: "center",
+        alignItems: 'center',
       }}
     >
       <SectionTitle>Suivez-nous</SectionTitle>
-      <View style={{ flexDirection: "row", gap: 16 }}>
+      <View style={{ flexDirection: 'row', gap: 16 }}>
         <SocialIcon
           appURL="fb://profile/61583036055705"
           url="https://www.facebook.com/profile.php?id=61583036055705"

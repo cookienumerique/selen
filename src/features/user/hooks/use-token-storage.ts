@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type UseTokenStorageReturn = {
   getToken: () => Promise<string | null>;
@@ -11,7 +11,7 @@ type UseTokenStorageReturn = {
  * @returns {UseTokenStorageReturn}
  */
 export const useTokenStorage = (): UseTokenStorageReturn => {
-  const TOKEN_STORAGE_KEY = "@selen/token";
+  const TOKEN_STORAGE_KEY = '@selen/token';
 
   const getToken = async (): Promise<string | null> => {
     const token = await AsyncStorage.getItem(TOKEN_STORAGE_KEY);

@@ -1,12 +1,12 @@
-import { Button } from "@/src/components/button";
-import { Text } from "@/src/components/texts";
-import { Colors } from "@/src/constants/theme";
-import { Octicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { Button } from '@/src/components/button';
+import { Text } from '@/src/components/texts';
+import { Colors } from '@/src/constants/theme';
+import { Octicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 export default function HomeButton() {
   const handleReturnToHome = () => {
-    router.replace("/");
+    router.push('/');
   };
 
   const fontSize = 14;

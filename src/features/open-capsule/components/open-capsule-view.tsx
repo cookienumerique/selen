@@ -1,17 +1,17 @@
-import CapsuleAlreadyRespondedToday from "@/app/capsule/capsule-already-responded-today";
-import ConnectionRequired from "@/app/capsule/connection-required";
-import { Button } from "@/src/components/button";
-import { Container } from "@/src/components/layout/container";
-import { Header } from "@/src/components/layout/header";
-import { MoonBackground } from "@/src/components/layout/moon-background";
-import HaloButton from "@/src/components/shared/halo-button";
-import { Colors } from "@/src/constants/theme";
-import { useCapsules } from "@/src/contexts/use-capsules";
-import { useUser } from "@/src/contexts/use-user";
-import { FontAwesome6 } from "@expo/vector-icons";
-import Entypo from "@expo/vector-icons/Entypo";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import CapsuleAlreadyRespondedToday from '@/app/capsule/capsule-already-responded-today';
+import ConnectionRequired from '@/app/capsule/connection-required';
+import { Button } from '@/src/components/button';
+import { Container } from '@/src/components/layout/container';
+import { Header } from '@/src/components/layout/header';
+import { MoonBackground } from '@/src/components/layout/moon-background';
+import HaloButton from '@/src/components/shared/halo-button';
+import { Colors } from '@/src/constants/theme';
+import { useCapsules } from '@/src/contexts/use-capsules';
+import { useUser } from '@/src/contexts/use-user';
+import { FontAwesome6 } from '@expo/vector-icons';
+import Entypo from '@expo/vector-icons/Entypo';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import {
   ActivityIndicator,
   Image,
@@ -19,10 +19,10 @@ import {
   ScrollView,
   Text,
   TextInput,
-  View
-} from "react-native";
+  View,
+} from 'react-native';
 
-export default function UnLockCapsule() {
+export default function OpenCapsuleView() {
   const {
     capsules,
     capsulesResponses,
@@ -39,7 +39,7 @@ export default function UnLockCapsule() {
   const capsuleToUnlock = capsules[capsuleIndex] ?? undefined;
   const form = useForm<{ response: string }>({
     defaultValues: {
-      response: "",
+      response: '',
     },
   });
 
@@ -48,7 +48,7 @@ export default function UnLockCapsule() {
   };
 
   const handleSkipCapsule = () => {
-    createCapsuleResponse({ capsuleId: capsuleToUnlock?.id, response: "" });
+    createCapsuleResponse({ capsuleId: capsuleToUnlock?.id, response: '' });
   };
 
   return (
@@ -60,7 +60,6 @@ export default function UnLockCapsule() {
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         {!userConnected && <ConnectionRequired />}
         {capsuleAlreadyRespondedToday && <CapsuleAlreadyRespondedToday />}
-        {/* {capsuleToUnlock && <AllCapsul esResponded />} */}
         {userConnected && !capsuleAlreadyRespondedToday && (
           <ScrollView
             contentContainerStyle={{
@@ -70,29 +69,29 @@ export default function UnLockCapsule() {
             }}
           >
             {isLoadingCapsules && (
-              <View style={{ flex: 1, justifyContent: "center", gap: 16 }}>
+              <View style={{ flex: 1, justifyContent: 'center', gap: 16 }}>
                 <ActivityIndicator />
-                <Text style={{ textAlign: "center" }}>
+                <Text style={{ textAlign: 'center' }}>
                   Chargement des données...
                 </Text>
               </View>
             )}
             {!isLoadingCapsules && (
               <>
-                <View style={{ alignItems: "center", marginVertical: 32 }}>
+                <View style={{ alignItems: 'center', marginVertical: 32 }}>
                   <Image
-                    source={require("@/assets/images/capsule.png")}
+                    source={require('@/assets/images/capsule.png')}
                     style={{
                       width: 200,
                       height: 120,
-                      resizeMode: "contain",
+                      resizeMode: 'contain',
                     }}
                   />
                 </View>
                 <Text
                   style={{
                     fontSize: 20,
-                    textAlign: "center",
+                    textAlign: 'center',
                     color: Colors.slateRoot,
                   }}
                 >
@@ -105,19 +104,19 @@ export default function UnLockCapsule() {
                   render={({ field: { onChange, value } }) => (
                     <View
                       style={{
-                        position: "relative",
+                        position: 'relative',
                       }}
                     >
                       <Image
-                        source={require("@/assets/images/scotch.png")}
+                        source={require('@/assets/images/scotch.png')}
                         style={{
-                          position: "absolute",
+                          position: 'absolute',
                           top: -20,
-                          left: "50%",
+                          left: '50%',
                           transform: [{ translateX: -90 }],
                           height: 40,
                           width: 180,
-                          resizeMode: "contain",
+                          resizeMode: 'contain',
                           zIndex: 1,
                         }}
                       />
@@ -130,10 +129,10 @@ export default function UnLockCapsule() {
                         style={{
                           borderRadius: 16,
                           borderColor: Colors.oakHoneyDark,
-                          backgroundColor: "white",
+                          backgroundColor: 'white',
                           paddingVertical: 32,
                           padding: 16,
-                          textAlignVertical: "top",
+                          textAlignVertical: 'top',
                           height: 150,
                         }}
                       />
@@ -142,19 +141,26 @@ export default function UnLockCapsule() {
                 />
 
                 <View
-                  style={{ position: "relative", marginTop: "auto", gap: 16 }}
+                  style={{ position: 'relative', marginTop: 'auto', gap: 16 }}
                 >
                   <HaloButton />
                   <Button
-                    style={{ marginTop: "auto" }}
+                    style={{ marginTop: 'auto' }}
                     onPress={form.handleSubmit(handleCreateCapsuleResponse)}
-                    disabled={!form.formState.isValid || isLoadingCreateCapsuleResponseMutation}
+                    disabled={
+                      !form.formState.isValid ||
+                      isLoadingCreateCapsuleResponseMutation
+                    }
                   >
-                    {isLoadingCreateCapsuleResponseMutation ? <ActivityIndicator /> : <Entypo
-                      name="pencil"
-                      size={14}
-                      color={Colors.oakHoneyDark}
-                    />}
+                    {isLoadingCreateCapsuleResponseMutation ? (
+                      <ActivityIndicator />
+                    ) : (
+                      <Entypo
+                        name="pencil"
+                        size={14}
+                        color={Colors.oakHoneyDark}
+                      />
+                    )}
 
                     <Text style={{ fontSize: 14, color: Colors.oakHoneyDark }}>
                       Je pose mes mots
@@ -162,15 +168,14 @@ export default function UnLockCapsule() {
                   </Button>
                   <Button
                     onPress={handleSkipCapsule}
-                    style={{ backgroundColor: "transparent" }}
+                    style={{ backgroundColor: 'transparent' }}
                   >
-
                     <FontAwesome6
                       name="arrow-rotate-right"
                       size={14}
                       color="gray"
                     />
-                    <Text style={{ fontSize: 12, color: "gray" }}>
+                    <Text style={{ fontSize: 12, color: 'gray' }}>
                       Passer cette capsule
                     </Text>
                   </Button>
@@ -179,8 +184,6 @@ export default function UnLockCapsule() {
             )}
           </ScrollView>
         )}
-
-
       </KeyboardAvoidingView>
     </Container>
   );
