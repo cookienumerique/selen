@@ -1,6 +1,6 @@
 import { formatStreakRange } from '@/src/features/calendar/utils/format-streak-range';
 import { getMaxStreakRangeForMonth } from '@/src/features/calendar/utils/get-max-streak-for-month';
-import { CapsuleResponse } from '@/types/capsule-response';
+import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import dayjs from 'dayjs';
 
 export type UseCalendarStatsReturn = {

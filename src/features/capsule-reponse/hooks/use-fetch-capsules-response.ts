@@ -1,6 +1,6 @@
 import { useAxios } from '@/src/api/axios';
 import { useUser } from '@/src/contexts/use-user';
-import { CapsuleResponse } from '@/types/capsule-response';
+import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import Toast from 'react-native-toast-message';

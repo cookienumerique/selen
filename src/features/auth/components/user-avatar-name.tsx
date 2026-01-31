@@ -6,10 +6,22 @@ export const UserAvatarName = () => {
 
   if (!user) return null;
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', gap: 16 }}>
+    <View
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 16,
+      }}
+    >
       <Image
-        source={{ uri: user.picture ?? '' }}
-        style={{ width: 100, height: 100, borderRadius: 50 }}
+        source={{
+          uri: user.picture ?? '',
+        }}
+        style={{
+          width: 100,
+          height: 100,
+          borderRadius: 50,
+        }}
       />
       <View
         style={{
@@ -19,7 +31,14 @@ export const UserAvatarName = () => {
           alignItems: 'center',
         }}
       >
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{user.name}</Text>
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: 'bold',
+          }}
+        >
+          {user.name}
+        </Text>
         <Text style={{ color: 'gray' }}>{user.email}</Text>
       </View>
     </View>

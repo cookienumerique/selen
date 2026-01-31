@@ -3,9 +3,9 @@ import {
   useCreateCapsuleResponse,
 } from '@/src/features/capsule-reponse/hooks/use-create';
 import { useFetchCapsulesResponse } from '@/src/features/capsule-reponse/hooks/use-fetch-capsules-response';
+import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import { useFetchCapsules } from '@/src/features/capsule/hooks/use-fetch-capsules';
-import { Capsule } from '@/types/capsule';
-import { CapsuleResponse } from '@/types/capsule-response';
+import { Capsule } from '@/src/features/capsule/types/capsule.types';
 import dayjs from 'dayjs';
 import { router } from 'expo-router';
 import { createContext, ReactNode, useContext } from 'react';

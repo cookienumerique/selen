@@ -1,5 +1,5 @@
 import { useAxios } from '@/src/api/axios';
-import { CapsuleResponse } from '@/types/capsule-response';
+import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import Toast from 'react-native-toast-message';
@@ -22,7 +22,6 @@ export const useFetchCapsulesResponseById = (id: number) => {
     },
     enabled: !!id,
   });
-
   useEffect(() => {
     if (!query.error) return;
     if (toastShownRef.current) return;

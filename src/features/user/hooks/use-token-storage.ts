@@ -26,5 +26,9 @@ export const useTokenStorage = (): UseTokenStorageReturn => {
     await AsyncStorage.removeItem(TOKEN_STORAGE_KEY);
   };
 
-  return { getToken, setToken, removeToken };
+  return {
+    getToken,
+    setToken,
+    removeToken,
+  };
 };

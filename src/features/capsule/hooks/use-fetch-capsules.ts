@@ -1,6 +1,6 @@
 import { useAxios } from '@/src/api/axios';
 import { useUser } from '@/src/contexts/use-user';
-import { Capsule } from '@/types/capsule';
+import { Capsule } from '@/src/features/capsule/types/capsule.types';
 import { QueryOptions, useQuery } from '@tanstack/react-query';
 
 type FetchCapsulesResponse = {

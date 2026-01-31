@@ -12,13 +12,13 @@ export function Button({ style, disabled, ...rest }: ButtonProps) {
       disabled={disabled}
       style={[
         {
-          backgroundColor: Colors.oakHoney,
+          backgroundColor: Colors.slateRoot,
           paddingVertical: 16,
           paddingHorizontal: 16,
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: 100,
+          borderRadius: 24,
           gap: 16,
         },
         style,

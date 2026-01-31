@@ -19,7 +19,13 @@ export const SettingsItem = ({ label, icon, route }: SettingsItemProps) => {
           justifyContent: 'space-between',
         }}
       >
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 16,
+          }}
+        >
           {icon}
           <Text style={{ color: 'gray' }}>{label}</Text>
         </View>

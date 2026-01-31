@@ -1,3 +1,13 @@
+## [1.5.0] – 2026-01-31
+
+### Added
+
+- Daily inner weather selection (one mood per day)
+- Inner weather visualization in the calendar
+- Capsule responses visualization in the calendar
+- Stacked indicators to display multiple activities on the same day
+- Access to previously completed capsules
+
 # Changelog
 
 ## [1.4.0] – 2026-01-22

@@ -1,10 +1,9 @@
-const version = '1.4.0';
-const versionCode = 9;
+const version = '1.5.0';
+const versionCode = 10;
 const supportMail = 'conceptiondigitale.team@gmail.com';
 const packageName = 'com.cookienumerique.selen';
 const selenAPI = "https://api-selen.cookie-numerique.fr";
 // const selenAPI = 'http://192.168.1.25:8083';
-// const selenAPI = 'http://192.168.1.63:8083';
 
 export default {
   expo: {

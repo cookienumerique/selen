@@ -24,9 +24,17 @@ export const StatsRow = ({ stats, isLoading }: StatsRowProps) => {
         {isLoading ? (
           <StatSkeleton />
         ) : (
-          <View style={{ alignItems: 'center' }}>
+          <View
+            style={{
+              alignItems: 'center',
+            }}
+          >
             <View
-              style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 8,
+              }}
             >
               <FontAwesome5 name="capsules" size={24} color={Colors.capsule} />
               <Text
@@ -56,9 +64,17 @@ export const StatsRow = ({ stats, isLoading }: StatsRowProps) => {
         {isLoading ? (
           <StatSkeleton />
         ) : (
-          <View style={{ alignItems: 'center' }}>
+          <View
+            style={{
+              alignItems: 'center',
+            }}
+          >
             <View
-              style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 8,
+              }}
             >
               <FontAwesome5 name="fire" size={20} color={Colors.orange} />
               <Text
@@ -73,7 +89,11 @@ export const StatsRow = ({ stats, isLoading }: StatsRowProps) => {
               </Text>
             </View>
             <Text
-              style={{ fontSize: 12, color: Colors.gray, textAlign: 'center' }}
+              style={{
+                fontSize: 12,
+                color: Colors.gray,
+                textAlign: 'center',
+              }}
             >
               jours consécutifs
             </Text>
@@ -84,10 +104,18 @@ export const StatsRow = ({ stats, isLoading }: StatsRowProps) => {
         {isLoading ? (
           <StatSkeleton />
         ) : (
-          <View style={{ alignItems: 'center' }}>
+          <View
+            style={{
+              alignItems: 'center',
+            }}
+          >
             <FontAwesome name="trophy" size={20} color={Colors.gold} />
             <Text
-              style={{ fontSize: 12, color: Colors.gray, textAlign: 'center' }}
+              style={{
+                fontSize: 12,
+                color: Colors.gray,
+                textAlign: 'center',
+              }}
             >
               Top semaine
             </Text>

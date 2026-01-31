@@ -13,7 +13,12 @@ function FollowUs() {
       }}
     >
       <SectionTitle>Suivez-nous</SectionTitle>
-      <View style={{ flexDirection: 'row', gap: 16 }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          gap: 16,
+        }}
+      >
         <SocialIcon
           appURL="fb://profile/61583036055705"
           url="https://www.facebook.com/profile.php?id=61583036055705"

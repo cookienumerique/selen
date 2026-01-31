@@ -12,7 +12,9 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 export const CapsuleResponseDetailScreen = () => {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id } = useLocalSearchParams<{
+    id: string;
+  }>();
   const { data: capsuleResponse, isLoading } = useFetchCapsulesResponseById(
     Number(id),
   );
@@ -26,11 +28,26 @@ export const CapsuleResponseDetailScreen = () => {
       <MoonBackground />
       <Header onGoBack={() => router.push('/(tabs)/calendar')} />
 
-      <View style={{ flex: 1, paddingVertical: 32 }}>
+      <View
+        style={{
+          flex: 1,
+          paddingVertical: 32,
+        }}
+      >
         {isLoading && <ActivityIndicator />}
         {capsuleResponse && (
-          <View style={{ flex: 1, gap: 32 }}>
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <View
+            style={{
+              flex: 1,
+              gap: 32,
+            }}
+          >
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
               <Image
                 source={require('@/assets/images/capsule.png')}
                 style={{
@@ -53,7 +70,12 @@ export const CapsuleResponseDetailScreen = () => {
                 'dddd D MMMM YYYY, à HH:mm',
               )}
             </Text>
-            <Card style={{ gap: 36, paddingHorizontal: 24 }}>
+            <Card
+              style={{
+                gap: 36,
+                paddingHorizontal: 24,
+              }}
+            >
               <Text
                 style={{
                   fontSize: 16,

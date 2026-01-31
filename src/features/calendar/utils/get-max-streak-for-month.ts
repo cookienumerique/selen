@@ -23,7 +23,12 @@ export function getMaxStreakRangeForMonth(
     ),
   ).sort();
 
-  if (days.length === 0) return { length: 0, start: '', end: '' };
+  if (days.length === 0)
+    return {
+      length: 0,
+      start: '',
+      end: '',
+    };
 
   let maxRange: StreakRange = {
     start: days[0],

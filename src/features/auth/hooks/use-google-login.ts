@@ -37,7 +37,9 @@ export const useGoogleLogin = () => {
   const login = async (): Promise<VerifyGoogleTokenResponse | undefined> => {
     setIsLoadingGoogleSignIn(true);
     setError(null);
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    await GoogleSignin.hasPlayServices({
+      showPlayServicesUpdateDialog: true,
+    });
     try {
       const result = await GoogleSignin.signIn();
       if (!result.data?.idToken) {

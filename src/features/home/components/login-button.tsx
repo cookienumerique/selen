@@ -34,9 +34,17 @@ export const LoginButton = () => {
       >
         <Image
           source={require('@/assets/images/google-logo.svg')}
-          style={{ width: 20, height: 20 }}
+          style={{
+            width: 20,
+            height: 20,
+          }}
         />
-        <Text style={{ color: Colors.gray, fontWeight: '600' }}>
+        <Text
+          style={{
+            color: Colors.gray,
+            fontWeight: '600',
+          }}
+        >
           Se connecter avec Google
         </Text>
       </Button>
@@ -52,11 +60,20 @@ export const LoginButton = () => {
             }}
           >
             <Text
-              style={{ fontSize: 14, fontWeight: 'bold', color: '#c53030' }}
+              style={{
+                fontSize: 14,
+                fontWeight: 'bold',
+                color: '#c53030',
+              }}
             >
               Une erreur est survenue lors de la connexion
             </Text>
-            <Text style={{ fontSize: 12, color: '#c53030' }}>
+            <Text
+              style={{
+                fontSize: 12,
+                color: '#c53030',
+              }}
+            >
               Contactez notre support pour plus d&apos;informations
             </Text>
           </View>

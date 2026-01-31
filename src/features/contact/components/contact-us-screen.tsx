@@ -39,7 +39,12 @@ export const ContactUsScreen = () => {
       <MoonBackground />
       <Header onGoBack={() => router.push('/(tabs)/settings')} />
 
-      <View style={{ gap: 16, paddingVertical: 16 }}>
+      <View
+        style={{
+          gap: 16,
+          paddingVertical: 16,
+        }}
+      >
         <Text
           style={{
             fontWeight: 'bold',
@@ -50,13 +55,25 @@ export const ContactUsScreen = () => {
           Contactez-nous
         </Text>
         <View style={{ gap: 4 }}>
-          <Text style={{ color: Colors.oakHoneyDark }}>
+          <Text
+            style={{
+              color: Colors.oakHoneyDark,
+            }}
+          >
             Une question, un doute, une idée ?
           </Text>
-          <Text style={{ color: Colors.oakHoneyDark }}>
+          <Text
+            style={{
+              color: Colors.oakHoneyDark,
+            }}
+          >
             Nous sommes là pour vous lire.
           </Text>
-          <Text style={{ color: Colors.oakHoneyDark }}>
+          <Text
+            style={{
+              color: Colors.oakHoneyDark,
+            }}
+          >
             N&apos;hésitez pas a nous écrire pour les partager.
           </Text>
         </View>
@@ -88,7 +105,12 @@ export const ContactUsScreen = () => {
           disabled={!form.formState.isValid}
         >
           <FontAwesome name="send" size={14} color={Colors.oakHoneyDark} />
-          <Text style={{ fontSize: 14, color: Colors.oakHoneyDark }}>
+          <Text
+            style={{
+              fontSize: 14,
+              color: Colors.oakHoneyDark,
+            }}
+          >
             Envoyer
           </Text>
         </Button>

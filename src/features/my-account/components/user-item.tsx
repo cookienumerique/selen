@@ -27,7 +27,12 @@ export const UserItem = ({
         }}
       >
         {icon}
-        <Text style={{ color: 'darkgray', fontWeight: 'regular' }}>
+        <Text
+          style={{
+            color: 'darkgray',
+            fontWeight: 'regular',
+          }}
+        >
           {label}
         </Text>
       </View>

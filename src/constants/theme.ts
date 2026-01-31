@@ -6,9 +6,10 @@
 import { Platform } from 'react-native';
 
 export const Colors = {
-  sageMist: '#74C476', // green
+  sageMist: '#b8c6a9', // green
+  sageMistDark: '#889e70', // green dark
   slateRoot: '#2f3e46', // blue
-  linenCloud: '#e8e2d9', // grey
+  linenCloud: '#f5e3c8', // grey
   warmSand: '#f5e3c8', // brown
   oakHoney: '#b99779', // beige
   oakHoneyDark: '#5c4633', // dark beige

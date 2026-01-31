@@ -2,7 +2,6 @@ import { Button } from '@/src/components/button';
 import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
 import { MoonBackground } from '@/src/components/layout/moon-background';
-import HaloButton from '@/src/components/shared/halo-button';
 import { Text } from '@/src/components/texts';
 import { Title } from '@/src/components/texts/title';
 import { Colors } from '@/src/constants/theme';
@@ -33,16 +32,32 @@ export const HomeView = () => {
         }}
       >
         {isLoadingUser && (
-          <View style={{ flex: 1, justifyContent: 'center', gap: 16 }}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              gap: 16,
+            }}
+          >
             <ActivityIndicator />
-            <Text style={{ textAlign: 'center' }}>
+            <Text
+              style={{
+                textAlign: 'center',
+              }}
+            >
               Chargement des données...
             </Text>
           </View>
         )}
         {!isLoadingUser && (
           <>
-            <View style={{ flex: 1, justifyContent: 'center', gap: 32 }}>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                gap: 32,
+              }}
+            >
               <Title
                 style={{
                   zIndex: 2,
@@ -70,18 +85,28 @@ export const HomeView = () => {
 
             {!user && <LoginButton />}
             {user && (
-              <View style={{ position: 'relative' }}>
-                <HaloButton />
+              <View
+                style={{
+                  position: 'relative',
+                }}
+              >
                 <Button
-                  style={{ width: '100%' }}
+                  style={{
+                    width: '100%',
+                  }}
                   onPress={handleDiscoverCapsule}
                 >
                   <FontAwesome5
                     name="capsules"
                     size={14}
-                    color={Colors.oakHoneyDark}
+                    color="white"
                   />
-                  <Text style={{ fontSize: 14, color: Colors.oakHoneyDark }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: "white"
+                    }}
+                  >
                     Je découvre ma capsule
                   </Text>
                 </Button>
@@ -90,6 +115,6 @@ export const HomeView = () => {
           </>
         )}
       </View>
-    </Container>
+    </Container >
   );
 };

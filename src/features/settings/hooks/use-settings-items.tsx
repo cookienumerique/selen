@@ -18,9 +18,7 @@ export const useSettingsItems = (): SettingsItem[] => {
     items.push({
       label: 'Mon compte',
       route: '/my-account-user',
-      icon: (
-        <MaterialDesignIcons name="account" size={24} color="gray" />
-      ),
+      icon: <MaterialDesignIcons name="account" size={24} color="gray" />,
     });
   }
 
@@ -34,11 +32,7 @@ export const useSettingsItems = (): SettingsItem[] => {
       label: 'Nous contacter',
       route: '/contact-us',
       icon: (
-        <MaterialDesignIcons
-          name="tooltip-question"
-          size={24}
-          color="gray"
-        />
+        <MaterialDesignIcons name="tooltip-question" size={24} color="gray" />
       ),
     },
   );

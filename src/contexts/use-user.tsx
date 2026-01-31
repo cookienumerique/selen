@@ -1,6 +1,6 @@
 import { selenAPIClient } from '@/src/api/axios';
 import { useTokenStorage } from '@/src/features/user/hooks/use-token-storage';
-import { User } from '@/types/user';
+import { User } from '@/src/features/user/types/user.types';
 import {
   createContext,
   ReactNode,
@@ -38,7 +38,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
       try {
         if (user || !token) return;
         selenAPIClient
-          .get('/users/me', { headers: { Authorization: `Bearer ${token}` } })
+          .get('/users/me', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
           .then((response) => {
             setUser(response.data?.user);
           });

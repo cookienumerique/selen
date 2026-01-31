@@ -86,7 +86,12 @@ export const ToastError = ({
         <TouchableOpacity
           onPress={() => Toast.hide()}
           activeOpacity={0.7}
-          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          hitSlop={{
+            top: 12,
+            bottom: 12,
+            left: 12,
+            right: 12,
+          }}
           style={{
             height: 34,
             width: 34,

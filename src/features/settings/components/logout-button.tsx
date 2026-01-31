@@ -9,7 +9,13 @@ export const LogoutButton = () => {
   const { logout } = useUser();
 
   return (
-    <View style={{ borderRadius: 16, padding: 16, gap: 16 }}>
+    <View
+      style={{
+        borderRadius: 16,
+        padding: 16,
+        gap: 16,
+      }}
+    >
       <TouchableOpacity
         onPress={() => {
           logout();

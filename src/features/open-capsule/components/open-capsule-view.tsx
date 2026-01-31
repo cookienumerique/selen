@@ -4,7 +4,6 @@ import { Button } from '@/src/components/button';
 import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
 import { MoonBackground } from '@/src/components/layout/moon-background';
-import HaloButton from '@/src/components/shared/halo-button';
 import { Colors } from '@/src/constants/theme';
 import { useCapsules } from '@/src/contexts/use-capsules';
 import { useUser } from '@/src/contexts/use-user';
@@ -37,18 +36,26 @@ export default function OpenCapsuleView() {
   const capsuleIndex = capsulesResponses.length;
 
   const capsuleToUnlock = capsules[capsuleIndex] ?? undefined;
-  const form = useForm<{ response: string }>({
+  const form = useForm<{
+    response: string;
+  }>({
     defaultValues: {
       response: '',
     },
   });
 
   const handleCreateCapsuleResponse = ({ response }: { response: string }) => {
-    createCapsuleResponse({ capsuleId: capsuleToUnlock?.id, response });
+    createCapsuleResponse({
+      capsuleId: capsuleToUnlock?.id,
+      response,
+    });
   };
 
   const handleSkipCapsule = () => {
-    createCapsuleResponse({ capsuleId: capsuleToUnlock?.id, response: '' });
+    createCapsuleResponse({
+      capsuleId: capsuleToUnlock?.id,
+      response: '',
+    });
   };
 
   return (
@@ -69,16 +76,31 @@ export default function OpenCapsuleView() {
             }}
           >
             {isLoadingCapsules && (
-              <View style={{ flex: 1, justifyContent: 'center', gap: 16 }}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  gap: 16,
+                }}
+              >
                 <ActivityIndicator />
-                <Text style={{ textAlign: 'center' }}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
                   Chargement des données...
                 </Text>
               </View>
             )}
             {!isLoadingCapsules && (
               <>
-                <View style={{ alignItems: 'center', marginVertical: 32 }}>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    marginVertical: 32,
+                  }}
+                >
                   <Image
                     source={require('@/assets/images/capsule.png')}
                     style={{
@@ -100,7 +122,9 @@ export default function OpenCapsuleView() {
                 <Controller
                   control={form.control}
                   name="response"
-                  rules={{ required: true }}
+                  rules={{
+                    required: true,
+                  }}
                   render={({ field: { onChange, value } }) => (
                     <View
                       style={{
@@ -113,7 +137,11 @@ export default function OpenCapsuleView() {
                           position: 'absolute',
                           top: -20,
                           left: '50%',
-                          transform: [{ translateX: -90 }],
+                          transform: [
+                            {
+                              translateX: -90,
+                            },
+                          ],
                           height: 40,
                           width: 180,
                           resizeMode: 'contain',
@@ -141,11 +169,16 @@ export default function OpenCapsuleView() {
                 />
 
                 <View
-                  style={{ position: 'relative', marginTop: 'auto', gap: 16 }}
+                  style={{
+                    position: 'relative',
+                    marginTop: 'auto',
+                    gap: 16,
+                  }}
                 >
-                  <HaloButton />
                   <Button
-                    style={{ marginTop: 'auto' }}
+                    style={{
+                      marginTop: 'auto',
+                    }}
                     onPress={form.handleSubmit(handleCreateCapsuleResponse)}
                     disabled={
                       !form.formState.isValid ||
@@ -158,24 +191,36 @@ export default function OpenCapsuleView() {
                       <Entypo
                         name="pencil"
                         size={14}
-                        color={Colors.oakHoneyDark}
+                        color="white"
                       />
                     )}
 
-                    <Text style={{ fontSize: 14, color: Colors.oakHoneyDark }}>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: "white",
+                      }}
+                    >
                       Je pose mes mots
                     </Text>
                   </Button>
                   <Button
                     onPress={handleSkipCapsule}
-                    style={{ backgroundColor: 'transparent' }}
+                    style={{
+                      backgroundColor: 'transparent',
+                    }}
                   >
                     <FontAwesome6
                       name="arrow-rotate-right"
                       size={14}
                       color="gray"
                     />
-                    <Text style={{ fontSize: 12, color: 'gray' }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'gray',
+                      }}
+                    >
                       Passer cette capsule
                     </Text>
                   </Button>

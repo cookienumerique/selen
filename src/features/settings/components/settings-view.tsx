@@ -31,7 +31,13 @@ export default function SettingsView() {
         </Card>
       </View>
       {user && <LogoutButton />}
-      <Text style={{ color: 'gray', textAlign: 'center', fontSize: 12 }}>
+      <Text
+        style={{
+          color: 'gray',
+          textAlign: 'center',
+          fontSize: 12,
+        }}
+      >
         v{env.VERSION}
       </Text>
     </Container>

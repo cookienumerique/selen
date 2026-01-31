@@ -28,7 +28,9 @@ export default function AboutUsScreen() {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ overflow: 'hidden' }}
+        contentContainerStyle={{
+          overflow: 'hidden',
+        }}
         style={{ marginTop: 16 }}
       >
         <View
@@ -49,7 +51,12 @@ export default function AboutUsScreen() {
                 size={14}
                 color={Colors.oakHoneyDark}
               />
-              <Text style={{ color: Colors.oakHoneyDark, fontStyle: 'italic' }}>
+              <Text
+                style={{
+                  color: Colors.oakHoneyDark,
+                  fontStyle: 'italic',
+                }}
+              >
                 Un instant de clarté dans un monde qui va trop vite.
               </Text>
               <FontAwesome
@@ -96,7 +103,12 @@ export default function AboutUsScreen() {
               </Text>
             </View>
             <Divider />
-            <Text style={{ color: Colors.oakHoneyDark, textAlign: 'center' }}>
+            <Text
+              style={{
+                color: Colors.oakHoneyDark,
+                textAlign: 'center',
+              }}
+            >
               De nouvelles fonctionnalités seront ajoutées progressivement.
               {'\n'}
               Vos idées comptent: n&apos;hésitez pas a nous écrire pour les
