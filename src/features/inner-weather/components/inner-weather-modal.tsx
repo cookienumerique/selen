@@ -3,6 +3,7 @@ import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
 import { Colors } from '@/src/constants/theme';
 import { useCreateInnerWeatherResponse } from '@/src/features/inner-weather-response/hooks/use-create-inner-weather-response';
+import { useFetchInnerWeathersResponses } from '@/src/features/inner-weather-response/hooks/use-fetch-inner-weathers-responses';
 import { InnerWeatherItem } from '@/src/features/inner-weather/components/inner-weather-item';
 import { useFetchInnerWeathers } from '@/src/features/inner-weather/hooks/use-fetch-inner-weathers';
 import { useInnerWeatherForm } from '@/src/features/inner-weather/hooks/use-inner-weather-form';
@@ -17,11 +18,13 @@ import Toast from 'react-native-toast-message';
 export const InnerWeatherModal = () => {
     const { isVisible, setIsVisible } = useInnerWeatherModal();
     const { data: innerWeathers, isPending: isPendingFetchInnerWeathers } = useFetchInnerWeathers();
+    const { invalidate: invalidateInnerWeathersResponses } = useFetchInnerWeathersResponses();
     const rows = chunkArray<InnerWeather>(innerWeathers || [], 3);
     // slip array in 3 items arrays
-    const { mutate: createInnerWeather, isPending } = useCreateInnerWeatherResponse({
-        onSuccess: () => {
+    const { mutateAsync: createInnerWeather, isPending } = useCreateInnerWeatherResponse({
+        onSuccess: async () => {
             setIsVisible(false);
+            await invalidateInnerWeathersResponses();
         },
         onError: (error) => {
             console.error(error);
@@ -35,10 +38,9 @@ export const InnerWeatherModal = () => {
     });
 
     const form = useInnerWeatherForm();
-    const onSubmit = ({ innerWeather }: InnerWeatherFormValues) => {
+    const onSubmit = async ({ innerWeather }: InnerWeatherFormValues) => {
         if (!innerWeather) return;
-        createInnerWeather({ innerWeatherId: innerWeather.id });
-        setIsVisible(false);
+        await createInnerWeather({ innerWeatherId: innerWeather.id });
     }
     return (
         <Modal visible={isVisible}>

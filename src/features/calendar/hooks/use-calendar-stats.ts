@@ -1,7 +1,6 @@
 import { formatStreakRange } from '@/src/features/calendar/utils/format-streak-range';
 import { getMaxStreakRangeForMonth } from '@/src/features/calendar/utils/get-max-streak-for-month';
 import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
-import dayjs from 'dayjs';
 
 export type UseCalendarStatsReturn = {
   totalCapsules: number;
@@ -12,10 +11,6 @@ export function useCalendarStats(
   data: CapsuleResponse[] | undefined,
   period: string,
 ) {
-  const totalCapsules =
-    data?.filter(
-      (item) => dayjs(item.createdAt).format('YYYY-MM') === period,
-    ) ?? [];
 
   const maxStreakRange = getMaxStreakRangeForMonth(data, period);
   const formattedRange = maxStreakRange
@@ -23,7 +18,7 @@ export function useCalendarStats(
     : undefined;
 
   return {
-    totalCapsules: totalCapsules.length,
+    totalCapsules: data?.length,
     maxStreak: maxStreakRange?.length ?? 0,
     formattedRange,
   };

@@ -55,7 +55,7 @@ export const StatsRow = ({ stats, isLoading }: StatsRowProps) => {
                 textAlign: 'center',
               }}
             >
-              capsules ouvertes
+              capsules ouvertes au total
             </Text>
           </View>
         )}
@@ -95,7 +95,7 @@ export const StatsRow = ({ stats, isLoading }: StatsRowProps) => {
                 textAlign: 'center',
               }}
             >
-              jours consécutifs
+              jours consécutifs ce mois-ci
             </Text>
           </View>
         )}
@@ -121,7 +121,7 @@ export const StatsRow = ({ stats, isLoading }: StatsRowProps) => {
             </Text>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: 12,
                 color: Colors.gold,
                 fontWeight: 'bold',
                 textAlign: 'center',

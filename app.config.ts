@@ -1,5 +1,5 @@
-const version = '1.5.0';
-const versionCode = 10;
+const version = '1.5.1';
+const versionCode = 11;
 const supportMail = 'conceptiondigitale.team@gmail.com';
 const packageName = 'com.cookienumerique.selen';
 const selenAPI = "https://api-selen.cookie-numerique.fr";

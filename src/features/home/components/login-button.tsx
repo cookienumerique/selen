@@ -33,7 +33,7 @@ export const LoginButton = () => {
         }}
       >
         <Image
-          source={require('@/assets/images/google-logo.svg')}
+          source={require('@/assets/images/google-logo.png')}
           style={{
             width: 20,
             height: 20,

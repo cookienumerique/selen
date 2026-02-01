@@ -1,6 +1,6 @@
 import { useAxios } from '@/src/api/axios';
 import { useUser } from '@/src/contexts/use-user';
-import { QueryOptions, useQuery } from '@tanstack/react-query';
+import { QueryOptions, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import Toast from 'react-native-toast-message';
 import { InnerWeatherResponse } from '../types/inner-weather-response.types';
@@ -19,9 +19,11 @@ export const useFetchInnerWeathersResponses = ({ params }: FetchInnerWeathersRes
   const axios = useAxios();
   const toastShownRef = useRef(false);
   const { user } = useUser();
+  const queryClient = useQueryClient();
 
+  const key = ['inner-weathers-responses', params];
   const query = useQuery<InnerWeatherResponse[], Error>({
-    queryKey: ['inner-weathers-responses', params, user?.uid],
+    queryKey: key,
     queryFn: async () => {
       const { data } = await axios.get<FetchInnerWeathersResponsesReturn>('/inner-weather-responses', { params });
       return data.items || [];
@@ -42,5 +44,12 @@ export const useFetchInnerWeathersResponses = ({ params }: FetchInnerWeathersRes
     });
   }, [query.error]);
 
-  return query;
+  const invalidate = () => queryClient.invalidateQueries({
+    queryKey: key,
+  });
+
+  return {
+    ...query,
+    invalidate,
+  };
 };

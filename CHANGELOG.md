@@ -1,3 +1,16 @@
+# Changelog
+
+## [1.5.1] – 2026-02-01
+
+### Added
+
+- change google logo
+- change wording in stats component
+
+## Fixed
+
+- the inner weather does not open when capsule responded
+
 ## [1.5.0] – 2026-01-31
 
 ### Added
@@ -7,8 +20,6 @@
 - Capsule responses visualization in the calendar
 - Stacked indicators to display multiple activities on the same day
 - Access to previously completed capsules
-
-# Changelog
 
 ## [1.4.0] – 2026-01-22
 
