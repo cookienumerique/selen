@@ -1,4 +1,4 @@
-import { useAxios } from '@/src/api/axios';
+import { useAxios } from '@/src/api/use-axios';
 import { useUser } from '@/src/contexts/use-user';
 import { QueryOptions, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
@@ -19,11 +19,10 @@ export const useFetchInnerWeathersResponses = (
   { params }: FetchInnerWeathersResponsesConfig = { params: {} },
   props?: QueryOptions<InnerWeatherResponse[], Error>,
 ) => {
-  const axios = useAxios();
   const toastShownRef = useRef(false);
-  const { user } = useUser();
   const queryClient = useQueryClient();
-
+  const { bearerTokenSelen } = useUser();
+  const axios = useAxios();
   const key = ['inner-weathers-responses', params];
   const query = useQuery<InnerWeatherResponse[], Error>({
     queryKey: key,
@@ -34,7 +33,7 @@ export const useFetchInnerWeathersResponses = (
       );
       return data.items || [];
     },
-    enabled: !!user,
+    enabled: !!bearerTokenSelen,
     ...props,
   });
 

@@ -24,7 +24,7 @@ export const LoginButton = () => {
     }
   };
   return (
-    <View style={{ gap: 16 }}>
+    <View style={{ gap: 16, width: '100%' }}>
       <Button
         onPress={handleLogin}
         disabled={isLoading}

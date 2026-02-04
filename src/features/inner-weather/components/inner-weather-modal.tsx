@@ -33,7 +33,7 @@ export const InnerWeatherModal = () => {
         await invalidateInnerWeathersResponses();
       },
       onError: (error) => {
-        console.error(error);
+        console.error(error.message);
         Toast.show({
           type: 'error',
           position: 'bottom',

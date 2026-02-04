@@ -1,10 +1,9 @@
-import { useAxios } from '@/src/api/axios';
+import { useAxios } from '@/src/api/use-axios';
 import { useUser } from '@/src/contexts/use-user';
 import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import Toast from 'react-native-toast-message';
-
 type FetchCapsulesResponse = {
   items: CapsuleResponse[];
 };
@@ -13,10 +12,8 @@ export const useFetchCapsulesResponse = (
   props?: UseQueryOptions<CapsuleResponse[], Error>,
 ) => {
   const { bearerTokenSelen } = useUser();
-  const axios = useAxios();
-
   const toastShownRef = useRef(false);
-
+  const axios = useAxios();
   const query = useQuery<CapsuleResponse[], Error>({
     queryKey: ['capsules-responses'],
     queryFn: async () => {

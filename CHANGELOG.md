@@ -1,10 +1,10 @@
 # Changelog
 
-## [1.6.0] – 2026-02-02
+## [1.6.0] – 2026-02-04
 
 ### Added
-
--
+- home screen with sub them
+- login screen
 
 ## [1.5.1] – 2026-02-01
 

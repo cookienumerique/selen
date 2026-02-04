@@ -1,4 +1,4 @@
-import { useAxios } from '@/src/api/axios';
+import { useAxios } from '@/src/api/use-axios';
 import { MutationOptions, useMutation } from '@tanstack/react-query';
 
 export type CreateCapsuleResponsePayload = {
@@ -10,7 +10,6 @@ export const useCreateCapsuleResponse = (
   props?: MutationOptions<void, Error, CreateCapsuleResponsePayload>,
 ) => {
   const axios = useAxios();
-
   return useMutation<void, Error, CreateCapsuleResponsePayload>({
     mutationFn: async ({ capsuleId, response }) => {
       await axios.post('/capsules-response', {

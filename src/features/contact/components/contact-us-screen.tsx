@@ -104,11 +104,11 @@ export const ContactUsScreen = () => {
           onPress={form.handleSubmit(handleContactUs)}
           disabled={!form.formState.isValid}
         >
-          <FontAwesome name="send" size={14} color={Colors.oakHoneyDark} />
+          <FontAwesome name="send" size={14} color="white" />
           <Text
             style={{
               fontSize: 14,
-              color: Colors.oakHoneyDark,
+              color: 'white',
             }}
           >
             Envoyer

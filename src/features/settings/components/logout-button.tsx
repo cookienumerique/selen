@@ -19,7 +19,7 @@ export const LogoutButton = () => {
       <TouchableOpacity
         onPress={() => {
           logout();
-          router.push('/home');
+          router.push('/login-screen');
         }}
       >
         <View

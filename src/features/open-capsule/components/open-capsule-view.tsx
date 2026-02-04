@@ -1,5 +1,6 @@
 import CapsuleAlreadyRespondedToday from '@/app/capsule/capsule-already-responded-today';
 import ConnectionRequired from '@/app/capsule/connection-required';
+import NoCapsuleAvailable from '@/app/capsule/no-capsule-available';
 import { Button } from '@/src/components/button';
 import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
@@ -9,7 +10,6 @@ import { useCapsules } from '@/src/contexts/use-capsules';
 import { useUser } from '@/src/contexts/use-user';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
-import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
@@ -23,8 +23,6 @@ import {
 } from 'react-native';
 
 export default function OpenCapsuleView() {
-  const { id } = useLocalSearchParams<{ id: string }>()
-  console.log('id', id);
 
   const {
     capsuleOfTheDay,
@@ -46,6 +44,7 @@ export default function OpenCapsuleView() {
   });
 
   const handleCreateCapsuleResponse = ({ response }: { response: string }) => {
+    if (!capsuleOfTheDay?.id) return;
     createCapsuleResponse({
       capsuleId: capsuleOfTheDay?.id,
       response,
@@ -53,6 +52,7 @@ export default function OpenCapsuleView() {
   };
 
   const handleSkipCapsule = () => {
+    if (!capsuleOfTheDay?.id) return;
     createCapsuleResponse({
       capsuleId: capsuleOfTheDay?.id,
       response: '',
@@ -68,7 +68,8 @@ export default function OpenCapsuleView() {
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         {!userConnected && <ConnectionRequired />}
         {capsuleAlreadyRespondedToday && <CapsuleAlreadyRespondedToday />}
-        {userConnected && !capsuleAlreadyRespondedToday && (
+        {!capsuleOfTheDay && <NoCapsuleAvailable />}
+        {userConnected && !capsuleAlreadyRespondedToday && capsuleOfTheDay && (
           <ScrollView
             contentContainerStyle={{
               flexGrow: 1,

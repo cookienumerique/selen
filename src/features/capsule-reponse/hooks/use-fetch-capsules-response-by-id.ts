@@ -1,4 +1,4 @@
-import { useAxios } from '@/src/api/axios';
+import { useAxios } from '@/src/api/use-axios';
 import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
@@ -9,9 +9,8 @@ type FetchCapsulesResponse = {
 };
 
 export const useFetchCapsulesResponseById = (id: number) => {
-  const axios = useAxios();
   const toastShownRef = useRef(false);
-
+  const axios = useAxios();
   const query = useQuery<CapsuleResponse | null, Error>({
     queryKey: ['capsules-responses', id],
     queryFn: async () => {

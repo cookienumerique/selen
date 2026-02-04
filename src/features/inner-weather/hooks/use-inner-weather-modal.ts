@@ -11,7 +11,7 @@ type UseInnerWeatherModalReturn = {
 export const useInnerWeatherModal = (): UseInnerWeatherModalReturn => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const { user, isLoadingUser } = useUser();
+  const { user, isLoadingUser, bearerTokenSelen } = useUser();
 
   const { data, isPending, isFetched } = useFetchInnerWeathersResponses({
     params: {
@@ -21,7 +21,8 @@ export const useInnerWeatherModal = (): UseInnerWeatherModalReturn => {
 
   const innerWeatherResponseToday = data?.[0];
 
-  const isReady = !!user && !isLoadingUser && isFetched && !isPending;
+  const isReady =
+    !!user && !isLoadingUser && isFetched && !isPending && !!bearerTokenSelen;
 
   useEffect(() => {
     if (!isReady) return;

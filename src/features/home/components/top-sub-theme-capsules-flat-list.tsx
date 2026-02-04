@@ -5,12 +5,11 @@ import { useFetchSubThemeCapsules } from '@/src/features/sub-theme-capsule/hooks
 import { ActivityIndicator, FlatList, View } from 'react-native';
 
 export const TopSubThemeCapsulesFlatList = () => {
-  const { data: topSubThemeCapsules, isLoading } =
-    useFetchSubThemeCapsules({
-      params: {
-        code: 'SUCCESS_DECONSTRUCTION,SELF_WORTH,CHILD_AS_MIRROR,SHADOW_SELF,LIFE_TRANSITIONS',
-      },
-    });
+  const { data: topSubThemeCapsules, isLoading } = useFetchSubThemeCapsules({
+    params: {
+      code: 'SUCCESS_DECONSTRUCTION,SELF_WORTH,CHILD_AS_MIRROR,SHADOW_SELF,LIFE_TRANSITIONS',
+    },
+  });
 
   return (
     <View style={{ gap: 16 }}>
@@ -36,7 +35,9 @@ export const TopSubThemeCapsulesFlatList = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 16 }}
-          renderItem={({ item }) => <SubThemeCapsuleRenderItem key={item.id} subThemeCasule={item} />}
+          renderItem={({ item }) => (
+            <SubThemeCapsuleRenderItem key={item.id} subThemeCasule={item} />
+          )}
         />
       )}
     </View>

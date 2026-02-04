@@ -1,8 +1,8 @@
+import HomeButton from '@/src/components/button/home-button';
 import { Colors } from '@/src/constants/theme';
-import { LoginButton } from '@/src/features/login/login-button';
 import { Image, Text, View } from 'react-native';
 
-export default function ConnectionRequired() {
+export default function NoCapsuleAvailable() {
   return (
     <>
       <View
@@ -37,10 +37,20 @@ export default function ConnectionRequired() {
             textAlign: 'center',
           }}
         >
-          Vous devez être connecté pour accéder à cette section
+          Aucune capsule disponible pour le moment.
+        </Text>
+        <Text
+          style={{
+            fontSize: 20,
+            color: Colors.oakHoneyDark,
+            textAlign: 'center',
+            fontStyle: 'italic',
+          }}
+        >
+          Tu as répondu à toutes les capsules de ce thème.
         </Text>
       </View>
-      <LoginButton />
+      <HomeButton />
     </>
   );
 }

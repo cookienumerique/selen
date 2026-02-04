@@ -1,4 +1,4 @@
-import { selenAPIClient } from '@/src/api/axios';
+import { selenAPIClient } from '@/src/api/client';
 import { User } from '@/src/features/user/types/user.types';
 export type VerifyGoogleTokenResponse = {
   token: string;

@@ -1,4 +1,5 @@
-import { selenAPIClient } from '@/src/api/axios';
+import { selenAPIClient } from '@/src/api/client';
+import { setAuthToken } from '@/src/api/set-auth-token';
 import { useTokenStorage } from '@/src/features/user/hooks/use-token-storage';
 import { User } from '@/src/features/user/types/user.types';
 import {
@@ -24,7 +25,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [bearerTokenSelen, setBearerTokenSelen] = useState<string | null>(null);
   const { removeToken, getToken } = useTokenStorage();
-
   const logout = async (): Promise<void> => {
     setUser(null);
     setBearerTokenSelen(null);
@@ -45,6 +45,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
           })
           .then((response) => {
             setUser(response.data?.user);
+            setAuthToken(token);
           });
       } catch (error) {
         console.error(error);

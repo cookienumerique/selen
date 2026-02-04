@@ -30,7 +30,6 @@ export const InnerWeatherCard = () => {
       )}
       {!isLoading && (
         <>
-
           <Image
             source={item.image}
             style={{
@@ -42,7 +41,7 @@ export const InnerWeatherCard = () => {
           <Text
             style={{
               textAlign: 'left',
-              fontSize: 14,
+              fontSize: 12,
               color: Colors.oakHoneyDark,
             }}
           >

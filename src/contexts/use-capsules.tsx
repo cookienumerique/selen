@@ -23,7 +23,7 @@ type CapsulesContextReturn = {
 type CapsulesProviderProps = {
   children: ReactNode;
   id: string;
-}
+};
 
 const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
   undefined,
@@ -42,12 +42,14 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
     isPending: isLoadingCreateCapsuleResponseMutation,
   } = useCreateCapsuleResponse();
 
-  const capsulesResponsesIds = capsulesResponses.map((capsule) => capsule.id);
+  const capsulesResponsesIds = capsulesResponses.map((capsuleResponse) => capsuleResponse.capsule?.id);
   const capsuleAlreadyRespondedToday: boolean = capsulesResponses.some(
     (capsule) => dayjs(capsule.createdAt).isSame(dayjs(), 'day'),
   );
 
-  const capsuleOfTheDay = capsules?.find((capsule) => !capsulesResponsesIds.includes(capsule.id));
+  const capsuleOfTheDay = capsules?.find(
+    (capsule) => !capsulesResponsesIds.includes(capsule.id),
+  );
 
   const createCapsuleResponse = async (
     payload: CreateCapsuleResponsePayload,
@@ -57,7 +59,8 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
     router.push('/capsule/capsule-completion');
   };
 
-  const isLoadingCapsuleOfTheDay = isLoadingCapsules || isLoadingCapsulesResponses;
+  const isLoadingCapsuleOfTheDay =
+    isLoadingCapsules || isLoadingCapsulesResponses;
   return (
     <CapsulesContext.Provider
       value={{
