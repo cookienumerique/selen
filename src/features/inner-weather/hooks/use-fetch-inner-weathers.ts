@@ -8,14 +8,17 @@ type FetchInnerWeathersResponse = {
   items: InnerWeather[];
 };
 
-export const useFetchInnerWeathers = (props?: QueryOptions<InnerWeather[], Error>) => {
+export const useFetchInnerWeathers = (
+  props?: QueryOptions<InnerWeather[], Error>,
+) => {
   const axios = useAxios();
   const toastShownRef = useRef(false);
 
   const query = useQuery<InnerWeather[], Error>({
     queryKey: ['inner-weathers'],
     queryFn: async () => {
-      const { data } = await axios.get<FetchInnerWeathersResponse>('/inner-weathers');
+      const { data } =
+        await axios.get<FetchInnerWeathersResponse>('/inner-weathers');
       return data.items || [];
     },
     ...props,

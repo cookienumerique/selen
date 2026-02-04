@@ -9,9 +9,9 @@ export default function HelloGreeting() {
     <Text
       style={{
         textAlign: 'left',
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: 'bold',
-        color: Colors.oakHoneyDark,
+        color: Colors.warmSand,
       }}
     >
       Bonjour, {user.name}

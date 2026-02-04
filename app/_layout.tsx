@@ -1,5 +1,4 @@
 import { toastConfig } from '@/src/components/toast/selen-toast';
-import { CapsulesProvider } from '@/src/contexts/use-capsules';
 import { UserProvider } from '@/src/contexts/use-user';
 import { configureGoogleSignIn } from '@/src/features/auth/config/google-signin';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -35,10 +34,8 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <UserProvider>
-        <CapsulesProvider>
-          <Slot />
-          <Toast config={toastConfig} bottomOffset={200} />
-        </CapsulesProvider>
+        <Slot />
+        <Toast config={toastConfig} bottomOffset={200} />
       </UserProvider>
     </QueryClientProvider>
   );

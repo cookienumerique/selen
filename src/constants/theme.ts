@@ -10,9 +10,9 @@ export const Colors = {
   sageMistDark: '#889e70', // green dark
   slateRoot: '#2f3e46', // blue
   linenCloud: '#f5e3c8', // grey
-  warmSand: '#f5e3c8', // brown
-  oakHoney: '#b99779', // beige
-  oakHoneyDark: '#5c4633', // dark beige
+  warmSand: '#f5e3c8', // beige clair
+  oakHoney: '#b99779', // marron clair
+  oakHoneyDark: '#5c4633', // marron foncé
   gray: '#878787',
   orange: '#ffa500',
   gold: '#ffd700',

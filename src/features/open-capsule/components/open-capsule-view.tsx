@@ -9,6 +9,7 @@ import { useCapsules } from '@/src/contexts/use-capsules';
 import { useUser } from '@/src/contexts/use-user';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
+import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
@@ -22,20 +23,20 @@ import {
 } from 'react-native';
 
 export default function OpenCapsuleView() {
+  const { id } = useLocalSearchParams<{ id: string }>()
+  console.log('id', id);
+
   const {
-    capsules,
-    capsulesResponses,
+    capsuleOfTheDay,
+    isLoadingCapsuleOfTheDay,
     capsuleAlreadyRespondedToday,
-    isLoadingCapsules,
     createCapsuleResponse,
     isLoadingCreateCapsuleResponseMutation,
   } = useCapsules();
 
   const { user, isLoadingUser } = useUser();
   const userConnected = user && !isLoadingUser;
-  const capsuleIndex = capsulesResponses.length;
 
-  const capsuleToUnlock = capsules[capsuleIndex] ?? undefined;
   const form = useForm<{
     response: string;
   }>({
@@ -46,14 +47,14 @@ export default function OpenCapsuleView() {
 
   const handleCreateCapsuleResponse = ({ response }: { response: string }) => {
     createCapsuleResponse({
-      capsuleId: capsuleToUnlock?.id,
+      capsuleId: capsuleOfTheDay?.id,
       response,
     });
   };
 
   const handleSkipCapsule = () => {
     createCapsuleResponse({
-      capsuleId: capsuleToUnlock?.id,
+      capsuleId: capsuleOfTheDay?.id,
       response: '',
     });
   };
@@ -75,7 +76,7 @@ export default function OpenCapsuleView() {
               paddingBottom: 16,
             }}
           >
-            {isLoadingCapsules && (
+            {isLoadingCapsuleOfTheDay && (
               <View
                 style={{
                   flex: 1,
@@ -93,7 +94,7 @@ export default function OpenCapsuleView() {
                 </Text>
               </View>
             )}
-            {!isLoadingCapsules && (
+            {!isLoadingCapsuleOfTheDay && (
               <>
                 <View
                   style={{
@@ -117,7 +118,7 @@ export default function OpenCapsuleView() {
                     color: Colors.slateRoot,
                   }}
                 >
-                  {capsuleToUnlock?.content}
+                  {capsuleOfTheDay?.content}
                 </Text>
                 <Controller
                   control={form.control}
@@ -188,17 +189,13 @@ export default function OpenCapsuleView() {
                     {isLoadingCreateCapsuleResponseMutation ? (
                       <ActivityIndicator />
                     ) : (
-                      <Entypo
-                        name="pencil"
-                        size={14}
-                        color="white"
-                      />
+                      <Entypo name="pencil" size={14} color="white" />
                     )}
 
                     <Text
                       style={{
                         fontSize: 14,
-                        color: "white",
+                        color: 'white',
                       }}
                     >
                       Je pose mes mots

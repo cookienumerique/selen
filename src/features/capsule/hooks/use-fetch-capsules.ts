@@ -1,25 +1,32 @@
 import { useAxios } from '@/src/api/axios';
 import { useUser } from '@/src/contexts/use-user';
 import { Capsule } from '@/src/features/capsule/types/capsule.types';
-import { QueryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 type FetchCapsulesResponse = {
   items: Capsule[];
 };
 
-export const useFetchCapsules = (props?: QueryOptions<Capsule[], Error>) => {
+type UseFetchCapsulesProps = {
+  params: {
+    subThemeCapsuleId?: string;
+  };
+}
+
+export const useFetchCapsules = ({ params, ...rest }: UseFetchCapsulesProps = { params: {} }) => {
   const { bearerTokenSelen } = useUser();
   const axios = useAxios();
-
-  const { data, ...rest } = useQuery<Capsule[], Error>({
-    queryKey: ['capsules'],
+  const queryKey = ['capsules', JSON.stringify(params)];
+  console.log('queryKey', queryKey);
+  const { data, ...restQuery } = useQuery<Capsule[], Error>({
+    queryKey,
     queryFn: async () => {
-      const { data } = await axios.get<FetchCapsulesResponse>('/capsules');
+      const { data } = await axios.get<FetchCapsulesResponse>('/capsules', { params });
       return data.items || [];
     },
     enabled: !!bearerTokenSelen,
-    ...props,
+    ...rest,
   });
 
-  return { data, ...rest };
+  return { data, ...restQuery };
 };

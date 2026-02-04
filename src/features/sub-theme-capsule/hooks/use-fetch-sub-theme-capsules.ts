@@ -3,33 +3,33 @@ import { useUser } from '@/src/contexts/use-user';
 import { QueryOptions, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import Toast from 'react-native-toast-message';
-import { InnerWeatherResponse } from '../types/inner-weather-response.types';
+import { SubThemeCapsule } from '../types/sub-theme-capsule.types';
 
-type FetchInnerWeathersResponsesReturn = {
-  items: InnerWeatherResponse[];
+type UseFetchSubThemeCapsulesResponse = {
+  items: SubThemeCapsule[];
 };
 
 type FetchInnerWeathersResponsesConfig = {
   params: {
-    day?: string;
+    code?: string;
   };
 };
 
-export const useFetchInnerWeathersResponses = (
+export const useFetchSubThemeCapsules = (
   { params }: FetchInnerWeathersResponsesConfig = { params: {} },
-  props?: QueryOptions<InnerWeatherResponse[], Error>,
+  props?: QueryOptions<SubThemeCapsule[], Error>,
 ) => {
   const axios = useAxios();
   const toastShownRef = useRef(false);
   const { user } = useUser();
   const queryClient = useQueryClient();
 
-  const key = ['inner-weathers-responses', params];
-  const query = useQuery<InnerWeatherResponse[], Error>({
+  const key = ['sub-theme-capsules', params];
+  const query = useQuery<SubThemeCapsule[], Error>({
     queryKey: key,
     queryFn: async () => {
-      const { data } = await axios.get<FetchInnerWeathersResponsesReturn>(
-        '/inner-weather-responses',
+      const { data } = await axios.get<UseFetchSubThemeCapsulesResponse>(
+        '/sub-theme-capsules',
         { params },
       );
       return data.items || [];
@@ -44,7 +44,7 @@ export const useFetchInnerWeathersResponses = (
     toastShownRef.current = true;
     Toast.show({
       type: 'error',
-      text1: 'Erreur lors du chargement des réponses des météos intérieures',
+      text1: 'Erreur lors du chargement des sous-thèmes capsules',
       position: 'bottom',
       autoHide: false,
     });

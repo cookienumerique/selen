@@ -7,7 +7,7 @@ import { MarkingProps } from 'react-native-calendars/src/calendar/day/marking';
 type MarkedDates = Record<string, MarkingProps>;
 
 export function useMarkedCapsulesResponses(
-  capsuleResponses: CapsuleResponse[] | undefined
+  capsuleResponses: CapsuleResponse[] | undefined,
 ): MarkedDates {
   return useMemo(() => {
     if (!capsuleResponses) return {};

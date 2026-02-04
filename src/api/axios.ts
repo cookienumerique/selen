@@ -11,7 +11,6 @@ const debug = false;
 
 export const useAxios = () => {
   const { bearerTokenSelen } = useUser();
-
   selenAPIClient.interceptors.request.use(
     (config) => {
       if (debug) {

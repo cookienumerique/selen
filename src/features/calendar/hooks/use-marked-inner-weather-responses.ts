@@ -5,22 +5,24 @@ import { useMemo } from 'react';
 import { MarkingProps } from 'react-native-calendars/src/calendar/day/marking';
 export type UseMarkedInnerWeatherResponsesReturn = Record<string, MarkingProps>;
 
-
-
-export function useMarkedInnerWeatherResponses(innerWeatherResponses: InnerWeatherResponse[] | undefined): UseMarkedInnerWeatherResponsesReturn {
+export function useMarkedInnerWeatherResponses(
+  innerWeatherResponses: InnerWeatherResponse[] | undefined,
+): UseMarkedInnerWeatherResponsesReturn {
   return useMemo(() => {
     if (!innerWeatherResponses) return {};
 
-    return innerWeatherResponses.reduce<Record<string, MarkingProps>>((acc, item) => {
-      const date = dayjs(item.day).format('YYYY-MM-DD');
+    return innerWeatherResponses.reduce<Record<string, MarkingProps>>(
+      (acc, item) => {
+        const date = dayjs(item.day).format('YYYY-MM-DD');
 
-      acc[date] = {
-        marked: true,
-        dots: [{ color: getInnerWeatherColor(item.innerWeather.code) }],
-      };
+        acc[date] = {
+          marked: true,
+          dots: [{ color: getInnerWeatherColor(item.innerWeather.code) }],
+        };
 
-      return acc;
-    }, {});
+        return acc;
+      },
+      {},
+    );
   }, [innerWeatherResponses]);
 }
-

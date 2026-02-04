@@ -11,8 +11,14 @@ import { useCalendarScreen } from '@/src/features/calendar/hooks/use-calendar-sc
 import { ScrollView } from 'react-native';
 
 export function CalendarView() {
-  const { isLoadingCapsulesResponses, isLoadingInnerWeathersResponses, markedDates, stats, onDayPress, onMonthChange } =
-    useCalendarScreen();
+  const {
+    isLoadingCapsulesResponses,
+    isLoadingInnerWeathersResponses,
+    markedDates,
+    stats,
+    onDayPress,
+    onMonthChange,
+  } = useCalendarScreen();
   return (
     <Container>
       <MoonBackground />
@@ -39,7 +45,9 @@ export function CalendarView() {
         <Calendar
           onMonthChange={onMonthChange}
           markedDates={markedDates}
-          displayLoadingIndicator={isLoadingCapsulesResponses || isLoadingInnerWeathersResponses}
+          displayLoadingIndicator={
+            isLoadingCapsulesResponses || isLoadingInnerWeathersResponses
+          }
           onDayPress={onDayPress}
         />
 

@@ -13,11 +13,7 @@ export const useInnerWeatherModal = (): UseInnerWeatherModalReturn => {
 
   const { user, isLoadingUser } = useUser();
 
-  const {
-    data,
-    isPending,
-    isFetched,
-  } = useFetchInnerWeathersResponses({
+  const { data, isPending, isFetched } = useFetchInnerWeathersResponses({
     params: {
       day: dayjs().format('YYYY-MM-DD'),
     },
@@ -25,11 +21,7 @@ export const useInnerWeatherModal = (): UseInnerWeatherModalReturn => {
 
   const innerWeatherResponseToday = data?.[0];
 
-  const isReady =
-    !!user &&
-    !isLoadingUser &&
-    isFetched &&
-    !isPending;
+  const isReady = !!user && !isLoadingUser && isFetched && !isPending;
 
   useEffect(() => {
     if (!isReady) return;

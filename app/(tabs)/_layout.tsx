@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 import { Colors } from '@/src/constants/theme';
-import { FontAwesome5, Ionicons, Octicons } from '@expo/vector-icons';
+import { Ionicons, Octicons } from '@expo/vector-icons';
 import MaterialDesignIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -18,7 +18,7 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 72 + insets.bottom,
-          backgroundColor: Colors.oakHoney,
+          backgroundColor: Colors.warmSand,
           opacity: 0.8,
         },
         tabBarItemStyle: {
@@ -47,14 +47,6 @@ export default function TabLayout() {
               size={iconSize}
               color={iconColor}
             />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="open-capsule/index"
-        options={{
-          tabBarIcon: () => (
-            <FontAwesome5 name="capsules" size={iconSize} color={iconColor} />
           ),
         }}
       />

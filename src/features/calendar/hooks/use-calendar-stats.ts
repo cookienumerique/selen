@@ -11,7 +11,6 @@ export function useCalendarStats(
   data: CapsuleResponse[] | undefined,
   period: string,
 ) {
-
   const maxStreakRange = getMaxStreakRangeForMonth(data, period);
   const formattedRange = maxStreakRange
     ? formatStreakRange(maxStreakRange)

@@ -3,17 +3,15 @@ import {
   useCreateCapsuleResponse,
 } from '@/src/features/capsule-reponse/hooks/use-create';
 import { useFetchCapsulesResponse } from '@/src/features/capsule-reponse/hooks/use-fetch-capsules-response';
-import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import { useFetchCapsules } from '@/src/features/capsule/hooks/use-fetch-capsules';
 import { Capsule } from '@/src/features/capsule/types/capsule.types';
 import dayjs from 'dayjs';
 import { router } from 'expo-router';
 import { createContext, ReactNode, useContext } from 'react';
+
 type CapsulesContextReturn = {
-  capsules: Capsule[];
-  isLoadingCapsules: boolean;
-  capsulesResponses: CapsuleResponse[];
-  isLoadingCapsulesResponses: boolean;
+  capsuleOfTheDay: Capsule | undefined;
+  isLoadingCapsuleOfTheDay: boolean;
   createCapsuleResponse: ({
     capsuleId,
     response,
@@ -22,13 +20,18 @@ type CapsulesContextReturn = {
   capsuleAlreadyRespondedToday: boolean;
 };
 
+type CapsulesProviderProps = {
+  children: ReactNode;
+  id: string;
+}
+
 const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
   undefined,
 );
 
-export function CapsulesProvider({ children }: { children: ReactNode }) {
+export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
   const { data: capsules = [], isLoading: isLoadingCapsules } =
-    useFetchCapsules();
+    useFetchCapsules({ params: { subThemeCapsuleId: id } });
   const {
     data: capsulesResponses = [],
     isLoading: isLoadingCapsulesResponses,
@@ -38,9 +41,13 @@ export function CapsulesProvider({ children }: { children: ReactNode }) {
     mutateAsync: createCapsuleResponseMutation,
     isPending: isLoadingCreateCapsuleResponseMutation,
   } = useCreateCapsuleResponse();
+
+  const capsulesResponsesIds = capsulesResponses.map((capsule) => capsule.id);
   const capsuleAlreadyRespondedToday: boolean = capsulesResponses.some(
     (capsule) => dayjs(capsule.createdAt).isSame(dayjs(), 'day'),
   );
+
+  const capsuleOfTheDay = capsules?.find((capsule) => !capsulesResponsesIds.includes(capsule.id));
 
   const createCapsuleResponse = async (
     payload: CreateCapsuleResponsePayload,
@@ -50,13 +57,12 @@ export function CapsulesProvider({ children }: { children: ReactNode }) {
     router.push('/capsule/capsule-completion');
   };
 
+  const isLoadingCapsuleOfTheDay = isLoadingCapsules || isLoadingCapsulesResponses;
   return (
     <CapsulesContext.Provider
       value={{
-        capsules,
-        isLoadingCapsules,
-        capsulesResponses,
-        isLoadingCapsulesResponses,
+        capsuleOfTheDay,
+        isLoadingCapsuleOfTheDay,
         createCapsuleResponse,
         isLoadingCreateCapsuleResponseMutation,
         capsuleAlreadyRespondedToday,
