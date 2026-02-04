@@ -1,5 +1,4 @@
 import CapsuleAlreadyRespondedToday from '@/app/capsule/capsule-already-responded-today';
-import ConnectionRequired from '@/app/capsule/connection-required';
 import NoCapsuleAvailable from '@/app/capsule/no-capsule-available';
 import { Button } from '@/src/components/button';
 import { Container } from '@/src/components/layout/container';
@@ -66,9 +65,8 @@ export default function OpenCapsuleView() {
         <Header />
       </View>
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-        {!userConnected && <ConnectionRequired />}
         {capsuleAlreadyRespondedToday && <CapsuleAlreadyRespondedToday />}
-        {!capsuleOfTheDay && <NoCapsuleAvailable />}
+        {!capsuleOfTheDay && !capsuleAlreadyRespondedToday && <NoCapsuleAvailable />}
         {userConnected && !capsuleAlreadyRespondedToday && capsuleOfTheDay && (
           <ScrollView
             contentContainerStyle={{
