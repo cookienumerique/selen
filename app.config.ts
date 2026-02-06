@@ -1,7 +1,13 @@
 const version = '1.6.1';
+
+// android
 const versionCode = 13;
-const supportMail = 'conceptiondigitale.team@gmail.com';
-const packageName = 'com.cookienumerique.selen';
+const packageNameAndroid = 'com.cookienumerique.selen';
+// Ios
+const packageNameIos = 'com.selen.app'
+const buildNumberIos = '1';
+
+// API
 const selenAPI = 'https://api-selen.cookie-numerique.fr';
 // const selenAPI = 'http://192.168.1.25:8083';
 
@@ -18,19 +24,40 @@ export default {
       backgroundColor: '#FFFFFF',
     },
     android: {
-      package: packageName,
+      package: packageNameAndroid,
       versionCode,
     },
     ios: {
-      bundleIdentifier: packageName,
+      bundleIdentifier: packageNameIos,
+      supportsTablet: false,
+      buildNumber: buildNumberIos,
+      googleServicesFile: "./GoogleService-Info.plist",
+      infoPlist: {
+        CFBundleURLTypes: [
+          {
+            CFBundleURLSchemes: [
+              'selen',
+              'com.googleusercontent.apps.405749262108-n3fmgndc8d6sve5j9nj9tea4vket9omb',
+            ],
+          },
+        ],
+      },
     },
     extra: {
-      SUPPORT_MAIL: supportMail,
+      SUPPORT_MAIL: 'conceptiondigitale.team@gmail.com',
       VERSION: version,
       SELEN_API: selenAPI,
       eas: {
         projectId: 'c7c1e457-7b72-4285-89b9-5602bcef6cb8',
       },
     },
+    "plugins": [
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.405749262108-n3fmgndc8d6sve5j9nj9tea4vket9omb"
+        }
+      ]
+    ]
   },
 };
