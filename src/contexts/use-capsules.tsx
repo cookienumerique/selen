@@ -42,7 +42,9 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
     isPending: isLoadingCreateCapsuleResponseMutation,
   } = useCreateCapsuleResponse();
 
-  const capsulesResponsesIds = capsulesResponses.map((capsuleResponse) => capsuleResponse.capsule?.id);
+  const capsulesResponsesIds = capsulesResponses.map(
+    (capsuleResponse) => capsuleResponse.capsule?.id,
+  );
   const capsuleAlreadyRespondedToday: boolean = capsulesResponses.some(
     (capsule) => dayjs(capsule.createdAt).isSame(dayjs(), 'day'),
   );

@@ -24,6 +24,11 @@ export const useSettingsItems = (): SettingsItem[] => {
 
   items.push(
     {
+      label: 'Notifications',
+      route: '/notification',
+      icon: <MaterialDesignIcons name="bell" size={24} color="gray" />,
+    },
+    {
       label: 'À propos de nous',
       route: '/about-us',
       icon: <Ionicons name="people" size={24} color="gray" />,

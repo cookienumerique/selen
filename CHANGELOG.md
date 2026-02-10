@@ -1,18 +1,30 @@
 # Changelog
 
+## [1.8.0] – 2026-02-10
+
+### Added
+
+- notification for open capsule
+
+## Fixed
+- the loading of the screen open capsule isLoading was added 
+
 ## [1.7.0] – 2026-02-06
 
 ### Added
+
 - ios configuration
 
 ## [1.6.1] – 2026-02-04
 
 ### Fixed
+
 - double screen is fixed on open-capsule screen
 
 ## [1.6.0] – 2026-02-04
 
 ### Added
+
 - home screen with sub them
 - login screen
 

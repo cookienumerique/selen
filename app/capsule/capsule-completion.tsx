@@ -23,11 +23,12 @@ export default function CapsuleCompletion() {
       >
         <Text
           style={{
-            color: Colors.oakHoney,
+            color: Colors.oakHoneyDark,
             fontSize: 32,
             fontWeight: 'bold',
             textAlign: 'center',
             lineHeight: 48,
+            letterSpacing: 1,
           }}
         >
           Merci d&apos;avoir pris ce moment pour toi ☀️

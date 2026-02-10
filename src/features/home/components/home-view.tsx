@@ -7,7 +7,6 @@ import { SubThemeOfTheMomentFlatList } from '@/src/features/home/components/sub-
 import { SurpriseCapsuleCard } from '@/src/features/home/components/surprise-capsule-card';
 import { TopSubThemeCapsulesFlatList } from '@/src/features/home/components/top-sub-theme-capsules-flat-list';
 import { ScrollView, View } from 'react-native';
-
 export const HomeView = () => {
   return (
     <Container style={{ backgroundColor: Colors.slateRoot, gap: 16 }}>

@@ -22,7 +22,6 @@ import {
 } from 'react-native';
 
 export default function OpenCapsuleView() {
-
   const {
     capsuleOfTheDay,
     isLoadingCapsuleOfTheDay,
@@ -65,8 +64,10 @@ export default function OpenCapsuleView() {
         <Header />
       </View>
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-        {capsuleAlreadyRespondedToday && <CapsuleAlreadyRespondedToday />}
-        {!capsuleOfTheDay && !capsuleAlreadyRespondedToday && <NoCapsuleAvailable />}
+        {capsuleAlreadyRespondedToday && !isLoadingCapsuleOfTheDay && <CapsuleAlreadyRespondedToday />}
+        {!capsuleOfTheDay && !capsuleAlreadyRespondedToday && !isLoadingCapsuleOfTheDay && (
+          <NoCapsuleAvailable />
+        )}
         {userConnected && !capsuleAlreadyRespondedToday && capsuleOfTheDay && (
           <ScrollView
             contentContainerStyle={{

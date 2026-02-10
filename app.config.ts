@@ -1,10 +1,10 @@
-const version = '1.6.1';
+const version = '1.8.0';
 
 // android
-const versionCode = 13;
+const versionCode = 14;
 const packageNameAndroid = 'com.cookienumerique.selen';
 // Ios
-const packageNameIos = 'com.selen.app'
+const packageNameIos = 'com.selen.app';
 const buildNumberIos = '1';
 
 // API
@@ -31,7 +31,7 @@ export default {
       bundleIdentifier: packageNameIos,
       supportsTablet: false,
       buildNumber: buildNumberIos,
-      googleServicesFile: "./GoogleService-Info.plist",
+      googleServicesFile: './GoogleService-Info.plist',
       infoPlist: {
         CFBundleURLTypes: [
           {
@@ -41,6 +41,7 @@ export default {
             ],
           },
         ],
+        UIBackgroundModes: ['remote-notification'],
       },
     },
     extra: {
@@ -51,13 +52,14 @@ export default {
         projectId: 'c7c1e457-7b72-4285-89b9-5602bcef6cb8',
       },
     },
-    "plugins": [
+    plugins: [
       [
-        "@react-native-google-signin/google-signin",
+        '@react-native-google-signin/google-signin',
         {
-          "iosUrlScheme": "com.googleusercontent.apps.405749262108-n3fmgndc8d6sve5j9nj9tea4vket9omb"
-        }
-      ]
-    ]
+          iosUrlScheme:
+            'com.googleusercontent.apps.405749262108-n3fmgndc8d6sve5j9nj9tea4vket9omb',
+        },
+      ],
+    ],
   },
 };
