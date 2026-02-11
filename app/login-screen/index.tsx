@@ -2,10 +2,11 @@ import { Container } from '@/src/components/layout/container';
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
 import { useUser } from '@/src/contexts/use-user';
-import { LoginButton } from '@/src/features/login/login-button';
+import { SignInAppleButton } from '@/src/features/login/signin-apple-button';
+import { SignInGoogleButton } from '@/src/features/login/signin-google-button';
 import { router } from 'expo-router';
 import React, { useEffect } from 'react';
-import { ActivityIndicator, Image, View } from 'react-native';
+import { ActivityIndicator, Image, Platform, View } from 'react-native';
 
 export default function Home() {
   const { user, isLoadingUser } = useUser();
@@ -47,8 +48,9 @@ export default function Home() {
         </View>
 
         {!user && (
-          <View style={{ width: '100%', marginTop: 'auto' }}>
-            <LoginButton />
+          <View style={{ width: '100%', marginTop: 'auto', gap: 16 }}>
+            <SignInGoogleButton />
+            {Platform.OS === 'ios' && <SignInAppleButton />}
           </View>
         )}
       </View>

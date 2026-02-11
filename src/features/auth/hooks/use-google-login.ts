@@ -1,13 +1,13 @@
-import { VerifyGoogleTokenResponse } from '@/src/api/authentification/verify-google-token';
+import { LoginGoogleResponse } from '@/src/api/authentification/login-google';
 import { useUser } from '@/src/contexts/use-user';
-import { useFetchUserByGoogleToken } from '@/src/features/auth/hooks/use-fetch-user-by-google-token';
+import { useLoginWithGoogle } from '@/src/features/auth/hooks/use-login-with-google';
 import { useTokenStorage } from '@/src/features/user/hooks/use-token-storage';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import Toast from 'react-native-toast-message';
 
-export const useGoogleLogin = () => {
+export const useGoogleLogIn = () => {
   const { setToken } = useTokenStorage();
   const { setUser } = useUser();
 
@@ -17,8 +17,8 @@ export const useGoogleLogin = () => {
   const {
     mutateAsync: verifyGoogleToken,
     isPending: isLoadingVerifyGoogleToken,
-  } = useFetchUserByGoogleToken({
-    onSuccess: ({ user, token }: VerifyGoogleTokenResponse) => {
+  } = useLoginWithGoogle({
+    onSuccess: ({ user, token }: LoginGoogleResponse) => {
       setToken(token);
       setUser(user);
       router.push('/');
@@ -34,7 +34,7 @@ export const useGoogleLogin = () => {
     },
   });
 
-  const login = async (): Promise<VerifyGoogleTokenResponse | undefined> => {
+  const login = async (): Promise<LoginGoogleResponse | undefined> => {
     setIsLoadingGoogleSignIn(true);
     setError(null);
     await GoogleSignin.hasPlayServices({
@@ -43,13 +43,12 @@ export const useGoogleLogin = () => {
     try {
       const result = await GoogleSignin.signIn();
       if (!result.data?.idToken) {
-        throw new Error('Google Sign-In failed: No idToken returned');
+        return;
       }
       const { idToken } = result.data;
-      console.log('idToken', idToken);
-      return verifyGoogleToken(idToken);
+
+      return verifyGoogleToken({ idToken });
     } catch (error: any) {
-      console.log('error', error);
       setError(error);
       return undefined;
     } finally {

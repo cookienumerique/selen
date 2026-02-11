@@ -64,10 +64,12 @@ export default function OpenCapsuleView() {
         <Header />
       </View>
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-        {capsuleAlreadyRespondedToday && !isLoadingCapsuleOfTheDay && <CapsuleAlreadyRespondedToday />}
-        {!capsuleOfTheDay && !capsuleAlreadyRespondedToday && !isLoadingCapsuleOfTheDay && (
-          <NoCapsuleAvailable />
+        {capsuleAlreadyRespondedToday && !isLoadingCapsuleOfTheDay && (
+          <CapsuleAlreadyRespondedToday />
         )}
+        {!capsuleOfTheDay &&
+          !capsuleAlreadyRespondedToday &&
+          !isLoadingCapsuleOfTheDay && <NoCapsuleAvailable />}
         {userConnected && !capsuleAlreadyRespondedToday && capsuleOfTheDay && (
           <ScrollView
             contentContainerStyle={{

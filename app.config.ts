@@ -1,11 +1,11 @@
-const version = '1.8.0';
+const version = '1.9.0';
 
 // android
-const versionCode = 14;
+const versionCode = 15;
 const packageNameAndroid = 'com.cookienumerique.selen';
 // Ios
 const packageNameIos = 'com.selen.app';
-const buildNumberIos = '1';
+const buildNumberIos = '2';
 
 // API
 const selenAPI = 'https://api-selen.cookie-numerique.fr';

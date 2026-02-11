@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.9.0] – 2026-02-10
+
+### Added
+
+- sign in with apple
+
 ## [1.8.0] – 2026-02-10
 
 ### Added
@@ -7,7 +13,8 @@
 - notification for open capsule
 
 ## Fixed
-- the loading of the screen open capsule isLoading was added 
+
+- the loading of the screen open capsule isLoading was added
 
 ## [1.7.0] – 2026-02-06
 

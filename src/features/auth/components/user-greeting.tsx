@@ -14,7 +14,7 @@ export default function HelloGreeting() {
         color: Colors.warmSand,
       }}
     >
-      Bonjour, {user.name}
+      Bonjour, {user?.firstName ?? ''}
     </Text>
   );
 }

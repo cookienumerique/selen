@@ -1,15 +1,15 @@
 import { Button } from '@/src/components/button';
 import { Text } from '@/src/components/texts';
 import { env } from '@/src/config/env';
-import { Colors } from '@/src/constants/theme';
-import { useGoogleLogin } from '@/src/features/auth/hooks/use-google-login';
+import { useAppleLogIn } from '@/src/features/auth/hooks/use-apple-login';
+import { FontAwesome } from '@expo/vector-icons';
 import * as MailComposer from 'expo-mail-composer';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
-export const LoginButton = () => {
-  const { login, isLoading, error } = useGoogleLogin();
-  const handleLogin = async () => {
-    await login();
+export const SignInAppleButton = () => {
+  const { login, isLoading, error } = useAppleLogIn();
+  const handleAppleLogin = async () => {
+    login();
   };
 
   const handleContactSupport = async () => {
@@ -25,29 +25,25 @@ export const LoginButton = () => {
   };
   return (
     <View style={{ gap: 16, width: '100%' }}>
-      <Button
-        onPress={handleLogin}
-        disabled={isLoading}
-        style={{
-          backgroundColor: 'white',
-        }}
-      >
-        <Image
-          source={require('@/assets/images/google-logo.png')}
+      <View style={{ borderRadius: 24, overflow: 'hidden', gap: 16 }}>
+        <Button
+          onPress={handleAppleLogin}
+          disabled={isLoading}
           style={{
-            width: 20,
-            height: 20,
-          }}
-        />
-        <Text
-          style={{
-            color: Colors.gray,
-            fontWeight: '600',
+            backgroundColor: 'black',
           }}
         >
-          Se connecter avec Google
-        </Text>
-      </Button>
+          <FontAwesome name="apple" size={20} color="white" />
+          <Text
+            style={{
+              color: 'white',
+              fontWeight: '600',
+            }}
+          >
+            Se connecter avec Apple
+          </Text>
+        </Button>
+      </View>
       {error && (
         <TouchableOpacity onPress={handleContactSupport}>
           <View
