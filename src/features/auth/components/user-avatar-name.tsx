@@ -15,7 +15,9 @@ export const UserAvatarName = () => {
     >
       <Image
         source={{
-          uri: user.picture ?? '',
+          uri:
+            user.picture ??
+            `https://api.dicebear.com/7.x/initials/png?seed=${user?.name ?? 'S'}&backgroundColor=2f3e46`,
         }}
         style={{
           width: 100,
@@ -37,7 +39,7 @@ export const UserAvatarName = () => {
             fontWeight: 'bold',
           }}
         >
-          {user.name}
+          {user?.name} {user?.firstName}
         </Text>
         <Text style={{ color: 'gray' }}>{user.email}</Text>
       </View>

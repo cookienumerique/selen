@@ -14,7 +14,6 @@ dayjs.locale('fr');
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true, // legacy (Android / compat)
     shouldShowBanner: true, // iOS foreground banner
     shouldShowList: true, // iOS notification center
     shouldPlaySound: true,

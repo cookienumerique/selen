@@ -15,7 +15,6 @@ export const MonthlyCapsuleBadge = () => {
   }).length;
 
   const handleClickCapsuleMonth = () => {
-    console.log('click');
     router.push('/calendar');
   };
   return (

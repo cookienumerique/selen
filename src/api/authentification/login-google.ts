@@ -15,6 +15,5 @@ export const loginGoogle = async ({
   const response = await selenAPIClient.post('/auth/google', {
     idToken,
   });
-
   return response.data;
 };

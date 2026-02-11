@@ -14,25 +14,23 @@ export const useGoogleLogIn = () => {
   const [isLoadingGoogleSignIn, setIsLoadingGoogleSignIn] =
     useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const {
-    mutateAsync: verifyGoogleToken,
-    isPending: isLoadingVerifyGoogleToken,
-  } = useLoginWithGoogle({
-    onSuccess: ({ user, token }: LoginGoogleResponse) => {
-      setToken(token);
-      setUser(user);
-      router.push('/');
-    },
-    onError: (error: Error) => {
-      console.error(error);
-      Toast.show({
-        type: 'error',
-        text1: 'Erreur lors de la connexion',
-        position: 'bottom',
-        autoHide: false,
-      });
-    },
-  });
+  const { mutateAsync: loginWithGoogle, isPending: isLoadingLoginWithGoogle } =
+    useLoginWithGoogle({
+      onSuccess: ({ user, token }: LoginGoogleResponse) => {
+        setToken(token);
+        setUser(user);
+        router.push('/');
+      },
+      onError: (error: Error) => {
+        console.error(error);
+        Toast.show({
+          type: 'error',
+          text1: 'Erreur lors de la connexion',
+          position: 'bottom',
+          autoHide: false,
+        });
+      },
+    });
 
   const login = async (): Promise<LoginGoogleResponse | undefined> => {
     setIsLoadingGoogleSignIn(true);
@@ -46,8 +44,8 @@ export const useGoogleLogIn = () => {
         return;
       }
       const { idToken } = result.data;
-
-      return verifyGoogleToken({ idToken });
+      const response = await loginWithGoogle({ idToken });
+      return response;
     } catch (error: any) {
       setError(error);
       return undefined;
@@ -55,6 +53,6 @@ export const useGoogleLogIn = () => {
       setIsLoadingGoogleSignIn(false);
     }
   };
-  const isLoading = isLoadingVerifyGoogleToken || isLoadingGoogleSignIn;
+  const isLoading = isLoadingLoginWithGoogle || isLoadingGoogleSignIn;
   return { login, isLoading, error };
 };

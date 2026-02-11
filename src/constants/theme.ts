@@ -16,6 +16,7 @@ export const Colors = {
   gray: '#878787',
   orange: '#ffa500',
   gold: '#ffd700',
+  red: '#C41E3A',
   capsule: '#6F8F72',
 };
 

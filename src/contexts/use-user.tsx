@@ -26,9 +26,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [bearerTokenSelen, setBearerTokenSelen] = useState<string | null>(null);
   const { removeToken, getToken } = useTokenStorage();
   const logout = async (): Promise<void> => {
+    await removeToken();
+    setAuthToken();
     setUser(null);
     setBearerTokenSelen(null);
-    removeToken();
   };
 
   useEffect(() => {

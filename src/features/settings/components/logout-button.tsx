@@ -17,8 +17,8 @@ export const LogoutButton = () => {
       }}
     >
       <TouchableOpacity
-        onPress={() => {
-          logout();
+        onPress={async () => {
+          await logout();
           router.push('/login-screen');
         }}
       >

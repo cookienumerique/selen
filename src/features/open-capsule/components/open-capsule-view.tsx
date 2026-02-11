@@ -75,7 +75,7 @@ export default function OpenCapsuleView() {
             contentContainerStyle={{
               flexGrow: 1,
               gap: 32,
-              paddingBottom: 16,
+              marginTop: 32,
             }}
           >
             {isLoadingCapsuleOfTheDay && (
@@ -98,78 +98,90 @@ export default function OpenCapsuleView() {
             )}
             {!isLoadingCapsuleOfTheDay && (
               <>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    marginVertical: 32,
-                  }}
-                >
-                  <Image
-                    source={require('@/assets/images/capsule.png')}
-                    style={{
-                      width: 200,
-                      height: 120,
-                      resizeMode: 'contain',
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    textAlign: 'center',
-                    color: Colors.slateRoot,
-                  }}
-                >
-                  {capsuleOfTheDay?.content}
-                </Text>
-                <Controller
-                  control={form.control}
-                  name="response"
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <View
+                <View style={{ gap: 32 }}>
+                  <View style={{ alignItems: 'center' }}>
+                    <Image
+                      source={require('@/assets/images/capsule.png')}
                       style={{
-                        position: 'relative',
+                        height: 80,
+                        resizeMode: 'contain',
+                      }}
+                    />
+                  </View>
+
+                  {capsuleOfTheDay.title && (
+                    <Text
+                      style={{
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        color: Colors.slateRoot,
                       }}
                     >
-                      <Image
-                        source={require('@/assets/images/scotch.png')}
-                        style={{
-                          position: 'absolute',
-                          top: -20,
-                          left: '50%',
-                          transform: [
-                            {
-                              translateX: -90,
-                            },
-                          ],
-                          height: 40,
-                          width: 180,
-                          resizeMode: 'contain',
-                          zIndex: 1,
-                        }}
-                      />
-                      <TextInput
-                        multiline
-                        placeholder="Ne réfléchis pas trop. Écris ce qui vient, même si ce n'est pas clair."
-                        value={value}
-                        onChangeText={onChange}
-                        numberOfLines={10}
-                        style={{
-                          borderRadius: 16,
-                          borderColor: Colors.oakHoneyDark,
-                          backgroundColor: 'white',
-                          paddingVertical: 32,
-                          padding: 16,
-                          textAlignVertical: 'top',
-                          height: 150,
-                        }}
-                      />
-                    </View>
+                      {capsuleOfTheDay.title}
+                    </Text>
                   )}
-                />
+
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      textAlign: 'center',
+                      color: Colors.oakHoneyDark,
+                    }}
+                  >
+                    {capsuleOfTheDay?.content}
+                  </Text>
+                  <View style={{ marginTop: 32 }}>
+                    <Controller
+                      control={form.control}
+                      name="response"
+                      rules={{
+                        required: true,
+                      }}
+                      render={({ field: { onChange, value } }) => (
+                        <View
+                          style={{
+                            position: 'relative',
+                          }}
+                        >
+                          <Image
+                            source={require('@/assets/images/scotch.png')}
+                            style={{
+                              position: 'absolute',
+                              top: -20,
+                              left: '50%',
+                              transform: [
+                                {
+                                  translateX: -90,
+                                },
+                              ],
+                              height: 40,
+                              width: 180,
+                              resizeMode: 'contain',
+                              zIndex: 1,
+                            }}
+                          />
+                          <TextInput
+                            multiline
+                            placeholder="Ne réfléchis pas trop. Écris ce qui vient, même si ce n'est pas clair."
+                            value={value}
+                            onChangeText={onChange}
+                            numberOfLines={10}
+                            style={{
+                              borderRadius: 16,
+                              borderColor: Colors.oakHoneyDark,
+                              backgroundColor: 'white',
+                              paddingVertical: 32,
+                              padding: 16,
+                              textAlignVertical: 'top',
+                              height: 150,
+                            }}
+                          />
+                        </View>
+                      )}
+                    />
+                  </View>
+                </View>
 
                 <View
                   style={{

@@ -5,8 +5,8 @@ import { selenAPIClient } from './client';
 const debug = false;
 
 export const setupAxiosInterceptors = (token?: string | null) => {
-  // selenAPIClient.interceptors.request.clear();
-  // selenAPIClient.interceptors.response.clear();
+  selenAPIClient.interceptors.request.clear();
+  selenAPIClient.interceptors.response.clear();
 
   selenAPIClient.interceptors.request.use(
     (config) => {
