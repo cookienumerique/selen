@@ -1,0 +1,33 @@
+import { useUser } from '@/src/contexts/use-user';
+import { useCalendar } from '@/src/features/calendar/hooks/calendar-provider';
+import { PremiumModal } from '@/src/features/premium/premium-modal';
+import dayjs from 'dayjs';
+import { StyleSheet, View } from 'react-native';
+export const CalendarPremium = () => {
+    const { isPremium } = useUser();
+
+    const {
+        period
+    } = useCalendar();
+
+    const isSameMonth = period === dayjs().format('YYYY-MM');
+    const displayPremiumOverlay = !isPremium && !isSameMonth;
+
+    return (
+        <>
+            {displayPremiumOverlay && (
+                <View
+                    style={[StyleSheet.absoluteFill, {
+                        marginTop: 50,
+                        zIndex: 10,
+                        backgroundColor: 'rgba(255, 255, 255, 0.50)',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: 20,
+                    }]}
+                >
+                    <PremiumModal isOpen={displayPremiumOverlay} title="Ne laisse pas le fil s'interrompre" description="Accéde à tout ton historique et garde une trace précieuse de tes victoires." />
+                </View >
+            )}</>
+    )
+}

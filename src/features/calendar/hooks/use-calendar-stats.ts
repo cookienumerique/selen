@@ -7,6 +7,7 @@ export type UseCalendarStatsReturn = {
   maxStreak: number;
   formattedRange: string | undefined;
 };
+
 export function useCalendarStats(
   data: CapsuleResponse[] | undefined,
   period: string,
@@ -17,7 +18,7 @@ export function useCalendarStats(
     : undefined;
 
   return {
-    totalCapsules: data?.length,
+    totalCapsules: data?.length ?? 0,
     maxStreak: maxStreakRange?.length ?? 0,
     formattedRange,
   };

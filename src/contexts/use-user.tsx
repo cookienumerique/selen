@@ -13,6 +13,7 @@ import {
 export type UserContextReturn = {
   bearerTokenSelen: string | null;
   user: User | null;
+  isPremium: boolean;
   setUser: (user: User) => void;
   logout: () => Promise<void>;
   isLoadingUser: boolean;
@@ -57,6 +58,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
     });
   }, [getToken, user]);
 
+  const isPremium = false
+
   return (
     <UserContext.Provider
       value={{
@@ -65,6 +68,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         setUser,
         bearerTokenSelen,
         isLoadingUser,
+        isPremium,
       }}
     >
       {children}

@@ -7,18 +7,18 @@ import { Colors } from '@/src/constants/theme';
 import { Encouragement } from '@/src/features/calendar/components/encouragement';
 import { LegendList } from '@/src/features/calendar/components/legends/legend-list';
 import { StatsRow } from '@/src/features/calendar/components/stats-row';
-import { useCalendarScreen } from '@/src/features/calendar/hooks/use-calendar-screen';
+import { useCalendar } from '@/src/features/calendar/hooks/calendar-provider';
 import { ScrollView } from 'react-native';
 
 export function CalendarView() {
   const {
-    isLoadingCapsulesResponses,
-    isLoadingInnerWeathersResponses,
+    isLoadingCapsules,
+    isLoadingWeather,
     markedDates,
     stats,
     onDayPress,
     onMonthChange,
-  } = useCalendarScreen();
+  } = useCalendar();
   return (
     <Container>
       <MoonBackground />
@@ -40,13 +40,13 @@ export function CalendarView() {
           Mon mois intérieur
         </Text>
 
-        <StatsRow stats={stats} isLoading={isLoadingCapsulesResponses} />
+        <StatsRow stats={stats} isLoading={isLoadingCapsules} />
 
         <Calendar
           onMonthChange={onMonthChange}
           markedDates={markedDates}
           displayLoadingIndicator={
-            isLoadingCapsulesResponses || isLoadingInnerWeathersResponses
+            isLoadingCapsules || isLoadingWeather
           }
           onDayPress={onDayPress}
         />
