@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.10.0] – 2026-02-12
+
+### Added
+
+- user can edit a capsule
+
 ## [1.9.0] – 2026-02-10
 
 ### Added

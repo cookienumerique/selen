@@ -1,6 +1,6 @@
 import { useAxios } from '@/src/api/use-axios';
 import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import Toast from 'react-native-toast-message';
 
@@ -11,8 +11,10 @@ type FetchCapsulesResponse = {
 export const useFetchCapsulesResponseById = (id: number) => {
   const toastShownRef = useRef(false);
   const axios = useAxios();
+  const queryClient = useQueryClient();
+  const key = ['capsules-responses', id];
   const query = useQuery<CapsuleResponse | null, Error>({
-    queryKey: ['capsules-responses', id],
+    queryKey: key,
     queryFn: async () => {
       const { data } = await axios.get<FetchCapsulesResponse>(
         `/capsules-response/${id}`,
@@ -33,5 +35,10 @@ export const useFetchCapsulesResponseById = (id: number) => {
     });
   }, [query.error]);
 
-  return query;
+  const invalidate = () =>
+    queryClient.invalidateQueries({
+      queryKey: key,
+    });
+
+  return { ...query, invalidate };
 };
