@@ -21,7 +21,10 @@
         "monochromeImage": "./assets/images/logo_selen_512.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "com.android.vending.BILLING"
+      ]
     },
     "web": {
       "output": "static",

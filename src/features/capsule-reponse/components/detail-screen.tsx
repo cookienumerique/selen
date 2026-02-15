@@ -12,6 +12,7 @@ import { MoreMenu } from '@/src/features/capsule-reponse/components/more-menu';
 import { SaveButton } from '@/src/features/capsule-reponse/components/save-button';
 import { useFetchCapsulesResponseById } from '@/src/features/capsule-reponse/hooks/use-fetch-capsules-response-by-id';
 import { useUpdateCapsuleResponse } from '@/src/features/capsule-reponse/hooks/use-update-capsule-response';
+import { PremiumModal } from '@/src/features/premium/premium-modal';
 import dayjs from 'dayjs';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
@@ -28,6 +29,8 @@ import Toast from 'react-native-toast-message';
 
 export const CapsuleResponseDetailScreen = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [displayPremiumModal, setDisplayPremiumModal] = useState(false);
+
   const { id } = useLocalSearchParams<{
     id: string;
   }>();
@@ -102,6 +105,7 @@ export const CapsuleResponseDetailScreen = () => {
     <Container>
       <MoonBackground />
       <Header onGoBack={() => router.push('/(tabs)/calendar')} />
+      <PremiumModal onClose={() => setDisplayPremiumModal(false)} isOpen={displayPremiumModal} title="Ta vérité actuelle" description={`Tes pensées d'hier ne sont plus forcément celles d'aujourd'hui.\n\nAvec Selen infini, garde le contrôle sur ton journal en modifiant ou supprimant tes capsules pour qu'elles reflètent toujours ta vérité actuelle.`} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           behavior="padding"
@@ -156,6 +160,7 @@ export const CapsuleResponseDetailScreen = () => {
               >
                 <View style={{ position: 'absolute', right: 0, top: 0 }}>
                   <MoreMenu
+                    setDisplayPremiumModal={setDisplayPremiumModal}
                     onEdit={handleEditCapsuleResponse}
                     onDelete={handleSkipCapsuleResponse}
                   />

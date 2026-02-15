@@ -1,7 +1,7 @@
 import { Colors } from '@/src/constants/theme';
 import MaterialDesignIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import React, { createContext, useContext, useRef, useState } from 'react';
-import { Modal, Pressable, View } from 'react-native';
+import { Modal, Pressable, TouchableOpacity, View } from 'react-native';
 
 type MenuContextType = {
     closeMenu: () => void;
@@ -43,9 +43,9 @@ export const Menu = ({ children }: MenuProps) => {
     return (
         <MenuContext.Provider value={{ closeMenu }}>
             <>
-                <View ref={buttonRef} style={{ padding: 16 }}>
-                    <MaterialDesignIcons name="dots-vertical" size={24} color={Colors.oakHoneyDark} onPress={openMenu} />
-                </View>
+                <TouchableOpacity ref={buttonRef} style={{ padding: 16 }} onPress={openMenu}>
+                    <MaterialDesignIcons name="dots-vertical" size={24} color={Colors.oakHoneyDark} />
+                </TouchableOpacity>
 
                 <Modal transparent visible={visible} animationType="fade">
                     <Pressable
@@ -66,6 +66,7 @@ export const Menu = ({ children }: MenuProps) => {
                                 shadowOffset: { width: 0, height: 4 },
                                 shadowRadius: 10,
                                 elevation: 8,
+                                gap: 0
                             }}
                         >
                             {children}

@@ -58,7 +58,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     });
   }, [getToken, user]);
 
-  const isPremium = false
+  const isPremium = true
 
   return (
     <UserContext.Provider

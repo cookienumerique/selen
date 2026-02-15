@@ -1,6 +1,6 @@
 import { useUser } from '@/src/contexts/use-user';
 import { useCalendar } from '@/src/features/calendar/hooks/calendar-provider';
-import { PremiumModal } from '@/src/features/premium/premium-modal';
+import { PremiumCard } from '@/src/features/premium/premium-card';
 import dayjs from 'dayjs';
 import { StyleSheet, View } from 'react-native';
 export const CalendarPremium = () => {
@@ -26,8 +26,8 @@ export const CalendarPremium = () => {
                         padding: 20,
                     }]}
                 >
-                    <PremiumModal isOpen={displayPremiumOverlay} title="Ne laisse pas le fil s'interrompre" description="Accéde à tout ton historique et garde une trace précieuse de tes victoires." />
-                </View >
+                    <PremiumCard title="Ne laisse pas le fil s'interrompre" description="Accéde à tout ton historique et garde une trace précieuse de tes victoires." />
+                </View>
             )}</>
     )
 }
