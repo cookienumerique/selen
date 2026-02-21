@@ -1,7 +1,7 @@
-const version = '1.9.0';
+const version = '1.10.0';
 
 // android
-const versionCode = 15;
+const versionCode = 26;
 const packageNameAndroid = 'com.cookienumerique.selen';
 // Ios
 const packageNameIos = 'com.selen.app';
@@ -46,6 +46,8 @@ export default {
     },
     extra: {
       SUPPORT_MAIL: 'conceptiondigitale.team@gmail.com',
+      BUILD_ANDROID: versionCode,
+      BUILD_IOS: buildNumberIos,
       VERSION: version,
       SELEN_API: selenAPI,
       eas: {

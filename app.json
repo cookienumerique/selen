@@ -45,7 +45,8 @@
         }
       ],
       "expo-font",
-      "expo-mail-composer"
+      "expo-mail-composer",
+      "react-native-iap"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -1,5 +1,6 @@
 import { selenAPIClient } from '@/src/api/client';
 import { setAuthToken } from '@/src/api/set-auth-token';
+import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import { useTokenStorage } from '@/src/features/user/hooks/use-token-storage';
 import { User } from '@/src/features/user/types/user.types';
 import {
@@ -13,7 +14,6 @@ import {
 export type UserContextReturn = {
   bearerTokenSelen: string | null;
   user: User | null;
-  isPremium: boolean;
   setUser: (user: User) => void;
   logout: () => Promise<void>;
   isLoadingUser: boolean;
@@ -22,6 +22,7 @@ export type UserContextReturn = {
 const UserContext = createContext<UserContextReturn | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
+  const { setSubscriptions } = useSubscriptions();
   const [user, setUser] = useState<User | null>(null);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [bearerTokenSelen, setBearerTokenSelen] = useState<string | null>(null);
@@ -45,8 +46,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
               Authorization: `Bearer ${token}`,
             },
           })
-          .then((response) => {
-            setUser(response.data?.user);
+          .then(({ data }) => {
+            const { user, subscriptions } = data;
+            setUser(user);
+            setSubscriptions(subscriptions ?? []);
             setAuthToken(token);
           });
       } catch (error) {
@@ -56,9 +59,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
         setIsLoadingUser(false);
       }
     });
-  }, [getToken, user]);
+  }, [getToken, user, setSubscriptions]);
 
-  const isPremium = true
 
   return (
     <UserContext.Provider
@@ -68,7 +70,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
         setUser,
         bearerTokenSelen,
         isLoadingUser,
-        isPremium,
       }}
     >
       {children}

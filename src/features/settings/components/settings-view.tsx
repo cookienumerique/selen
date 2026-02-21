@@ -10,7 +10,7 @@ import { LogoutButton } from '@/src/features/settings/components/logout-button';
 import { SettingsItem } from '@/src/features/settings/components/settings-item';
 import { useSettingsItems } from '@/src/features/settings/hooks/use-settings-items';
 import React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 
 export default function SettingsView() {
   const { user } = useUser();
@@ -38,7 +38,7 @@ export default function SettingsView() {
           fontSize: 12,
         }}
       >
-        v{env.VERSION}
+        v{env.VERSION} ({Platform.OS === 'android' ? env.BUILD_ANDROID : env.BUILD_IOS})
       </Text>
     </Container>
   );

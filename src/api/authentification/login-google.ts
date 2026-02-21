@@ -1,8 +1,10 @@
 import { selenAPIClient } from '@/src/api/client';
+import { Subscription } from '@/src/features/subscription/types/subscription.types';
 import { User } from '@/src/features/user/types/user.types';
 export type LoginGoogleResponse = {
   token: string;
   user: User;
+  subscriptions: Subscription[];
 };
 
 export type LoginGoogleProps = {

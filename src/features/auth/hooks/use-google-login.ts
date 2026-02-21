@@ -1,4 +1,5 @@
 import { LoginGoogleResponse } from '@/src/api/authentification/login-google';
+import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import { useUser } from '@/src/contexts/use-user';
 import { useLoginWithGoogle } from '@/src/features/auth/hooks/use-login-with-google';
 import { useTokenStorage } from '@/src/features/user/hooks/use-token-storage';
@@ -10,15 +11,16 @@ import Toast from 'react-native-toast-message';
 export const useGoogleLogIn = () => {
   const { setToken } = useTokenStorage();
   const { setUser } = useUser();
-
+  const { setSubscriptions } = useSubscriptions();
   const [isLoadingGoogleSignIn, setIsLoadingGoogleSignIn] =
     useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const { mutateAsync: loginWithGoogle, isPending: isLoadingLoginWithGoogle } =
     useLoginWithGoogle({
-      onSuccess: ({ user, token }: LoginGoogleResponse) => {
+      onSuccess: ({ user, token, subscriptions }: LoginGoogleResponse) => {
         setToken(token);
         setUser(user);
+        setSubscriptions(subscriptions ?? []);
         router.push('/');
       },
       onError: (error: Error) => {

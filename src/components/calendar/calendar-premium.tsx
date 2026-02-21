@@ -1,17 +1,17 @@
-import { useUser } from '@/src/contexts/use-user';
+import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import { useCalendar } from '@/src/features/calendar/hooks/calendar-provider';
 import { PremiumCard } from '@/src/features/premium/premium-card';
 import dayjs from 'dayjs';
 import { StyleSheet, View } from 'react-native';
 export const CalendarPremium = () => {
-    const { isPremium } = useUser();
+    const { hasActiveSubscription } = useSubscriptions();
 
     const {
         period
     } = useCalendar();
 
     const isSameMonth = period === dayjs().format('YYYY-MM');
-    const displayPremiumOverlay = !isPremium && !isSameMonth;
+    const displayPremiumOverlay = !hasActiveSubscription && !isSameMonth;
 
     return (
         <>

@@ -1,6 +1,6 @@
-import { Button } from '@/src/components/button';
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
+import { ExploreInfinityButton } from '@/src/features/subscription/components/explor-infinity-button';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, View } from "react-native";
 
@@ -11,6 +11,7 @@ type PremiumCardProps = {
 }
 
 export const PremiumCard = ({ title, description, onClose }: PremiumCardProps) => {
+
     return (
         <View
             style={{
@@ -59,14 +60,7 @@ export const PremiumCard = ({ title, description, onClose }: PremiumCardProps) =
                     {description}
                 </Text>
             </View>
-            <Button onPress={onClose}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, justifyContent: 'center', width: '100%' }}>
-                    <Ionicons name="sparkles" size={12} color="white" />
-                    <Text style={{ color: 'white' }}>
-                        Explorer l&apos;infini
-                    </Text>
-                </View>
-            </Button>
+            <ExploreInfinityButton />
         </View>
     )
 }

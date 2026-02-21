@@ -1,9 +1,11 @@
 import { selenAPIClient } from '@/src/api/client';
+import { Subscription } from '@/src/features/subscription/types/subscription.types';
 import { User } from '@/src/features/user/types/user.types';
 
 export type LoginAppleResponse = {
   token: string;
   user: User;
+  subscriptions: Subscription[];
 };
 
 export type LoginAppleProps = {
@@ -23,6 +25,5 @@ export const loginInApple = async ({
     givenName,
   });
 
-  console.log('response', response.data);
   return response.data;
 };

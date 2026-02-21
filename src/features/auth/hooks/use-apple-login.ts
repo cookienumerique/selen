@@ -1,4 +1,5 @@
 import { LoginAppleResponse } from '@/src/api/authentification/login-apple';
+import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import { useUser } from '@/src/contexts/use-user';
 import { useLoginWithApple } from '@/src/features/auth/hooks/use-login-with-apple';
 import { useTokenStorage } from '@/src/features/user/hooks/use-token-storage';
@@ -8,6 +9,7 @@ import Toast from 'react-native-toast-message';
 
 export const useAppleLogIn = () => {
   const { setToken } = useTokenStorage();
+  const { setSubscriptions } = useSubscriptions();
   const { setUser } = useUser();
 
   const {
@@ -15,9 +17,10 @@ export const useAppleLogIn = () => {
     isPending: isLoadingLoginWithApple,
     error: errorLoginWithApple,
   } = useLoginWithApple({
-    onSuccess: ({ user, token }: LoginAppleResponse) => {
+    onSuccess: ({ user, token, subscriptions }: LoginAppleResponse) => {
       setToken(token);
       setUser(user);
+      setSubscriptions(subscriptions ?? []);
       router.push('/');
     },
     onError: (error: Error) => {

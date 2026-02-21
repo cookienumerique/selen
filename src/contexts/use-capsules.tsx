@@ -1,3 +1,4 @@
+import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import {
   CreateCapsuleResponsePayload,
   useCreateCapsuleResponse,
@@ -18,6 +19,7 @@ type CapsulesContextReturn = {
   }: CreateCapsuleResponsePayload) => void;
   isLoadingCreateCapsuleResponseMutation: boolean;
   capsuleAlreadyRespondedToday: boolean;
+  capsuleAlreadyRespondedThisWeek: boolean;
 };
 
 type CapsulesProviderProps = {
@@ -30,6 +32,7 @@ const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
 );
 
 export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
+  const { hasActiveSubscription } = useSubscriptions();
   const { data: capsules = [], isLoading: isLoadingCapsules } =
     useFetchCapsules({ params: { subThemeCapsuleId: id } });
   const {
@@ -61,6 +64,12 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
     router.push('/capsule/capsule-completion');
   };
 
+  const nbCapsulesRespondedThisWeek = capsulesResponses.filter(
+    (capsule) => dayjs(capsule.createdAt).isSame(dayjs(), 'week'),
+  ).length;
+
+  const capsuleAlreadyRespondedThisWeek = !hasActiveSubscription && nbCapsulesRespondedThisWeek >= 3;
+
   const isLoadingCapsuleOfTheDay =
     isLoadingCapsules || isLoadingCapsulesResponses;
   return (
@@ -71,6 +80,7 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
         createCapsuleResponse,
         isLoadingCreateCapsuleResponseMutation,
         capsuleAlreadyRespondedToday,
+        capsuleAlreadyRespondedThisWeek,
       }}
     >
       {children}

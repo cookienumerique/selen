@@ -1,7 +1,7 @@
 import { Menu } from '@/src/components/menu';
 import { MenuItem } from '@/src/components/menu/menu-item';
 import { Colors } from '@/src/constants/theme';
-import { useUser } from '@/src/contexts/use-user';
+import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import { Entypo } from '@expo/vector-icons';
 import {
   Alert,
@@ -15,10 +15,10 @@ type MoreMenuProps = {
 };
 
 export const MoreMenu = ({ onEdit, onDelete, setDisplayPremiumModal }: MoreMenuProps) => {
-  const { isPremium } = useUser();
+  const { hasActiveSubscription } = useSubscriptions();
 
   const handleEdit = () => {
-    if (!isPremium) {
+    if (!hasActiveSubscription) {
       setDisplayPremiumModal(true);
       return;
     }
@@ -26,7 +26,7 @@ export const MoreMenu = ({ onEdit, onDelete, setDisplayPremiumModal }: MoreMenuP
   };
 
   const handleOpenConfirmationAlert = () => {
-    if (!isPremium) {
+    if (!hasActiveSubscription) {
       setDisplayPremiumModal(true);
       return;
     }
@@ -50,20 +50,19 @@ export const MoreMenu = ({ onEdit, onDelete, setDisplayPremiumModal }: MoreMenuP
 
   return (
     <Menu>
-      <MenuItem onPress={handleEdit} style={{ opacity: isPremium ? 1 : 0.5 }}>
+      <MenuItem onPress={handleEdit}>
         <Entypo name="pencil" size={16} color={Colors.oakHoneyDark} />
         <Text
           style={{
             fontSize: 16,
             color: Colors.oakHoneyDark,
-            opacity: isPremium ? 1 : 0.5,
           }}
         >
           Modifier
         </Text>
       </MenuItem>
 
-      <MenuItem onPress={handleOpenConfirmationAlert} style={{ opacity: isPremium ? 1 : 0.5 }}>
+      <MenuItem onPress={handleOpenConfirmationAlert}>
         <Entypo name="trash" size={16} color={Colors.red} />
         <Text
           style={{

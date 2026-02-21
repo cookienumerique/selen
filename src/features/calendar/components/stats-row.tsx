@@ -127,7 +127,7 @@ export const StatsRow = ({ stats, isLoading }: StatsRowProps) => {
                 textAlign: 'center',
               }}
             >
-              {formattedRange}
+              {formattedRange ?? '-'}
             </Text>
           </View>
         )}
