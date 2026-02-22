@@ -23,7 +23,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 
@@ -35,9 +35,11 @@ export const CapsuleResponseDetailScreen = () => {
     id: string;
   }>();
 
-  const { data: capsuleResponse, isLoading, invalidate: invalidateCapsuleResponse } = useFetchCapsulesResponseById(
-    Number(id),
-  );
+  const {
+    data: capsuleResponse,
+    isLoading,
+    invalidate: invalidateCapsuleResponse,
+  } = useFetchCapsulesResponseById(Number(id));
 
   const {
     mutateAsync: updateCapsuleResponse,
@@ -45,7 +47,7 @@ export const CapsuleResponseDetailScreen = () => {
   } = useUpdateCapsuleResponse({
     onSuccess: () => {
       setIsEditing(false);
-      invalidateCapsuleResponse()
+      invalidateCapsuleResponse();
     },
     onError: (error) => {
       console.error(error);
@@ -58,7 +60,6 @@ export const CapsuleResponseDetailScreen = () => {
       setIsEditing(false);
     },
   });
-
 
   const { response: responseDefault } = capsuleResponse ?? {};
 
@@ -84,7 +85,6 @@ export const CapsuleResponseDetailScreen = () => {
       ? "Vous n'avez pas répondu à la capsule"
       : `${capsuleResponse?.response}`;
 
-
   const handleEditCapsuleResponse = () => {
     setIsEditing(true);
   };
@@ -105,7 +105,12 @@ export const CapsuleResponseDetailScreen = () => {
     <Container>
       <MoonBackground />
       <Header onGoBack={() => router.push('/(tabs)/calendar')} />
-      <PremiumModal onClose={() => setDisplayPremiumModal(false)} isOpen={displayPremiumModal} title="Ta vérité actuelle" description={`Tes pensées d'hier ne sont plus forcément celles d'aujourd'hui.\n\nAvec Selen infini, garde le contrôle sur ton journal en modifiant ou supprimant tes capsules pour qu'elles reflètent toujours ta vérité actuelle.`} />
+      <PremiumModal
+        onClose={() => setDisplayPremiumModal(false)}
+        isOpen={displayPremiumModal}
+        title="Ta vérité actuelle"
+        description={`Tes pensées d'hier ne sont plus forcément celles d'aujourd'hui.\n\nAvec Selen infini, garde le contrôle sur ton journal en modifiant ou supprimant tes capsules pour qu'elles reflètent toujours ta vérité actuelle.`}
+      />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           behavior="padding"

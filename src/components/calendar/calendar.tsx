@@ -5,11 +5,10 @@ import React from 'react';
 import { View } from 'react-native';
 import {
   Calendar as CalendarComponent,
-  CalendarProps
+  CalendarProps,
 } from 'react-native-calendars';
 
 export const Calendar = (props: CalendarProps) => {
-
   return (
     <Card
       style={{
@@ -28,7 +27,6 @@ export const Calendar = (props: CalendarProps) => {
               calendarBackground: 'transparent',
             }}
             {...props}
-
           />
         </View>
         <CalendarPremium />

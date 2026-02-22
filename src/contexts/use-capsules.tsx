@@ -64,11 +64,12 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
     router.push('/capsule/capsule-completion');
   };
 
-  const nbCapsulesRespondedThisWeek = capsulesResponses.filter(
-    (capsule) => dayjs(capsule.createdAt).isSame(dayjs(), 'week'),
+  const nbCapsulesRespondedThisWeek = capsulesResponses.filter((capsule) =>
+    dayjs(capsule.createdAt).isSame(dayjs(), 'week'),
   ).length;
 
-  const capsuleAlreadyRespondedThisWeek = !hasActiveSubscription && nbCapsulesRespondedThisWeek >= 3;
+  const capsuleAlreadyRespondedThisWeek =
+    !hasActiveSubscription && nbCapsulesRespondedThisWeek >= 3;
 
   const isLoadingCapsuleOfTheDay =
     isLoadingCapsules || isLoadingCapsulesResponses;

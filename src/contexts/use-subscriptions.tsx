@@ -1,11 +1,9 @@
-import { Subscription, SubscriptionStatusEnum } from '@/src/features/subscription/types/subscription.types';
-import dayjs from 'dayjs';
 import {
-  createContext,
-  ReactNode,
-  useContext,
-  useState
-} from 'react';
+  Subscription,
+  SubscriptionStatusEnum,
+} from '@/src/features/subscription/types/subscription.types';
+import dayjs from 'dayjs';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 export type SubscriptionContextReturn = {
   subscriptions: Subscription[];
@@ -13,14 +11,15 @@ export type SubscriptionContextReturn = {
   hasActiveSubscription: boolean;
 };
 
-const SubscriptionContext = createContext<SubscriptionContextReturn | undefined>(undefined);
+const SubscriptionContext = createContext<
+  SubscriptionContextReturn | undefined
+>(undefined);
 
 export function SubscriptionsProvider({ children }: { children: ReactNode }) {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const now = dayjs();
 
-
-  const hasActiveSubscription = subscriptions.some(subscription => {
+  const hasActiveSubscription = subscriptions.some((subscription) => {
     const isValidStatus = [
       SubscriptionStatusEnum.SUBSCRIPTION_STATE_ACTIVE,
       SubscriptionStatusEnum.SUBSCRIPTION_STATE_IN_GRACE_PERIOD,
@@ -46,7 +45,9 @@ export function SubscriptionsProvider({ children }: { children: ReactNode }) {
 export function useSubscriptions() {
   const ctx = useContext(SubscriptionContext);
   if (!ctx) {
-    throw new Error('useSubscriptions must be used inside <SubscriptionsProvider>');
+    throw new Error(
+      'useSubscriptions must be used inside <SubscriptionsProvider>',
+    );
   }
   return ctx;
 }

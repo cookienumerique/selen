@@ -38,7 +38,8 @@ export default function SettingsView() {
           fontSize: 12,
         }}
       >
-        v{env.VERSION} ({Platform.OS === 'android' ? env.BUILD_ANDROID : env.BUILD_IOS})
+        v{env.VERSION} (
+        {Platform.OS === 'android' ? env.BUILD_ANDROID : env.BUILD_IOS})
       </Text>
     </Container>
   );

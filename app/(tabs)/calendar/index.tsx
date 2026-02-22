@@ -3,7 +3,9 @@ import { CalendarProvider } from '@/src/features/calendar/hooks/calendar-provide
 import React from 'react';
 
 export default function Calendar() {
-  return (<CalendarProvider>
-    <CalendarView />
-  </CalendarProvider>)
+  return (
+    <CalendarProvider>
+      <CalendarView />
+    </CalendarProvider>
+  );
 }

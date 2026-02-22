@@ -1,4 +1,4 @@
-import { User } from "@/src/features/user/types/user.types";
+import { User } from '@/src/features/user/types/user.types';
 
 export enum SubscriptionStatusEnum {
   SUBSCRIPTION_STATE_UNSPECIFIED = 'SUBSCRIPTION_STATE_UNSPECIFIED',
@@ -20,16 +20,19 @@ export enum SubscriptionProviderEnum {
 export enum SubscriptionBasePlanIdEnum {
   SELEN_PREMIUM_MONTHLY = 'selen-premium-monthly',
   SELEN_PREMIUM_YEARLY = 'selen-premium-yearly',
+  SELEN_PREMIUM_MONTHLY_FOUNDER = 'selen-premium-monthly-founder',
+  SELEN_PREMIUM_YEARLY_FOUNDER = 'selen-premium-yearly-founder',
 }
 
 export enum SubscriptionProductIdEnum {
   SELEN_PREMIUM = 'selen_premium',
 }
-export type SubscriptionStatus = typeof SubscriptionStatusEnum[keyof typeof SubscriptionStatusEnum];
+export type SubscriptionStatus =
+  (typeof SubscriptionStatusEnum)[keyof typeof SubscriptionStatusEnum];
 
 export type Subscription = {
   id: number;
-  user: User
+  user: User;
   provider: SubscriptionProviderEnum;
   basePlanId: SubscriptionBasePlanIdEnum;
   productId: SubscriptionProductIdEnum;

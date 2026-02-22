@@ -1,14 +1,9 @@
 import HomeButton from '@/src/components/button/home-button';
 import { Colors } from '@/src/constants/theme';
 import { ExploreInfinityButton } from '@/src/features/subscription/components/explor-infinity-button';
-import { router } from 'expo-router';
 import { Text, View } from 'react-native';
 
 export default function CapsuleAlreadyRespondedThisWeek() {
-  const handleDiscoverInfinite = () => {
-    router.push('/subscription');
-  }
-
   return (
     <>
       <View
@@ -51,7 +46,8 @@ export default function CapsuleAlreadyRespondedThisWeek() {
             }}
           >
             Envie de ne pas t&apos;arrêter là ?{'\n'}
-            Avec Selen infini, ne laisse aucune pensée de côté et accède à ta capsule chaque jour de la semaine.
+            Avec Selen infini, ne laisse aucune pensée de côté et accède à ta
+            capsule chaque jour de la semaine.
           </Text>
           <Text
             style={{
@@ -69,7 +65,6 @@ export default function CapsuleAlreadyRespondedThisWeek() {
         <ExploreInfinityButton />
         <HomeButton />
       </View>
-
     </>
   );
 }

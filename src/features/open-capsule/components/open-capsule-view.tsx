@@ -61,25 +61,34 @@ export default function OpenCapsuleView() {
   };
 
   if (isLoadingCapsuleOfTheDay) {
-    return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.warmSand }}>
-      <ActivityIndicator />
-    </View>
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: Colors.warmSand,
+        }}
+      >
+        <ActivityIndicator />
+      </View>
+    );
   }
 
   if (capsuleAlreadyRespondedThisWeek) {
-    return <CapsuleAlreadyOpenedThisWeekScreen />
+    return <CapsuleAlreadyOpenedThisWeekScreen />;
   }
 
   if (capsuleAlreadyRespondedToday) {
-    return <CapsuleAlreadyOpenedTodayScreen />
+    return <CapsuleAlreadyOpenedTodayScreen />;
   }
 
   if (!capsuleOfTheDay) {
-    return <NoCapsuleAvailableScreen />
+    return <NoCapsuleAvailableScreen />;
   }
 
   if (!userConnected) {
-    return <LoginScreen />
+    return <LoginScreen />;
   }
 
   return (

@@ -45,9 +45,7 @@ export function CalendarView() {
         <Calendar
           onMonthChange={onMonthChange}
           markedDates={markedDates}
-          displayLoadingIndicator={
-            isLoadingCapsules || isLoadingWeather
-          }
+          displayLoadingIndicator={isLoadingCapsules || isLoadingWeather}
           onDayPress={onDayPress}
         />
 

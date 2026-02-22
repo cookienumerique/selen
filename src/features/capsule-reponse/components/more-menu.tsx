@@ -3,10 +3,7 @@ import { MenuItem } from '@/src/components/menu/menu-item';
 import { Colors } from '@/src/constants/theme';
 import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import { Entypo } from '@expo/vector-icons';
-import {
-  Alert,
-  Text
-} from 'react-native';
+import { Alert, Text } from 'react-native';
 
 type MoreMenuProps = {
   onEdit: () => void;
@@ -14,7 +11,11 @@ type MoreMenuProps = {
   setDisplayPremiumModal: (display: boolean) => void;
 };
 
-export const MoreMenu = ({ onEdit, onDelete, setDisplayPremiumModal }: MoreMenuProps) => {
+export const MoreMenu = ({
+  onEdit,
+  onDelete,
+  setDisplayPremiumModal,
+}: MoreMenuProps) => {
   const { hasActiveSubscription } = useSubscriptions();
 
   const handleEdit = () => {
@@ -22,7 +23,7 @@ export const MoreMenu = ({ onEdit, onDelete, setDisplayPremiumModal }: MoreMenuP
       setDisplayPremiumModal(true);
       return;
     }
-    onEdit()
+    onEdit();
   };
 
   const handleOpenConfirmationAlert = () => {
@@ -46,7 +47,7 @@ export const MoreMenu = ({ onEdit, onDelete, setDisplayPremiumModal }: MoreMenuP
       ],
       { cancelable: true },
     );
-  }
+  };
 
   return (
     <Menu>

@@ -1,13 +1,15 @@
-import { Text } from "@/src/components/texts";
+import { Text } from '@/src/components/texts';
 
 type FeatureItemDescriptionProps = {
-    children: React.ReactNode;
-}
+  children: React.ReactNode;
+};
 
-export const FeatureItemDescription = ({ children }: FeatureItemDescriptionProps) => {
-    return (
-        <Text style={{ color: "white", fontSize: 14, textAlign: 'left' }}>
-            {children}
-        </Text>
-    )
-}
+export const FeatureItemDescription = ({
+  children,
+}: FeatureItemDescriptionProps) => {
+  return (
+    <Text style={{ color: 'white', fontSize: 14, textAlign: 'left' }}>
+      {children}
+    </Text>
+  );
+};

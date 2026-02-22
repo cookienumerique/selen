@@ -6,7 +6,10 @@ import { DateData } from 'react-native-calendars';
 import { useCalendarStats } from '@/src/features/calendar/hooks/use-calendar-stats';
 import { useMarkedCapsulesResponses } from '@/src/features/calendar/hooks/use-marked-capsules-response';
 import { useMarkedInnerWeatherResponses } from '@/src/features/calendar/hooks/use-marked-inner-weather-responses';
-import { MarkedDates, mergeMarkedDates } from '@/src/features/calendar/utils/merge-marked-dates';
+import {
+  MarkedDates,
+  mergeMarkedDates,
+} from '@/src/features/calendar/utils/merge-marked-dates';
 import { useFetchCapsulesResponse } from '@/src/features/capsule-reponse/hooks/use-fetch-capsules-response';
 import { useFetchInnerWeathersResponses } from '@/src/features/inner-weather-response/hooks/use-fetch-inner-weathers-responses';
 
@@ -22,7 +25,11 @@ type CalendarContextType = {
 
 const CalendarContext = createContext<CalendarContextType | null>(null);
 
-export const CalendarProvider = ({ children }: { children: React.ReactNode }) => {
+export const CalendarProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const { data: capsuleResponses, isLoading: isLoadingCapsules } =
     useFetchCapsulesResponse();
 
@@ -32,8 +39,9 @@ export const CalendarProvider = ({ children }: { children: React.ReactNode }) =>
   const [period, setPeriod] = useState(dayjs().format('YYYY-MM'));
 
   const markedCapsulesDates = useMarkedCapsulesResponses(capsuleResponses);
-  const markedInnerWeathersDates =
-    useMarkedInnerWeatherResponses(innerWeatherResponses);
+  const markedInnerWeathersDates = useMarkedInnerWeatherResponses(
+    innerWeatherResponses,
+  );
 
   const markedDates = useMemo(
     () => mergeMarkedDates(markedCapsulesDates, markedInnerWeathersDates),
@@ -44,8 +52,7 @@ export const CalendarProvider = ({ children }: { children: React.ReactNode }) =>
 
   const handleDayPress = (day: DateData) => {
     const response = capsuleResponses?.find(
-      (item) =>
-        dayjs(item.createdAt).format('YYYY-MM-DD') === day.dateString,
+      (item) => dayjs(item.createdAt).format('YYYY-MM-DD') === day.dateString,
     );
 
     if (!response) return;

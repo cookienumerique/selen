@@ -61,7 +61,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
     });
   }, [getToken, user, setSubscriptions]);
 
-
   return (
     <UserContext.Provider
       value={{
