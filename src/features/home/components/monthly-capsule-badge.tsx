@@ -22,8 +22,8 @@ export const MonthlyCapsuleBadge = () => {
       onPress={handleClickCapsuleMonth}
       style={{
         backgroundColor: Colors.warmSand,
-        width: 50,
-        height: 50,
+        minWidth: 50,
+        minHeight: 50,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 8,
@@ -42,12 +42,13 @@ export const MonthlyCapsuleBadge = () => {
           <View
             style={{
               position: 'absolute',
-              bottom: -5,
-              right: -5,
+              bottom: -4,
+              right: -4,
               backgroundColor: Colors.oakHoney,
-              borderRadius: 50,
-              height: 20,
-              width: 20,
+              borderRadius: 999,
+              minWidth: 22,
+              paddingHorizontal: 6,
+              paddingVertical: 2,
               justifyContent: 'center',
               alignItems: 'center',
             }}

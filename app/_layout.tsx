@@ -1,7 +1,9 @@
+import ForceUpdateScreen from '@/app/force-update';
 import { toastConfig } from '@/src/components/toast/selen-toast';
 import { SubscriptionsProvider } from '@/src/contexts/use-subscriptions';
 import { UserProvider } from '@/src/contexts/use-user';
 import { configureGoogleSignIn } from '@/src/features/auth/config/google-signin';
+import { useAppUpdate } from '@/src/features/force-update/hooks/use-app-update';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
@@ -37,9 +39,15 @@ export default function RootLayout() {
     'OpenSans-Bold': require('../assets/fonts/OpenSans-Bold.ttf'),
   });
 
+  const { needsUpdate } = useAppUpdate()
+
   useEffect(() => {
     configureGoogleSignIn();
   }, []);
+
+  if (needsUpdate) {
+    return <ForceUpdateScreen />
+  }
   if (!loaded) return null;
 
   return (

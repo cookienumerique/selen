@@ -45,7 +45,7 @@ export default function CapsuleAlreadyRespondedThisWeek() {
               fontStyle: 'italic',
             }}
           >
-            Envie de ne pas t&apos;arrêter là ?{'\n'}
+            Envie de continuer ?{'\n'}
             Avec Selen infini, ne laisse aucune pensée de côté et accède à ta
             capsule chaque jour de la semaine.
           </Text>

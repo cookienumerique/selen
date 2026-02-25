@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.11.0] - 2026-02-25
+### Added
+- force update screen
+
 ## [1.10.0] – 2026-02-12
 
 ### Added

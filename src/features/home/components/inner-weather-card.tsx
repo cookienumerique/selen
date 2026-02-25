@@ -14,7 +14,7 @@ export const InnerWeatherCard = () => {
   const [innerWeatherOfDay] = innerWeather || [];
   const item = {
     id: 'inner-weather',
-    title: 'Ta météo\n intérieure',
+    title: 'Ta météo intérieure',
     description: innerWeatherOfDay?.innerWeather?.name,
     image:
       !innerWeatherOfDay || isLoading
@@ -22,7 +22,7 @@ export const InnerWeatherCard = () => {
         : getInnerWeatherAsset(innerWeatherOfDay.innerWeather),
   };
   return (
-    <HomeCard>
+    <HomeCard style={{ padding: 8, minHeight: 120 }}>
       {isLoading && (
         <ActivityIndicator
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
@@ -40,7 +40,7 @@ export const InnerWeatherCard = () => {
           />
           <Text
             style={{
-              textAlign: 'left',
+              textAlign: 'center',
               fontSize: 12,
               color: Colors.oakHoneyDark,
             }}

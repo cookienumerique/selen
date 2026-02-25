@@ -15,7 +15,7 @@ export const SurpriseCapsuleCard = () => {
     >
       <HomeCard
         style={{
-          width: '100%',
+          minHeight: 120,
           padding: 0,
           borderRadius: 16,
           overflow: 'hidden',
@@ -51,7 +51,7 @@ export const SurpriseCapsuleCard = () => {
             <Text
               style={{
                 marginTop: 'auto',
-                textAlign: 'left',
+                textAlign: 'center',
                 fontSize: 12,
                 color: Colors.oakHoneyDark,
               }}

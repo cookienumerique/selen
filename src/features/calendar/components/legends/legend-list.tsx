@@ -26,14 +26,17 @@ export const LegendList = () => {
       >
         Legendes:
       </Text>
-      <View style={{ flexDirection: 'row', gap: 8, width: '100%' }}>
+      <View style={{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 8,
+        justifyContent: 'space-between',
+      }}>
         <LegendItem color={Colors.capsule} name="Capsule ouverte" />
         <LegendItem
           color={getInnerWeatherColor('SUNNY')}
           name={getInnerWeatherByCode('SUNNY')?.name ?? ''}
         />
-      </View>
-      <View style={{ flexDirection: 'row', gap: 8, width: '100%' }}>
         <LegendItem
           color={getInnerWeatherColor('CLEAR')}
           name={getInnerWeatherByCode('CLEAR')?.name ?? ''}
@@ -42,8 +45,6 @@ export const LegendList = () => {
           color={getInnerWeatherColor('SOFT')}
           name={getInnerWeatherByCode('SOFT')?.name ?? ''}
         />
-      </View>
-      <View style={{ flexDirection: 'row', gap: 8, width: '100%' }}>
         <LegendItem
           color={getInnerWeatherColor('FOGGY')}
           name={getInnerWeatherByCode('FOGGY')?.name ?? ''}
@@ -52,13 +53,12 @@ export const LegendList = () => {
           color={getInnerWeatherColor('TENSE')}
           name={getInnerWeatherByCode('TENSE')?.name ?? ''}
         />
-      </View>
-      <View style={{ flexDirection: 'row', gap: 8, width: '100%' }}>
         <LegendItem
           color={getInnerWeatherColor('OVERWHELMED')}
           name={getInnerWeatherByCode('OVERWHELMED')?.name ?? ''}
         />
       </View>
+
     </Card>
   );
 };

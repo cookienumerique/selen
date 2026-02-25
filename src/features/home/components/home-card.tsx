@@ -15,8 +15,6 @@ export const HomeCard = ({ children, style }: HomeCardProps) => {
         {
           backgroundColor: Colors.warmSand,
           gap: 8,
-          width: 110,
-          height: 110,
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 16,

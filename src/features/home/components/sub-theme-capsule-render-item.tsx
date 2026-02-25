@@ -21,7 +21,7 @@ export const SubThemeCapsuleRenderItem = ({
 
   return (
     <TouchableOpacity onPress={handlePressOnSubThemeCapsule}>
-      <HomeCard style={{ padding: 0, borderRadius: 16, overflow: 'hidden' }}>
+      <HomeCard style={{ padding: 0, borderRadius: 16, overflow: 'hidden', height: 120, width: 120 }}>
         <ImageBackground
           source={source}
           resizeMode="cover"

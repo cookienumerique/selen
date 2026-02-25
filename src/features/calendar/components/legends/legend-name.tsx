@@ -5,9 +5,10 @@ export const LegendName = ({ name }: { name: string }) => {
   return (
     <Text
       style={{
-        fontSize: 14,
+        fontSize: 12,
         color: Colors.oakHoneyDark,
         textAlign: 'left',
+        flexShrink: 1,
       }}
     >
       {name}

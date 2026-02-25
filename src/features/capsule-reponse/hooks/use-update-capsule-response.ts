@@ -14,7 +14,6 @@ export const useUpdateCapsuleResponse = (
 
   return useMutation<CapsuleResponse, Error, UpdateCapsuleResponsePayload>({
     mutationFn: async ({ id, response }) => {
-      console.log({ id, response });
       const { data } = await axios.patch<CapsuleResponse>(
         `/capsule-responses/${id}`,
         { response },

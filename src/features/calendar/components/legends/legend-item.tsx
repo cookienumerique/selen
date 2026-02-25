@@ -12,9 +12,10 @@ export const LegendItem = ({
     <View
       style={{
         flexDirection: 'row',
-        gap: 8,
         alignItems: 'center',
-        width: '50%',
+        justifyContent: 'flex-start',
+        gap: 8,
+        flexBasis: '48%',
       }}
     >
       <LegendDot color={color} />

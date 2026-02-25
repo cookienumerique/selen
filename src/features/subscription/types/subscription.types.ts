@@ -13,6 +13,7 @@ export enum SubscriptionStatusEnum {
 }
 
 export enum SubscriptionProviderEnum {
+  MANUAL = 'manual',
   GOOGLE = 'google',
   APPLE = 'apple',
 }
@@ -34,8 +35,8 @@ export type Subscription = {
   id: number;
   user: User;
   provider: SubscriptionProviderEnum;
-  basePlanId: SubscriptionBasePlanIdEnum;
-  productId: SubscriptionProductIdEnum;
+  basePlanId?: SubscriptionBasePlanIdEnum;
+  productId?: SubscriptionProductIdEnum;
   purchaseToken: string;
   status: SubscriptionStatusEnum;
   expiresAt: string;
