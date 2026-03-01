@@ -1,51 +1,47 @@
 import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import { useUser } from '@/src/contexts/use-user';
-import { SubscriptionBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
+import { SubscriptionAndroidBasePlanIdEnum, SubscriptionAndroidProductIdEnum, SubscriptionIosBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
 import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
+import { Platform } from 'react-native';
 import {
   fetchProducts,
   finishTransaction,
+  getTransactionJwsIOS,
   ProductOrSubscription,
   purchaseErrorListener,
   purchaseUpdatedListener,
   requestPurchase,
-  type Purchase,
+  type Purchase
 } from 'react-native-iap';
-import { useIapInit } from './use-iap-init';
 import { useSubscribeApi } from './use-subscribe-api';
-export const subscriptionProductId = 'selen_premium';
-
-export type SubscriptionBasePlanId =
-  | SubscriptionBasePlanIdEnum.SELEN_PREMIUM_MONTHLY
-  | SubscriptionBasePlanIdEnum.SELEN_PREMIUM_YEARLY
-  | SubscriptionBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER
-  | SubscriptionBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER;
-
 export const useSubscriptionIap = () => {
   const listenersInitialized = useRef<boolean>(false);
-
-  useIapInit();
   const [subscriptionsIap, setSubscriptionsIap] = useState<
     ProductOrSubscription[]
   >([]);
-  const { mutateAsync: subscribeApi, isPending: isLoadingSubscribeApi } =
+  const { subscribeAndroid, subscribeApple, isLoadingSubscribeApple, isLoadingSubscribeAndroid } =
     useSubscribeApi();
   const { setUser } = useUser();
   const { subscriptions, setSubscriptions } = useSubscriptions();
+
 
   useEffect(() => {
     let updateListener: any;
     let errorListener: any;
 
     if (listenersInitialized.current) return;
-
     listenersInitialized.current = true;
 
     const fetchSubs = async () => {
       try {
+        const skus =
+          Platform.OS === 'ios'
+            ? [SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER, SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER]
+            : [SubscriptionAndroidProductIdEnum.SELEN_PREMIUM];
+
         const subs = await fetchProducts({
-          skus: [subscriptionProductId],
+          skus,
           type: 'subs',
         });
 
@@ -58,13 +54,36 @@ export const useSubscriptionIap = () => {
     fetchSubs();
 
     updateListener = purchaseUpdatedListener(async (purchaseData: Purchase) => {
-      const { purchaseToken, productId } = purchaseData;
       try {
+        if (Platform.OS === 'ios') {
+          const { transactionId, productId } = purchaseData;
+
+          if (!transactionId) return;
+
+          const receipt = await getTransactionJwsIOS(productId);
+
+          if (!receipt) return;
+          const { item } = await subscribeApple({
+            receipt,
+          });
+
+          await finishTransaction({
+            purchase: purchaseData,
+          });
+
+          setSubscriptions([...subscriptions, item]);
+          setUser(item.user);
+          router.push('/(tabs)/home');
+          return;
+        }
+
+        const { purchaseToken, productId } = purchaseData;
         if (!purchaseToken) return;
-        const { item: subscriptionCreated } = await subscribeApi({
+        const { item: subscriptionCreated } = await subscribeAndroid({
           purchaseToken,
           productId,
         });
+
         setSubscriptions([...(subscriptions ?? []), subscriptionCreated]);
         setUser(subscriptionCreated?.user);
 
@@ -87,13 +106,27 @@ export const useSubscriptionIap = () => {
       updateListener?.remove();
       errorListener?.remove();
     };
-  }, [subscribeApi, setSubscriptions, setUser, subscriptions]);
+  }, [subscribeApple, setSubscriptions, setUser, subscriptions, subscribeAndroid]);
 
-  const buy = async (basePlanId: SubscriptionBasePlanId) => {
+  const buy = async (basePlanId: SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum) => {
     try {
       if (!subscriptionsIap.length) return;
+
+      // ===== IOS =====
+      if (Platform.OS === 'ios') {
+        await requestPurchase({
+          type: 'subs',
+          request: {
+            ios: {
+              sku: basePlanId,
+            },
+          },
+        });
+        return;
+      }
+
       const product = subscriptionsIap.find(
-        (s) => s.id === subscriptionProductId,
+        (s) => s.id === SubscriptionAndroidProductIdEnum.SELEN_PREMIUM,
       );
 
       if (!product?.subscriptionOffers) return;
@@ -111,10 +144,10 @@ export const useSubscriptionIap = () => {
         type: 'subs',
         request: {
           google: {
-            skus: [subscriptionProductId],
+            skus: [SubscriptionAndroidProductIdEnum.SELEN_PREMIUM],
             subscriptionOffers: [
               {
-                sku: subscriptionProductId,
+                sku: SubscriptionAndroidProductIdEnum.SELEN_PREMIUM,
                 offerToken: offer.offerTokenAndroid,
               },
             ],
@@ -126,5 +159,5 @@ export const useSubscriptionIap = () => {
     }
   };
 
-  return { subscriptionsIap, buy, isLoading: isLoadingSubscribeApi };
+  return { subscriptionsIap, buy, isLoading: isLoadingSubscribeApple || isLoadingSubscribeAndroid };
 };

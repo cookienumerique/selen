@@ -1,32 +1,22 @@
-import { useAxios } from '@/src/api/use-axios';
-import { Subscription } from '@/src/features/subscription/types/subscription.types';
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
-import { Purchase } from 'react-native-iap';
+import { useSubscribeAndroid, UseSubscribeAndroidPayload, UseSubscribeAndroidResponse } from '@/src/features/subscription/hooks/use-subscribe-android';
+import { useSubscribeApple, UseSubscribeApplePayload, UseSubscribeAppleResponse } from '@/src/features/subscription/hooks/use-subscribe-apple';
 
-type UseSubscribeApiPayload = {
-  purchaseToken: Purchase['purchaseToken'];
-  productId: Purchase['productId'];
+
+type UseSubscribeApiResponse = {
+  subscribeApple: (payload: UseSubscribeApplePayload) => Promise<UseSubscribeAppleResponse>;
+  subscribeAndroid: (payload: UseSubscribeAndroidPayload) => Promise<UseSubscribeAndroidResponse>;
+  isLoadingSubscribeApple: boolean;
+  isLoadingSubscribeAndroid: boolean;
 };
 
-type SubscribeApiResponse = {
-  item: Subscription;
-};
+export const useSubscribeApi = (): UseSubscribeApiResponse => {
+  const { mutateAsync: subscribeApple, isPending: isLoadingSubscribeApple } = useSubscribeApple();
+  const { mutateAsync: subscribeAndroid, isPending: isLoadingSubscribeAndroid } = useSubscribeAndroid();
 
-export const useSubscribeApi = (): UseMutationResult<
-  SubscribeApiResponse,
-  Error,
-  UseSubscribeApiPayload
-> => {
-  const axios = useAxios();
-
-  return useMutation({
-    mutationFn: async ({ purchaseToken, productId }) => {
-      const { data } = await axios.post<SubscribeApiResponse>(
-        '/subscriptions/android',
-        { purchaseToken, productId },
-      );
-
-      return data;
-    },
-  });
+  return {
+    subscribeApple,
+    subscribeAndroid,
+    isLoadingSubscribeApple,
+    isLoadingSubscribeAndroid,
+  }
 };

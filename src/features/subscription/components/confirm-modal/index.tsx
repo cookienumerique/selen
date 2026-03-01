@@ -2,15 +2,15 @@ import { Button } from '@/src/components/button';
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
 import {
-  SubscriptionBasePlanId,
   useSubscriptionIap,
 } from '@/src/features/subscription/hooks/use-subscription-iap';
-import { SubscriptionBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
+import { SubscriptionAndroidBasePlanIdEnum, SubscriptionIosBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
 import { Ionicons } from '@expo/vector-icons';
 import {
   ActivityIndicator,
   Modal,
   ModalProps,
+  Platform,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -23,7 +23,10 @@ export const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const { buy, isLoading } = useSubscriptionIap();
 
-  const handleSubscribe = (baseSubscription: SubscriptionBasePlanId) =>
+  const monthlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY;
+  const yearlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY;
+
+  const handleSubscribe = (baseSubscription: SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum) =>
     buy(baseSubscription);
 
   return (
@@ -81,7 +84,7 @@ export const ConfirmModal = ({
           </View>
 
           <Button
-            onPress={() => handleSubscribe(SubscriptionBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER)}
+            onPress={() => handleSubscribe(yearlyBasePlanId)}
             disabled={isLoading}
             style={{ backgroundColor: Colors.warmSand, width: '100%' }}
           >
@@ -102,7 +105,7 @@ export const ConfirmModal = ({
           </Button>
 
           <TouchableOpacity
-            onPress={() => handleSubscribe(SubscriptionBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER)}
+            onPress={() => handleSubscribe(monthlyBasePlanId)}
           >
             <Text
               style={{
@@ -111,6 +114,11 @@ export const ConfirmModal = ({
                 textAlign: 'center',
               }}
             >
+              {isLoading ? (
+                <ActivityIndicator size="small" color={Colors.slateRoot} />
+              ) : (
+                <Ionicons name="sparkles" size={18} color={Colors.slateRoot} />
+              )}
               Non merci, je préfère le mensuel à 6,99 €
             </Text>
           </TouchableOpacity>

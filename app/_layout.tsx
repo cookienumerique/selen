@@ -4,6 +4,7 @@ import { SubscriptionsProvider } from '@/src/contexts/use-subscriptions';
 import { UserProvider } from '@/src/contexts/use-user';
 import { configureGoogleSignIn } from '@/src/features/auth/config/google-signin';
 import { useAppUpdate } from '@/src/features/force-update/hooks/use-app-update';
+import { useIapInit } from '@/src/features/subscription/hooks/use-iap-init';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
@@ -40,6 +41,7 @@ export default function RootLayout() {
   });
 
   const { needsUpdate } = useAppUpdate()
+  useIapInit();
 
   useEffect(() => {
     configureGoogleSignIn();

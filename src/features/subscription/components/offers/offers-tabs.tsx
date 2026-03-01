@@ -5,30 +5,34 @@ import { ComparisonFeatures } from '@/src/features/subscription/components/compa
 import { ConfirmModal } from '@/src/features/subscription/components/confirm-modal';
 import { OfferButton } from '@/src/features/subscription/components/offers/offer-button';
 import {
-  SubscriptionBasePlanId,
   useSubscriptionIap,
 } from '@/src/features/subscription/hooks/use-subscription-iap';
-import { SubscriptionBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
+import { SubscriptionAndroidBasePlanIdEnum, SubscriptionIosBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Platform, View } from 'react-native';
 
 export const OffersTabs = () => {
   const { buy, isLoading } = useSubscriptionIap();
-  const [basePlan, setBasePlan] = useState<SubscriptionBasePlanId>(
-    SubscriptionBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER,
-  );
-  const isMonthlyBasePlan = basePlan === SubscriptionBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER;
+
+  const monthlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER;
+
+  const yearlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER;
+
+  const [basePlan, setBasePlan] = useState<SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum>(monthlyBasePlanId);
+
+  const isMonthlyBasePlan = basePlan === monthlyBasePlanId;
   const [openConfirmationModal, setOpenConfirmationModal] =
     useState<boolean>(false);
-  const priceMonthly = 9.9;
+
+  const priceMonthly = 9.99;
   const priceMonthlyDiscount = 6.99;
   const priceMonthlyPercentageDiscount = Math.ceil(
     100 - (priceMonthlyDiscount / priceMonthly) * 100,
   ).toFixed(0);
 
-  const priceYearly = 89.9;
-  const priceYearlyDiscount = 59.9;
+  const priceYearly = 89.99;
+  const priceYearlyDiscount = 59.99;
   const priceYearlyMonthlyDiscount = priceYearlyDiscount / 12;
   const priceYearlyDailyDiscount = priceYearlyDiscount / 365;
 
@@ -36,7 +40,7 @@ export const OffersTabs = () => {
     if (isMonthlyBasePlan) {
       setOpenConfirmationModal(true);
     } else {
-      await buy(SubscriptionBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER);
+      await buy(yearlyBasePlanId);
     }
   };
 
@@ -52,12 +56,12 @@ export const OffersTabs = () => {
       <View style={{ flexDirection: 'row', gap: 8 }}>
         <OfferButton
           isActive={isMonthlyBasePlan}
-          onPress={() => setBasePlan(SubscriptionBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER)}
+          onPress={() => setBasePlan(monthlyBasePlanId)}
           label="Mensuel"
         />
         <OfferButton
           isActive={!isMonthlyBasePlan}
-          onPress={() => setBasePlan(SubscriptionBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER)}
+          onPress={() => setBasePlan(yearlyBasePlanId)}
           label="Annuel"
         />
       </View>

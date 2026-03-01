@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.12.0]
+### Added
+Purchase Ios
+
 ## [1.11.0] - 2026-02-25
 ### Added
 - force update screen
