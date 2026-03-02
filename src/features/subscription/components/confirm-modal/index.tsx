@@ -23,8 +23,8 @@ export const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const { buy, isLoading } = useSubscriptionIap();
 
-  const monthlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY;
-  const yearlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY;
+  const monthlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER;
+  const yearlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER;
 
   const handleSubscribe = (baseSubscription: SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum) =>
     buy(baseSubscription);
