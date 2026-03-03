@@ -1,4 +1,3 @@
-// src/api/interceptors.ts
 import { AxiosError } from 'axios';
 import { selenAPIClient } from './client';
 

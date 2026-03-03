@@ -4,6 +4,7 @@ import { SubscriptionsProvider } from '@/src/contexts/use-subscriptions';
 import { UserProvider } from '@/src/contexts/use-user';
 import { configureGoogleSignIn } from '@/src/features/auth/config/google-signin';
 import { useAppUpdate } from '@/src/features/force-update/hooks/use-app-update';
+import { PowerShakeProvider } from '@/src/features/power-shake/power-shake-provider';
 import { useIapInit } from '@/src/features/subscription/hooks/use-iap-init';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -56,8 +57,10 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <SubscriptionsProvider>
         <UserProvider>
-          <Slot />
-          <Toast config={toastConfig} bottomOffset={200} />
+          <PowerShakeProvider>
+            <Slot />
+            <Toast config={toastConfig} bottomOffset={200} />
+          </PowerShakeProvider>
         </UserProvider>
       </SubscriptionsProvider>
     </QueryClientProvider>
