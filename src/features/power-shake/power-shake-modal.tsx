@@ -1,3 +1,5 @@
+import { Button } from "@/src/components/button";
+import { Text } from "@/src/components/texts";
 import { Colors } from "@/src/constants/theme";
 import { BreathingView } from '@/src/features/power-shake/components/breathing-view';
 import { QuoteView } from '@/src/features/power-shake/components/quote-view';
@@ -48,11 +50,16 @@ export default function PowerShakeModal({ visible, onClose }: PowerShakeModalPro
 
     return (
         <Modal visible={visible} transparent animationType="none">
-            <View style={{ flex: 1, backgroundColor: Colors.slateRoot, justifyContent: "center", alignItems: "center" }}>
+            <View style={{ flex: 1, backgroundColor: Colors.slateRoot, justifyContent: "center", alignItems: "center", paddingVertical: 32 }}>
 
-                <BreathingView size={size} opacity={breathOpacity} cycle={cycle} />
-                <QuoteView quote={quote} opacity={quoteOpacity} />
+                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                    <BreathingView size={size} opacity={breathOpacity} cycle={cycle} />
+                    <QuoteView quote={quote} opacity={quoteOpacity} />
+                </View>
 
+                <Button onPress={onClose} style={{ marginTop: 'auto' }}>
+                    <Text style={{ color: Colors.linenCloud }}>Passer</Text>
+                </Button>
             </View>
         </Modal>
     );
