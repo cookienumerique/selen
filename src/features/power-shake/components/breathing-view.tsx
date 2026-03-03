@@ -42,7 +42,7 @@ export function BreathingView({ size, opacity, cycle }: any) {
                         Respire avec moi
                     </Text>
                     <Text style={{ color: Colors.linenCloud, fontSize: 12 }}>
-                        Encore {cycle} respirations
+                        Encore {cycle} {cycle === 1 ? 'respiration' : 'respirations'}
                     </Text>
                 </View>
             </View>

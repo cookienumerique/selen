@@ -1,11 +1,21 @@
 # Changelog
 
-## [1.12.0]
+## [1.13.0] 2026-03-03
+
 ### Added
+
+- power shake feature
+
+## [1.12.0]
+
+### Added
+
 Purchase Ios
 
 ## [1.11.0] - 2026-02-25
+
 ### Added
+
 - force update screen
 
 ## [1.10.0] – 2026-02-12
