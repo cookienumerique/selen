@@ -22,20 +22,16 @@ export const Colors = {
 };
 
 export const Fonts = Platform.select({
-  ios: {
-    sans: 'OpenSans-Regular',
-    sansBold: 'OpenSans-Bold',
-  },
-  android: {
-    sans: 'OpenSans-Regular',
-    sansBold: 'OpenSans-Bold',
-  },
   default: {
     sans: 'OpenSans-Regular',
     sansBold: 'OpenSans-Bold',
-  },
-  web: {
-    sans: 'OpenSans-Regular',
-    sansBold: 'OpenSans-Bold',
+    sansItalic: 'OpenSans-Italic',
+    sansLight: 'OpenSans-Light',
+    seasons: 'TheSeasonsRegular',
+    seasonsItalic: 'TheSeasonsItalic',
+    seasonsBold: 'TheSeasonsBold',
+    seasonsLight: 'TheSeasonsLight',
+    seasonsLightItalic: 'TheSeasonsLightItalic',
+    seasonsBoldItalic: 'TheSeasonsBoldItalic',
   },
 });

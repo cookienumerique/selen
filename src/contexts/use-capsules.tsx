@@ -59,9 +59,12 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
   const createCapsuleResponse = async (
     payload: CreateCapsuleResponsePayload,
   ) => {
-    await createCapsuleResponseMutation(payload);
+    const capsuleResponse = await createCapsuleResponseMutation(payload);
     refetchCapsulesResponses();
-    router.push('/capsule/capsule-completion');
+    router.push({
+      pathname: '/capsule/capsule-answered',
+      params: { capsule: JSON.stringify(capsuleResponse) },
+    });
   };
 
   const nbCapsulesRespondedThisWeek = capsulesResponses.filter((capsule) =>

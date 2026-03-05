@@ -1,6 +1,6 @@
 export type Version = {
-    latest: string;
-    minRequired: string;
-    forceUpdate: boolean;
-    storeUrl: string;
+  latest: string;
+  minRequired: string;
+  forceUpdate: boolean;
+  storeUrl: string;
 };

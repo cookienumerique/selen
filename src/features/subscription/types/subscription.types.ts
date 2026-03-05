@@ -51,7 +51,9 @@ export type Subscription = {
   id: number;
   user: User;
   provider: SubscriptionProviderEnum;
-  basePlanId?: SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum;
+  basePlanId?:
+    | SubscriptionAndroidBasePlanIdEnum
+    | SubscriptionIosBasePlanIdEnum;
   productId?: SubscriptionProductIdEnum;
   purchaseToken: string;
   status: SubscriptionStatusEnum;
@@ -60,4 +62,3 @@ export type Subscription = {
   createdAt: string;
   updatedAt: string;
 };
-

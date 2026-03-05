@@ -1,7 +1,4 @@
-import {
-  finishTransaction,
-  getAvailablePurchases,
-} from 'react-native-iap';
+import { finishTransaction, getAvailablePurchases } from 'react-native-iap';
 
 export const clearPendingPurchases = async () => {
   try {

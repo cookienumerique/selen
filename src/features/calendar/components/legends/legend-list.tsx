@@ -26,12 +26,14 @@ export const LegendList = () => {
       >
         Legendes:
       </Text>
-      <View style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: 8,
-        justifyContent: 'space-between',
-      }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          gap: 8,
+          justifyContent: 'space-between',
+        }}
+      >
         <LegendItem color={Colors.capsule} name="Capsule ouverte" />
         <LegendItem
           color={getInnerWeatherColor('SUNNY')}
@@ -58,7 +60,6 @@ export const LegendList = () => {
           name={getInnerWeatherByCode('OVERWHELMED')?.name ?? ''}
         />
       </View>
-
     </Card>
   );
 };

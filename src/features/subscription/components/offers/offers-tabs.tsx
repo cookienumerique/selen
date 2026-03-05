@@ -4,10 +4,11 @@ import { Colors } from '@/src/constants/theme';
 import { ComparisonFeatures } from '@/src/features/subscription/components/comparison-feature.tsx/comparison-features';
 import { ConfirmModal } from '@/src/features/subscription/components/confirm-modal';
 import { OfferButton } from '@/src/features/subscription/components/offers/offer-button';
+import { useSubscriptionIap } from '@/src/features/subscription/hooks/use-subscription-iap';
 import {
-  useSubscriptionIap,
-} from '@/src/features/subscription/hooks/use-subscription-iap';
-import { SubscriptionAndroidBasePlanIdEnum, SubscriptionIosBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
+  SubscriptionAndroidBasePlanIdEnum,
+  SubscriptionIosBasePlanIdEnum,
+} from '@/src/features/subscription/types/subscription.types';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { ActivityIndicator, Platform, View } from 'react-native';
@@ -15,11 +16,19 @@ import { ActivityIndicator, Platform, View } from 'react-native';
 export const OffersTabs = () => {
   const { buy, isLoading } = useSubscriptionIap();
 
-  const monthlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER;
+  const monthlyBasePlanId =
+    Platform.OS === 'ios'
+      ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER
+      : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER;
 
-  const yearlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER;
+  const yearlyBasePlanId =
+    Platform.OS === 'ios'
+      ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER
+      : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER;
 
-  const [basePlan, setBasePlan] = useState<SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum>(monthlyBasePlanId);
+  const [basePlan, setBasePlan] = useState<
+    SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum
+  >(monthlyBasePlanId);
 
   const isMonthlyBasePlan = basePlan === monthlyBasePlanId;
   const [openConfirmationModal, setOpenConfirmationModal] =

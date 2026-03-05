@@ -27,6 +27,17 @@ export default {
     android: {
       package: packageNameAndroid,
       versionCode,
+      intentFilters: [
+        {
+          action: "android.intent.action.VIEW",
+          data: [{ scheme: "instagram-stories" }, { scheme: "facebook-stories" }]
+        }
+      ],
+      queries: [
+        "com.instagram.android",
+        "com.facebook.katana",
+        "com.facebook.orca"
+      ]
     },
     ios: {
       bundleIdentifier: packageNameIos,
@@ -34,6 +45,15 @@ export default {
       buildNumber: buildNumberIos,
       googleServicesFile: './GoogleService-Info.plist',
       infoPlist: {
+        "FacebookAppID": "1445836246903878",
+        "FacebookDisplayName": "Selen",
+        "LSApplicationQueriesSchemes": [
+          "instagram",
+          "instagram-stories",
+          "facebook",
+          "facebook-stories",
+          "fb"
+        ],
         CFBundleURLTypes: [
           {
             CFBundleURLSchemes: [

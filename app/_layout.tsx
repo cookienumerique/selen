@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
-import { Slot } from 'expo-router';
+import { Slot, SplashScreen } from 'expo-router';
 import React, { useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
@@ -39,17 +39,32 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     'OpenSans-Regular': require('../assets/fonts/OpenSans-Regular.ttf'),
     'OpenSans-Bold': require('../assets/fonts/OpenSans-Bold.ttf'),
+    'OpenSans-Italic': require('../assets/fonts/OpenSans-Italic.ttf'),
+    'OpenSans-Light': require('../assets/fonts/OpenSans-Light.ttf'),
+    'TheSeasonsRegular': require('../assets/fonts/the-seasons-regular.ttf'),
+    'TheSeasonsItalic': require('../assets/fonts/the-seasons-italic.ttf'),
+    'TheSeasonsBold': require('../assets/fonts/the-seasons-bold.ttf'),
+    'TheSeasonsLight': require('../assets/fonts/the-seasons-light.ttf'),
+    'TheSeasonsLightItalic': require('../assets/fonts/the-seasons-light-italic.ttf'),
+    'TheSeasonsBoldItalic': require('../assets/fonts/the-seasons-bold-italic.ttf'),
   });
 
-  const { needsUpdate } = useAppUpdate()
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  const { needsUpdate } = useAppUpdate();
   useIapInit();
 
   useEffect(() => {
     configureGoogleSignIn();
   }, []);
+  if (!loaded) return null;
 
   if (needsUpdate) {
-    return <ForceUpdateScreen />
+    return <ForceUpdateScreen />;
   }
   if (!loaded) return null;
 

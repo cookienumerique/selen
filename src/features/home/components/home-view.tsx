@@ -9,7 +9,6 @@ import { TopSubThemeCapsulesFlatList } from '@/src/features/home/components/top-
 import { TotalCapsulesOpened } from '@/src/features/home/components/total-capsules-opened';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-
 export const HomeView = () => {
   return (
     <Container style={{ backgroundColor: Colors.slateRoot, gap: 16 }}>
@@ -26,7 +25,10 @@ export const HomeView = () => {
         <MonthlyCapsuleBadge />
       </View>
       <TotalCapsulesOpened />
-      <ScrollView contentContainerStyle={{ gap: 32 }} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={{ gap: 32 }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={{ flexDirection: 'row', gap: 16 }}>
           <View style={{ flex: 4 }}>
             <InnerWeatherCard />
@@ -40,6 +42,6 @@ export const HomeView = () => {
           <SubThemeOfTheMomentFlatList />
         </View>
       </ScrollView>
-    </Container >
+    </Container>
   );
 };

@@ -1,6 +1,10 @@
 import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import { useUser } from '@/src/contexts/use-user';
-import { SubscriptionAndroidBasePlanIdEnum, SubscriptionAndroidProductIdEnum, SubscriptionIosBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
+import {
+  SubscriptionAndroidBasePlanIdEnum,
+  SubscriptionAndroidProductIdEnum,
+  SubscriptionIosBasePlanIdEnum,
+} from '@/src/features/subscription/types/subscription.types';
 import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
@@ -12,7 +16,7 @@ import {
   purchaseErrorListener,
   purchaseUpdatedListener,
   requestPurchase,
-  type Purchase
+  type Purchase,
 } from 'react-native-iap';
 import { useSubscribeApi } from './use-subscribe-api';
 export const useSubscriptionIap = () => {
@@ -20,11 +24,14 @@ export const useSubscriptionIap = () => {
   const [subscriptionsIap, setSubscriptionsIap] = useState<
     ProductOrSubscription[]
   >([]);
-  const { subscribeAndroid, subscribeApple, isLoadingSubscribeApple, isLoadingSubscribeAndroid } =
-    useSubscribeApi();
+  const {
+    subscribeAndroid,
+    subscribeApple,
+    isLoadingSubscribeApple,
+    isLoadingSubscribeAndroid,
+  } = useSubscribeApi();
   const { setUser } = useUser();
   const { subscriptions, setSubscriptions } = useSubscriptions();
-
 
   useEffect(() => {
     let updateListener: any;
@@ -37,7 +44,10 @@ export const useSubscriptionIap = () => {
       try {
         const skus =
           Platform.OS === 'ios'
-            ? [SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER, SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER]
+            ? [
+                SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER,
+                SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER,
+              ]
             : [SubscriptionAndroidProductIdEnum.SELEN_PREMIUM];
 
         const subs = await fetchProducts({
@@ -106,9 +116,19 @@ export const useSubscriptionIap = () => {
       updateListener?.remove();
       errorListener?.remove();
     };
-  }, [subscribeApple, setSubscriptions, setUser, subscriptions, subscribeAndroid]);
+  }, [
+    subscribeApple,
+    setSubscriptions,
+    setUser,
+    subscriptions,
+    subscribeAndroid,
+  ]);
 
-  const buy = async (basePlanId: SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum) => {
+  const buy = async (
+    basePlanId:
+      | SubscriptionAndroidBasePlanIdEnum
+      | SubscriptionIosBasePlanIdEnum,
+  ) => {
     try {
       if (!subscriptionsIap.length) return;
 
@@ -159,5 +179,9 @@ export const useSubscriptionIap = () => {
     }
   };
 
-  return { subscriptionsIap, buy, isLoading: isLoadingSubscribeApple || isLoadingSubscribeAndroid };
+  return {
+    subscriptionsIap,
+    buy,
+    isLoading: isLoadingSubscribeApple || isLoadingSubscribeAndroid,
+  };
 };

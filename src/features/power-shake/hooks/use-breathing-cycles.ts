@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 /**
  * 🎯 Hook responsable UNIQUEMENT du compteur de cycles.
@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
  * - visible (pour savoir quand démarrer)
  */
 export function useBreathingCycles(visible: boolean) {
-
   /**
    * Nombre total de cycles prévus.
    * Ici 3 cycles de 10 secondes chacun.
@@ -34,7 +33,6 @@ export function useBreathingCycles(visible: boolean) {
    * Il sert à démarrer / arrêter le compteur.
    */
   useEffect(() => {
-
     /**
      * Si la modal n’est pas visible,
      * on ne lance rien.
@@ -54,14 +52,12 @@ export function useBreathingCycles(visible: boolean) {
      * Parce qu’un cycle complet = 4s inspiration + 6s expiration = 10s.
      */
     const interval = setInterval(() => {
-
       /**
        * setCycle avec fonction callback.
        *
        * prev = valeur précédente.
        */
       setCycle((prev) => {
-
         /**
          * Si on est déjà à 1,
          * on reste à 1.
@@ -75,7 +71,6 @@ export function useBreathingCycles(visible: boolean) {
          */
         return prev - 1;
       });
-
     }, 10000);
 
     /**
@@ -87,7 +82,6 @@ export function useBreathingCycles(visible: boolean) {
      * évite les memory leaks.
      */
     return () => clearInterval(interval);
-
   }, [totalCycles, visible]);
 
   /**

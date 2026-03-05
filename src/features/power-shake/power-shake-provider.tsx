@@ -1,10 +1,10 @@
-import { useUser } from "@/src/contexts/use-user";
-import DiscoverPowerShakeModal from "@/src/features/power-shake/discover-power-shake-modal";
-import { useDiscoverPowerShake } from "@/src/features/power-shake/hooks/use-discover-power-shake";
-import { usePowerShakeSensor } from "@/src/features/power-shake/hooks/use-power-shake-sensor";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState } from "react";
-import PowerShakeModal from "./power-shake-modal";
+import { useUser } from '@/src/contexts/use-user';
+import DiscoverPowerShakeModal from '@/src/features/power-shake/discover-power-shake-modal';
+import { useDiscoverPowerShake } from '@/src/features/power-shake/hooks/use-discover-power-shake';
+import { usePowerShakeSensor } from '@/src/features/power-shake/hooks/use-power-shake-sensor';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState } from 'react';
+import PowerShakeModal from './power-shake-modal';
 export const DISCOVER_KEY = 'discover_power_shake';
 
 type PowerShakeProviderProps = {
@@ -13,9 +13,11 @@ type PowerShakeProviderProps = {
 
 export const PowerShakeProvider = ({ children }: PowerShakeProviderProps) => {
   const { user } = useUser();
-  const [isVisiblePowerShakeModal, setIsVisiblePowerShakeModal] = useState(false);
+  const [isVisiblePowerShakeModal, setIsVisiblePowerShakeModal] =
+    useState(false);
 
-  const { visible: discoverVisible, close: closeDiscover } = useDiscoverPowerShake(user);
+  const { visible: discoverVisible, close: closeDiscover } =
+    useDiscoverPowerShake(user);
 
   usePowerShakeSensor({
     enabled: !isVisiblePowerShakeModal,
@@ -23,7 +25,7 @@ export const PowerShakeProvider = ({ children }: PowerShakeProviderProps) => {
   });
 
   const handleDiscoverClose = async () => {
-    await AsyncStorage.setItem(DISCOVER_KEY, "true");
+    await AsyncStorage.setItem(DISCOVER_KEY, 'true');
     closeDiscover();
   };
 
@@ -34,7 +36,10 @@ export const PowerShakeProvider = ({ children }: PowerShakeProviderProps) => {
         visible={isVisiblePowerShakeModal}
         onClose={() => setIsVisiblePowerShakeModal(false)}
       />
-      <DiscoverPowerShakeModal visible={discoverVisible} onClose={handleDiscoverClose} />
+      <DiscoverPowerShakeModal
+        visible={discoverVisible}
+        onClose={handleDiscoverClose}
+      />
     </>
   );
 };

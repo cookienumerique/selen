@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { initConnection } from 'react-native-iap';
 export const useIapInit = (): void => {
   useEffect(() => {
-
     const init = async () => {
       try {
         await initConnection();
@@ -15,7 +14,5 @@ export const useIapInit = (): void => {
     };
 
     init();
-
   }, []);
-
 };

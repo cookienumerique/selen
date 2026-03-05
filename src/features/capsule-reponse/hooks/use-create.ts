@@ -1,4 +1,5 @@
 import { useAxios } from '@/src/api/use-axios';
+import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import { MutationOptions, useMutation } from '@tanstack/react-query';
 
 export type CreateCapsuleResponsePayload = {
@@ -7,15 +8,19 @@ export type CreateCapsuleResponsePayload = {
 };
 
 export const useCreateCapsuleResponse = (
-  props?: MutationOptions<void, Error, CreateCapsuleResponsePayload>,
+  props?: MutationOptions<CapsuleResponse, Error, CreateCapsuleResponsePayload>,
 ) => {
   const axios = useAxios();
-  return useMutation<void, Error, CreateCapsuleResponsePayload>({
+  return useMutation<CapsuleResponse, Error, CreateCapsuleResponsePayload>({
     mutationFn: async ({ capsuleId, response }) => {
-      await axios.post('/capsules-response', {
-        capsuleId,
-        response,
-      });
+      const { data } = await axios.post<{ item: CapsuleResponse }>(
+        '/capsules-response',
+        {
+          capsuleId,
+          response,
+        },
+      );
+      return data.item;
     },
     ...props,
   });

@@ -1,10 +1,11 @@
 import { Button } from '@/src/components/button';
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
+import { useSubscriptionIap } from '@/src/features/subscription/hooks/use-subscription-iap';
 import {
-  useSubscriptionIap,
-} from '@/src/features/subscription/hooks/use-subscription-iap';
-import { SubscriptionAndroidBasePlanIdEnum, SubscriptionIosBasePlanIdEnum } from '@/src/features/subscription/types/subscription.types';
+  SubscriptionAndroidBasePlanIdEnum,
+  SubscriptionIosBasePlanIdEnum,
+} from '@/src/features/subscription/types/subscription.types';
 import { Ionicons } from '@expo/vector-icons';
 import {
   ActivityIndicator,
@@ -23,11 +24,20 @@ export const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const { buy, isLoading } = useSubscriptionIap();
 
-  const monthlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER;
-  const yearlyBasePlanId = Platform.OS === 'ios' ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER;
+  const monthlyBasePlanId =
+    Platform.OS === 'ios'
+      ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER
+      : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER;
+  const yearlyBasePlanId =
+    Platform.OS === 'ios'
+      ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER
+      : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER;
 
-  const handleSubscribe = (baseSubscription: SubscriptionAndroidBasePlanIdEnum | SubscriptionIosBasePlanIdEnum) =>
-    buy(baseSubscription);
+  const handleSubscribe = (
+    baseSubscription:
+      | SubscriptionAndroidBasePlanIdEnum
+      | SubscriptionIosBasePlanIdEnum,
+  ) => buy(baseSubscription);
 
   return (
     <Modal
@@ -104,9 +114,7 @@ export const ConfirmModal = ({
             </Text>
           </Button>
 
-          <TouchableOpacity
-            onPress={() => handleSubscribe(monthlyBasePlanId)}
-          >
+          <TouchableOpacity onPress={() => handleSubscribe(monthlyBasePlanId)}>
             <Text
               style={{
                 fontSize: 12,
