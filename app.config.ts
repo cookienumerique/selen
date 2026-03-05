@@ -1,7 +1,7 @@
-const version = '1.13.1';
+const version = '1.14.0';
 
 // android
-const versionCode = 32;
+const versionCode = 33;
 const packageNameAndroid = 'com.cookienumerique.selen';
 
 // Ios
@@ -34,9 +34,12 @@ export default {
         }
       ],
       queries: [
-        "com.instagram.android",
-        "com.facebook.katana",
-        "com.facebook.orca"
+        {
+          package: "com.instagram.android"
+        },
+        {
+          package: "com.facebook.katana"
+        }
       ]
     },
     ios: {

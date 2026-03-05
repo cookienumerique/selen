@@ -17,6 +17,7 @@ export const SkipButton = () => {
         alignItems: 'center',
         gap: 16,
         justifyContent: 'center',
+        paddingHorizontal: 32,
       }}
     >
       <Octicons name="heart" size={14} color={Colors.linenCloud} />
@@ -24,9 +25,10 @@ export const SkipButton = () => {
         style={{
           fontSize: 14,
           color: Colors.linenCloud,
+          textAlign: 'center',
         }}
       >
-        Garder pour moi et reprendre ma journée
+        Reprendre ma journée
       </Text>
     </Button>
   );

@@ -1,5 +1,5 @@
 import { Text } from '@/src/components/texts';
-import { Colors, Fonts } from '@/src/constants/theme';
+import { Colors } from '@/src/constants/theme';
 import { Capsule } from '@/src/features/capsule/types/capsule.types';
 import { Image, View } from 'react-native';
 
@@ -45,13 +45,11 @@ export const CapsuleShareTemplate = ({ capsule }: CapsuleShareTemplateProps) => 
                 </Text>
             </View>
 
-
-            {/* CONTENU PRINCIPAL */}
             <View style={{ gap: 80 }}>
                 <Text
+                    family="seasons"
                     style={{
                         fontSize: 84,
-                        fontFamily: Fonts.seasons,
                         color: Colors.slateRoot,
                         textAlign: 'center',
                         lineHeight: 110,

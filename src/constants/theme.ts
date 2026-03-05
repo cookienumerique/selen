@@ -3,7 +3,6 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-import { Platform } from 'react-native';
 
 export const Colors = {
   sageMist: '#b8c6a9', // green
@@ -21,17 +20,21 @@ export const Colors = {
   capsule: '#6F8F72',
 };
 
-export const Fonts = Platform.select({
-  default: {
-    sans: 'OpenSans-Regular',
-    sansBold: 'OpenSans-Bold',
-    sansItalic: 'OpenSans-Italic',
-    sansLight: 'OpenSans-Light',
-    seasons: 'TheSeasonsRegular',
-    seasonsItalic: 'TheSeasonsItalic',
-    seasonsBold: 'TheSeasonsBold',
-    seasonsLight: 'TheSeasonsLight',
-    seasonsLightItalic: 'TheSeasonsLightItalic',
-    seasonsBoldItalic: 'TheSeasonsBoldItalic',
+export const Fonts = {
+  openSans: {
+    regular: 'OpenSans-Regular',
+    bold: 'OpenSans-Bold',
+    italic: 'OpenSans-Italic',
+    light: 'OpenSans-Light',
+    boldItalic: 'OpenSans-BoldItalic',
+    lightItalic: 'OpenSans-LightItalic',
   },
-});
+  seasons: {
+    regular: 'TheSeasonsRegular',
+    bold: 'TheSeasonsBold',
+    italic: 'TheSeasonsItalic',
+    light: 'TheSeasonsLight',
+    boldItalic: 'TheSeasonsBoldItalic',
+    lightItalic: 'TheSeasonsLightItalic',
+  },
+};

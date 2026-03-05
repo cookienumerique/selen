@@ -41,6 +41,8 @@ export default function RootLayout() {
     'OpenSans-Bold': require('../assets/fonts/OpenSans-Bold.ttf'),
     'OpenSans-Italic': require('../assets/fonts/OpenSans-Italic.ttf'),
     'OpenSans-Light': require('../assets/fonts/OpenSans-Light.ttf'),
+    'OpenSans-BoldItalic': require('../assets/fonts/OpenSans-Bold.ttf'),
+    'OpenSans-LightItalic': require('../assets/fonts/OpenSans-Light.ttf'),
     'TheSeasonsRegular': require('../assets/fonts/the-seasons-regular.ttf'),
     'TheSeasonsItalic': require('../assets/fonts/the-seasons-italic.ttf'),
     'TheSeasonsBold': require('../assets/fonts/the-seasons-bold.ttf'),

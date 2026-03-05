@@ -1,25 +1,32 @@
-import { Fonts } from '@/src/constants/theme';
-import {
-  Text as RNText,
-  StyleSheet,
-  TextStyle,
-  type TextProps,
-} from 'react-native';
-export function Text({ style, ...rest }: TextProps) {
-  const flattenedStyle = StyleSheet.flatten(style) || {};
-  const { fontStyle, fontWeight } = flattenedStyle;
-  let fontFamily = Fonts.sans;
+import { Fonts } from "@/src/constants/theme";
+import { Text as RNText, TextProps, TextStyle } from "react-native";
 
-  if (fontWeight === 'bold') {
-    fontFamily = Fonts.sansBold;
-  }
+type FontFamilyType = 'openSans' | 'seasons';
+type FontVariant =
+  | 'regular'
+  | 'bold'
+  | 'italic'
+  | 'light'
+  | 'boldItalic'
+  | 'lightItalic';
 
-  if (fontStyle === 'italic') {
-    fontFamily = Fonts.sansItalic;
-  }
+type CustomTextProps = TextProps & {
+  family?: FontFamilyType;
+  variant?: FontVariant;
+};
 
-  if (fontWeight === 'light') {
-    fontFamily = Fonts.sansLight;
-  }
-  return <RNText style={[{ fontFamily } as TextStyle, style]} {...rest} />;
+export function Text({
+  style,
+  family = 'openSans',
+  variant = 'regular',
+  ...rest
+}: CustomTextProps) {
+  const fontFamily = Fonts[family][variant] ?? Fonts[family].regular;
+
+  return (
+    <RNText
+      style={[{ fontFamily } as TextStyle, style]}
+      {...rest}
+    />
+  );
 }

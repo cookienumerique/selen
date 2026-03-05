@@ -1,5 +1,5 @@
 import { Text } from '@/src/components/texts';
-import { Colors, Fonts } from '@/src/constants/theme';
+import { Colors } from '@/src/constants/theme';
 import { Capsule } from '@/src/features/capsule/types/capsule.types';
 import React from 'react';
 import { View } from 'react-native';
@@ -25,12 +25,12 @@ export const CapsulePreview = (props: CapsulePreviewProps) => {
             />
             <View style={{ paddingHorizontal: 16, paddingVertical: 64, gap: 16 }}>
                 <Text
+                    family="seasons"
+                    variant="bold"
                     style={{
                         fontSize: 24,
-                        fontWeight: 'bold',
                         textAlign: 'center',
                         color: Colors.slateRoot,
-                        fontFamily: Fonts.seasonsBold,
                     }}
                 >
                     {capsule.title}
