@@ -3,7 +3,7 @@ import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
 import { LegendItem } from '@/src/features/calendar/components/legends/legend-item';
 import { useFetchInnerWeathers } from '@/src/features/inner-weather/hooks/use-fetch-inner-weathers';
-import { InnerWeather } from '@/src/features/inner-weather/types/inner-weather.types';
+import { InnerWeather, InnerWeatherCodeEnum } from '@/src/features/inner-weather/types/inner-weather.types';
 import { getInnerWeatherColor } from '@/src/features/inner-weather/utils/get-inner-weather-color';
 import { ActivityIndicator, View } from 'react-native';
 
@@ -36,28 +36,28 @@ export const LegendList = () => {
       >
         <LegendItem color={Colors.capsule} name="Capsule ouverte" />
         <LegendItem
-          color={getInnerWeatherColor('SUNNY')}
-          name={getInnerWeatherByCode('SUNNY')?.name ?? ''}
+          color={getInnerWeatherColor(InnerWeatherCodeEnum.SUNNY)}
+          name={getInnerWeatherByCode(InnerWeatherCodeEnum.SUNNY)?.name ?? ''}
         />
         <LegendItem
-          color={getInnerWeatherColor('CLEAR')}
-          name={getInnerWeatherByCode('CLEAR')?.name ?? ''}
+          color={getInnerWeatherColor(InnerWeatherCodeEnum.CLEAR)}
+          name={getInnerWeatherByCode(InnerWeatherCodeEnum.CLEAR)?.name ?? ''}
         />
         <LegendItem
-          color={getInnerWeatherColor('SOFT')}
-          name={getInnerWeatherByCode('SOFT')?.name ?? ''}
+          color={getInnerWeatherColor(InnerWeatherCodeEnum.SOFT)}
+          name={getInnerWeatherByCode(InnerWeatherCodeEnum.SOFT)?.name ?? ''}
         />
         <LegendItem
-          color={getInnerWeatherColor('FOGGY')}
-          name={getInnerWeatherByCode('FOGGY')?.name ?? ''}
+          color={getInnerWeatherColor(InnerWeatherCodeEnum.FOGGY)}
+          name={getInnerWeatherByCode(InnerWeatherCodeEnum.FOGGY)?.name ?? ''}
         />
         <LegendItem
-          color={getInnerWeatherColor('TENSE')}
-          name={getInnerWeatherByCode('TENSE')?.name ?? ''}
+          color={getInnerWeatherColor(InnerWeatherCodeEnum.TENSE)}
+          name={getInnerWeatherByCode(InnerWeatherCodeEnum.TENSE)?.name ?? ''}
         />
         <LegendItem
-          color={getInnerWeatherColor('OVERWHELMED')}
-          name={getInnerWeatherByCode('OVERWHELMED')?.name ?? ''}
+          color={getInnerWeatherColor(InnerWeatherCodeEnum.OVERWHELMED)}
+          name={getInnerWeatherByCode(InnerWeatherCodeEnum.OVERWHELMED)?.name ?? ''}
         />
       </View>
     </Card>

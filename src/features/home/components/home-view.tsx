@@ -3,6 +3,7 @@ import { Colors } from '@/src/constants/theme';
 import HelloGreeting from '@/src/features/auth/components/user-greeting';
 import { InnerWeatherCard } from '@/src/features/home/components/inner-weather-card';
 import { MonthlyCapsuleBadge } from '@/src/features/home/components/monthly-capsule-badge';
+import { SubThemeCapsulesByInnerWeatherFlatList } from '@/src/features/home/components/sub-theme-capsules-by-inner-weather-flat-list';
 import { SubThemeOfTheMomentFlatList } from '@/src/features/home/components/sub-theme-of-the-moment-flat-list';
 import { SurpriseCapsuleCard } from '@/src/features/home/components/surprise-capsule-card';
 import { TopSubThemeCapsulesFlatList } from '@/src/features/home/components/top-sub-theme-capsules-flat-list';
@@ -38,6 +39,7 @@ export const HomeView = () => {
           </View>
         </View>
         <View style={{ gap: 8 }}>
+          <SubThemeCapsulesByInnerWeatherFlatList />
           <TopSubThemeCapsulesFlatList />
           <SubThemeOfTheMomentFlatList />
         </View>

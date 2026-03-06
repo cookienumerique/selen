@@ -1,6 +1,15 @@
+export enum InnerWeatherCodeEnum {
+  SUNNY = 'SUNNY',
+  CLEAR = 'CLEAR',
+  SOFT = 'SOFT',
+  FOGGY = 'FOGGY',
+  TENSE = 'TENSE',
+  OVERWHELMED = 'OVERWHELMED',
+}
+
 export type InnerWeather = {
   id: string;
-  code: 'SUNNY' | 'CLEAR' | 'SOFT' | 'FOGGY' | 'TENSE' | 'OVERWHELMED';
+  code: InnerWeatherCodeEnum;
   name: string;
   day: string;
   createdAt: string;

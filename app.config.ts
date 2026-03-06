@@ -1,7 +1,7 @@
-const version = '1.15.0';
+const version = '1.16.0';
 
 // android
-const versionCode = 34;
+const versionCode = 35;
 const packageNameAndroid = 'com.cookienumerique.selen';
 
 // Ios

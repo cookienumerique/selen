@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.16.0] 2026-03-06
+
+### Added
+
+- capsule by inner weather.
+
 ## [1.15.0] 2026-03-06
 
 ### Added
