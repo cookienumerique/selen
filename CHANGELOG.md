@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.15.0] 2026-03-06
+
+### Added
+
+- sound and viration on open and close capsule
+- remove 3 caps / week for free user
+- increase opacity on screen preview capsule
+
 ## [1.14.0] 2026-03-04
 
 ### Added

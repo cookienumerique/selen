@@ -2,6 +2,7 @@ import { useUser } from '@/src/contexts/use-user';
 import DiscoverPowerShakeModal from '@/src/features/power-shake/discover-power-shake-modal';
 import { useDiscoverPowerShake } from '@/src/features/power-shake/hooks/use-discover-power-shake';
 import { usePowerShakeSensor } from '@/src/features/power-shake/hooks/use-power-shake-sensor';
+import { useSound } from '@/src/hooks/use-sound';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import PowerShakeModal from './power-shake-modal';
@@ -13,6 +14,7 @@ type PowerShakeProviderProps = {
 
 export const PowerShakeProvider = ({ children }: PowerShakeProviderProps) => {
   const { user } = useUser();
+  const { play: playBreathSound, stop: stopBreathSound } = useSound(require('@/assets/sounds/breath-sound.wav'));
   const [isVisiblePowerShakeModal, setIsVisiblePowerShakeModal] =
     useState(false);
 
@@ -21,7 +23,10 @@ export const PowerShakeProvider = ({ children }: PowerShakeProviderProps) => {
 
   usePowerShakeSensor({
     enabled: !isVisiblePowerShakeModal,
-    onShake: () => setIsVisiblePowerShakeModal(true),
+    onShake: () => {
+      setIsVisiblePowerShakeModal(true);
+      playBreathSound();
+    },
   });
 
   const handleDiscoverClose = async () => {
@@ -35,6 +40,7 @@ export const PowerShakeProvider = ({ children }: PowerShakeProviderProps) => {
       <PowerShakeModal
         visible={isVisiblePowerShakeModal}
         onClose={() => setIsVisiblePowerShakeModal(false)}
+        stopBreathSound={stopBreathSound}
       />
       <DiscoverPowerShakeModal
         visible={discoverVisible}

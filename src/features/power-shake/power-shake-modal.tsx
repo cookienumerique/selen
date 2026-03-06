@@ -14,15 +14,16 @@ import quotes from './quotes.json';
 type PowerShakeModalProps = {
   visible: boolean;
   onClose: () => void;
+  stopBreathSound: () => void;
 };
 
 export default function PowerShakeModal({
   visible,
   onClose,
+  stopBreathSound,
 }: PowerShakeModalProps) {
   const [quote, setQuote] = useState<string>();
   const cycle = useBreathingCycles(visible);
-
   const breathOpacity = useSharedValue(1);
   const quoteOpacity = useSharedValue(0);
 
@@ -40,6 +41,7 @@ export default function PowerShakeModal({
       reset();
       breathOpacity.value = 1;
       quoteOpacity.value = 0;
+      stopBreathSound();
       return;
     }
 
@@ -47,7 +49,7 @@ export default function PowerShakeModal({
     setQuote(quotes.quotes[randomIndex].quote);
 
     start();
-  }, [breathOpacity, quoteOpacity, reset, start, visible]);
+  }, [breathOpacity, quoteOpacity, reset, start, stopBreathSound, visible]);
 
   return (
     <Modal visible={visible} transparent animationType="none">

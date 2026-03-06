@@ -6,12 +6,13 @@ import { MoonBackground } from '@/src/components/layout/moon-background';
 import { Colors } from '@/src/constants/theme';
 import { useCapsules } from '@/src/contexts/use-capsules';
 import { useUser } from '@/src/contexts/use-user';
-import { CapsuleAlreadyOpenedThisWeekScreen } from '@/src/features/open-capsule/components/capsule-already-opened-this-week-screen';
 import { CapsuleAlreadyOpenedTodayScreen } from '@/src/features/open-capsule/components/capsule-already-opened-today-screen';
 import { NoCapsuleAvailableScreen } from '@/src/features/open-capsule/components/no-capsule-available-screen';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
-import React from 'react';
+import * as Haptics from 'expo-haptics';
+import React, { useEffect } from 'react';
+
 import { Controller, useForm } from 'react-hook-form';
 import {
   ActivityIndicator,
@@ -20,7 +21,7 @@ import {
   ScrollView,
   Text,
   TextInput,
-  View,
+  View
 } from 'react-native';
 
 export default function OpenCapsuleView() {
@@ -28,7 +29,6 @@ export default function OpenCapsuleView() {
     capsuleOfTheDay,
     isLoadingCapsuleOfTheDay,
     capsuleAlreadyRespondedToday,
-    capsuleAlreadyRespondedThisWeek,
     createCapsuleResponse,
     isLoadingCreateCapsuleResponseMutation,
   } = useCapsules();
@@ -60,6 +60,18 @@ export default function OpenCapsuleView() {
     });
   };
 
+  useEffect(() => {
+    if (capsuleOfTheDay?.id) {
+      const playHaptics = async () => {
+        await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+        setTimeout(() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+        }, 80);
+      };
+      playHaptics();
+    }
+  }, [capsuleOfTheDay]);
+
   if (isLoadingCapsuleOfTheDay) {
     return (
       <View
@@ -75,9 +87,11 @@ export default function OpenCapsuleView() {
     );
   }
 
-  if (capsuleAlreadyRespondedThisWeek) {
-    return <CapsuleAlreadyOpenedThisWeekScreen />;
-  }
+
+
+  // if (capsuleAlreadyRespondedThisWeek) {
+  //   return <CapsuleAlreadyOpenedThisWeekScreen />;
+  // }
 
   if (capsuleAlreadyRespondedToday) {
     return <CapsuleAlreadyOpenedTodayScreen />;

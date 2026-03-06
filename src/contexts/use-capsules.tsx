@@ -1,4 +1,3 @@
-import { useSubscriptions } from '@/src/contexts/use-subscriptions';
 import {
   CreateCapsuleResponsePayload,
   useCreateCapsuleResponse,
@@ -9,6 +8,7 @@ import { Capsule } from '@/src/features/capsule/types/capsule.types';
 import dayjs from 'dayjs';
 import { router } from 'expo-router';
 import { createContext, ReactNode, useContext } from 'react';
+import { Vibration } from 'react-native';
 
 type CapsulesContextReturn = {
   capsuleOfTheDay: Capsule | undefined;
@@ -19,7 +19,6 @@ type CapsulesContextReturn = {
   }: CreateCapsuleResponsePayload) => void;
   isLoadingCreateCapsuleResponseMutation: boolean;
   capsuleAlreadyRespondedToday: boolean;
-  capsuleAlreadyRespondedThisWeek: boolean;
 };
 
 type CapsulesProviderProps = {
@@ -32,7 +31,6 @@ const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
 );
 
 export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
-  const { hasActiveSubscription } = useSubscriptions();
   const { data: capsules = [], isLoading: isLoadingCapsules } =
     useFetchCapsules({ params: { subThemeCapsuleId: id } });
   const {
@@ -43,7 +41,16 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
   const {
     mutateAsync: createCapsuleResponseMutation,
     isPending: isLoadingCreateCapsuleResponseMutation,
-  } = useCreateCapsuleResponse();
+  } = useCreateCapsuleResponse({
+    onSuccess: async (capsuleResponse) => {
+      Vibration.vibrate(800);
+      await refetchCapsulesResponses();
+      router.push({
+        pathname: '/capsule/capsule-answered',
+        params: { capsule: JSON.stringify(capsuleResponse) },
+      });
+    }
+  });
 
   const capsulesResponsesIds = capsulesResponses.map(
     (capsuleResponse) => capsuleResponse.capsule?.id,
@@ -58,21 +65,7 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
 
   const createCapsuleResponse = async (
     payload: CreateCapsuleResponsePayload,
-  ) => {
-    const capsuleResponse = await createCapsuleResponseMutation(payload);
-    refetchCapsulesResponses();
-    router.push({
-      pathname: '/capsule/capsule-answered',
-      params: { capsule: JSON.stringify(capsuleResponse) },
-    });
-  };
-
-  const nbCapsulesRespondedThisWeek = capsulesResponses.filter((capsule) =>
-    dayjs(capsule.createdAt).isSame(dayjs(), 'week'),
-  ).length;
-
-  const capsuleAlreadyRespondedThisWeek =
-    !hasActiveSubscription && nbCapsulesRespondedThisWeek >= 3;
+  ) => await createCapsuleResponseMutation(payload);
 
   const isLoadingCapsuleOfTheDay =
     isLoadingCapsules || isLoadingCapsulesResponses;
@@ -84,7 +77,6 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
         createCapsuleResponse,
         isLoadingCreateCapsuleResponseMutation,
         capsuleAlreadyRespondedToday,
-        capsuleAlreadyRespondedThisWeek,
       }}
     >
       {children}

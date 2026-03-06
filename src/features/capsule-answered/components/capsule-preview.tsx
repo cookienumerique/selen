@@ -15,7 +15,7 @@ export const CapsulePreview = (props: CapsulePreviewProps) => {
                 style={{
                     position: 'absolute',
                     backgroundColor: 'white',
-                    opacity: 0.5,
+                    opacity: 0.8,
                     width: '100%',
                     height: '100%',
                     borderRadius: 16,

@@ -6,6 +6,7 @@ import React from 'react';
 import { KeyboardAvoidingView, View } from 'react-native';
 
 export const CapsuleAlreadyOpenedThisWeekScreen = () => {
+  // TODO: not used anymore
   return (
     <Container>
       <MoonBackground />

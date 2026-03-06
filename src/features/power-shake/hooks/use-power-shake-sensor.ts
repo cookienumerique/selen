@@ -1,6 +1,3 @@
-// hooks/usePowerShakeSensor.ts
-
-import { useBreakSound } from '@/src/features/power-shake/use-breath-sound';
 import * as Haptics from 'expo-haptics';
 import { Accelerometer } from 'expo-sensors';
 import { useEffect, useRef } from 'react';
@@ -15,7 +12,6 @@ export function usePowerShakeSensor({
   onShake,
 }: UsePowerShakeSensorProps) {
   const lastTrigger = useRef(0);
-  const { play: playBreathSound } = useBreakSound();
   useEffect(() => {
     if (!enabled) return;
 
@@ -33,13 +29,12 @@ export function usePowerShakeSensor({
         if (now - lastTrigger.current > cooldown) {
           lastTrigger.current = now;
 
-          playBreathSound();
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
           onShake();
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
         }
       }
     });
 
     return () => subscription.remove();
-  }, [enabled, onShake, playBreathSound]);
+  }, [enabled, onShake]);
 }
