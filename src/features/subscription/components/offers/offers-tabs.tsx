@@ -11,7 +11,7 @@ import {
 } from '@/src/features/subscription/types/subscription.types';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { ActivityIndicator, Platform, View } from 'react-native';
+import { ActivityIndicator, Linking, Platform, View } from 'react-native';
 
 export const OffersTabs = () => {
   const { buy, isLoading } = useSubscriptionIap();
@@ -143,17 +143,29 @@ export const OffersTabs = () => {
         <ComparisonFeatures />
 
         <View style={{ gap: 16 }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              gap: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Ionicons name="shield-checkmark-outline" size={16} color="white" />
-            <Text style={{ fontSize: 12, color: 'white' }}>
-              Sans engagement. Annulez à tout moment.
+
+          <View style={{ gap: 4 }}>
+            <Text style={{ color: 'white', fontSize: 12 }}>
+              En souscrivant, vous acceptez nos{' '}
+              <Text
+                style={{ textDecorationLine: 'underline' }}
+                onPress={() => Linking.openURL('https://instantselen.fr/politique-de-confidentialite')}
+              >
+                CGU
+              </Text>
+              {' '}et notre{' '}
+              <Text
+                style={{ textDecorationLine: 'underline' }}
+                onPress={() => Linking.openURL('https://instantselen.fr/politique-de-confidentialite')}
+              >
+                Politique de confidentialité
+              </Text>
+            </Text>
+            <Text style={{ color: 'white', fontSize: 12 }}>L&apos;abonnement se renouvelle automatiquement
+              sauf résiliation 24h avant la fin de la période.
+            </Text>
+            <Text style={{ color: 'white', fontSize: 12 }}>
+              Gérez ou annulez via les Réglages App Store.
             </Text>
           </View>
           <Button

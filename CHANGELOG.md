@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.17.1] 2026-03-10
+
+### Fixed
+
+- update offer from apple review
+
 ## [1.17.0] 2026-03-06
 
 ### Added
