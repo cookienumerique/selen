@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.17.0] 2026-03-06
+
+### Added
+
+- ai response when open capsule
+- decrease sensor for power shake
+
 ## [1.16.0] 2026-03-06
 
 ### Added

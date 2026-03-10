@@ -20,8 +20,8 @@ export function usePowerShakeSensor({
     const subscription = Accelerometer.addListener(({ x, y, z }) => {
       const force = Math.sqrt(x * x + y * y + z * z);
 
-      const threshold = 1.7;
-      const cooldown = 1500;
+      const threshold = 2.8;
+      const cooldown = 2000;
 
       if (force > threshold) {
         const now = Date.now();

@@ -1,13 +1,13 @@
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
-import { Capsule } from '@/src/features/capsule/types/capsule.types';
+import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import { Image, View } from 'react-native';
 
 type CapsuleShareTemplateProps = {
-    capsule: Capsule;
+    capsuleResponse: CapsuleResponse;
 };
 
-export const CapsuleShareTemplate = ({ capsule }: CapsuleShareTemplateProps) => {
+export const CapsuleShareTemplate = ({ capsuleResponse }: CapsuleShareTemplateProps) => {
     return (
         <View
             style={{
@@ -47,18 +47,6 @@ export const CapsuleShareTemplate = ({ capsule }: CapsuleShareTemplateProps) => 
 
             <View style={{ gap: 80 }}>
                 <Text
-                    family="seasons"
-                    style={{
-                        fontSize: 84,
-                        color: Colors.slateRoot,
-                        textAlign: 'center',
-                        lineHeight: 110,
-                    }}
-                >
-                    {capsule.title}
-                </Text>
-
-                <Text
                     style={{
                         fontSize: 56,
                         color: Colors.slateRoot,
@@ -66,7 +54,7 @@ export const CapsuleShareTemplate = ({ capsule }: CapsuleShareTemplateProps) => 
                         lineHeight: 84,
                     }}
                 >
-                    {capsule.content}
+                    {capsuleResponse?.aiResponse}
                 </Text>
             </View>
 

@@ -18,13 +18,14 @@ export const SkipButton = () => {
         gap: 16,
         justifyContent: 'center',
         paddingHorizontal: 32,
+        backgroundColor: Colors.linenCloud,
       }}
     >
-      <Octicons name="heart" size={14} color={Colors.linenCloud} />
+      <Octicons name="heart" size={14} color={Colors.slateRoot} />
       <Text
         style={{
           fontSize: 14,
-          color: Colors.linenCloud,
+          color: Colors.slateRoot,
           textAlign: 'center',
         }}
       >

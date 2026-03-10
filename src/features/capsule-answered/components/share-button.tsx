@@ -13,8 +13,8 @@ export const ShareButton = (props: ShareButtonProps) => {
     <Pressable
       onPress={() => onPress(target)}
     >
-      {target === 'instagram' && <Entypo name="instagram" size={36} color={Colors.slateRoot} />}
-      {target === 'facebook' && <Entypo name="facebook" size={36} color={Colors.slateRoot} />}
+      {target === 'instagram' && <Entypo name="instagram" size={36} color={Colors.linenCloud} />}
+      {target === 'facebook' && <Entypo name="facebook" size={36} color={Colors.linenCloud} />}
     </Pressable>
   );
 };
