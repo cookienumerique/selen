@@ -45,8 +45,8 @@ export const useSubscriptionIap = () => {
         const skus =
           Platform.OS === 'ios'
             ? [
-              SubscriptionIosBasePlanIdEnum.SELEN_INFINI_MONTHLY_FOUNDER,
-              SubscriptionIosBasePlanIdEnum.SELEN_INFINI_YEARLY_FOUNDER,
+              SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER,
+              SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER,
             ]
             : [SubscriptionAndroidProductIdEnum.SELEN_PREMIUM];
 

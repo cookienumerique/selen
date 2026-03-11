@@ -18,12 +18,12 @@ export const OffersTabs = () => {
 
   const monthlyBasePlanId =
     Platform.OS === 'ios'
-      ? SubscriptionIosBasePlanIdEnum.SELEN_INFINI_MONTHLY_FOUNDER
+      ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER
       : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER;
 
   const yearlyBasePlanId =
     Platform.OS === 'ios'
-      ? SubscriptionIosBasePlanIdEnum.SELEN_INFINI_YEARLY_FOUNDER
+      ? SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER
       : SubscriptionAndroidBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER;
 
   const [basePlan, setBasePlan] = useState<
