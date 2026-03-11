@@ -5,6 +5,7 @@
 ### Fixed
 
 - update offer from apple review
+- update subscription base plan for review
 
 ## [1.17.0] 2026-03-06
 

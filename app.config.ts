@@ -6,7 +6,7 @@ const packageNameAndroid = 'com.cookienumerique.selen';
 
 // Ios
 const packageNameIos = 'com.selen.app';
-const buildNumberIos = '5';
+const buildNumberIos = '9';
 
 // API
 const selenAPI = 'https://api.instantselen.fr';
@@ -48,6 +48,8 @@ export default {
       buildNumber: buildNumberIos,
       googleServicesFile: './GoogleService-Info.plist',
       infoPlist: {
+        "NSPhotoLibraryUsageDescription": "Selen utilise votre photothèque pour partager votre réponse de la lune sur les réseaux sociaux.",
+        "NSPhotoLibraryAddUsageDescription": "Selen sauvegarde votre réponse de la lune dans votre photothèque.",
         "FacebookAppID": "1445836246903878",
         "FacebookDisplayName": "Selen",
         "LSApplicationQueriesSchemes": [
