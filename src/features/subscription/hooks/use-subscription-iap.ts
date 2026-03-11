@@ -31,7 +31,7 @@ export const useSubscriptionIap = () => {
     isLoadingSubscribeAndroid,
   } = useSubscribeApi();
   const { setUser } = useUser();
-  const { subscriptions, setSubscriptions } = useSubscriptions();
+  const { setSubscriptions } = useSubscriptions();
 
   useEffect(() => {
     let updateListener: any;
@@ -45,9 +45,9 @@ export const useSubscriptionIap = () => {
         const skus =
           Platform.OS === 'ios'
             ? [
-                SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_MONTHLY_FOUNDER,
-                SubscriptionIosBasePlanIdEnum.SELEN_PREMIUM_YEARLY_FOUNDER,
-              ]
+              SubscriptionIosBasePlanIdEnum.SELEN_INFINI_MONTHLY_FOUNDER,
+              SubscriptionIosBasePlanIdEnum.SELEN_INFINI_YEARLY_FOUNDER,
+            ]
             : [SubscriptionAndroidProductIdEnum.SELEN_PREMIUM];
 
         const subs = await fetchProducts({
@@ -73,7 +73,7 @@ export const useSubscriptionIap = () => {
           const receipt = await getTransactionJwsIOS(productId);
 
           if (!receipt) return;
-          const { item } = await subscribeApple({
+          const { item: subscriptionCreated } = await subscribeApple({
             receipt,
           });
 
@@ -81,9 +81,10 @@ export const useSubscriptionIap = () => {
             purchase: purchaseData,
           });
 
-          setSubscriptions([...subscriptions, item]);
-          setUser(item.user);
-          router.push('/(tabs)/home');
+          setSubscriptions(prev => [...(prev ?? []), subscriptionCreated]);
+
+          setUser(subscriptionCreated.user);
+          router.replace('/(tabs)/home');
           return;
         }
 
@@ -94,15 +95,15 @@ export const useSubscriptionIap = () => {
           productId,
         });
 
-        setSubscriptions([...(subscriptions ?? []), subscriptionCreated]);
-        setUser(subscriptionCreated?.user);
-
-        if (!subscriptionCreated) return;
         await finishTransaction({
           purchase: purchaseData,
           isConsumable: false,
         });
-        router.push('/(tabs)/home');
+        setSubscriptions(prev => [...(prev ?? []), subscriptionCreated]);
+        setUser(subscriptionCreated?.user);
+
+        if (!subscriptionCreated) return;
+        router.replace('/(tabs)/home');
       } catch (error) {
         console.error('Backend validation error:', error);
       }
@@ -120,7 +121,6 @@ export const useSubscriptionIap = () => {
     subscribeApple,
     setSubscriptions,
     setUser,
-    subscriptions,
     subscribeAndroid,
   ]);
 

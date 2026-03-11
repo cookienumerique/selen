@@ -1,24 +1,28 @@
+import { ProgressRing } from '@/src/components/progress/progress-circle';
 import { Text } from '@/src/components/texts';
 import { env } from '@/src/config/env';
+import { Colors } from '@/src/constants/theme';
 import { HomeCard } from '@/src/features/home/components/home-card';
-import { SubThemeCapsule } from '@/src/features/sub-theme-capsule/types/sub-theme-capsule.types';
+import { SubThemeCapsuleWithProgress } from '@/src/features/sub-theme-capsule/types/sub-theme-capsule-with-progress.types';
+import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 type SubThemeCapsuleRenderItemProps = {
-  subThemeCasule: SubThemeCapsule;
+  subThemesWithProgress: SubThemeCapsuleWithProgress;
 };
 export const SubThemeCapsuleRenderItem = ({
-  subThemeCasule,
+  subThemesWithProgress,
 }: SubThemeCapsuleRenderItemProps) => {
-  const source = subThemeCasule.image
-    ? { uri: `${env.SELEN_API}/media/${subThemeCasule.image}` }
+  const { subThemeCapsule, isCompleted, answeredCapsules, totalCapsules } = subThemesWithProgress;
+  const source = subThemeCapsule.image
+    ? { uri: `${env.SELEN_API}/media/${subThemeCapsule.image}` }
     : require('@/assets/images/surprise-capsule-background.png');
 
   const handlePressOnSubThemeCapsule = () => {
-    router.navigate(`/capsule/open-capsule-screen?id=${subThemeCasule.id}`);
+    if (isCompleted) return;
+    router.navigate(`/capsule/open-capsule-screen?id=${subThemeCapsule.id}`);
   };
-
   return (
     <TouchableOpacity onPress={handlePressOnSubThemeCapsule}>
       <HomeCard
@@ -52,10 +56,18 @@ export const SubThemeCapsuleRenderItem = ({
               opacity: 0.3,
             }}
           />
-          <View style={{ padding: 8 }}>
-            <Text style={{ fontSize: 12, color: 'white' }}>
-              {subThemeCasule.name}
+          <View style={{ width: '100%', padding: 8, flexDirection: 'row', gap: 4 }}>
+            <Text style={{ width: '80%', fontSize: 12, color: 'white' }}>
+              {subThemeCapsule.name}
             </Text>
+            <View style={{ justifyContent: 'flex-end' }}>
+              {!isCompleted && <ProgressRing
+                total={totalCapsules}
+                currentValue={answeredCapsules}
+                size={16}
+              />}
+              {isCompleted && <Ionicons name="checkmark-circle" size={20} color={Colors.sageMist} />}
+            </View>
           </View>
         </ImageBackground>
       </HomeCard>

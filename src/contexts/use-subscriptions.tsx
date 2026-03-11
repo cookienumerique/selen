@@ -7,7 +7,7 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 
 export type SubscriptionContextReturn = {
   subscriptions: Subscription[];
-  setSubscriptions: (subscriptions: Subscription[]) => void;
+  setSubscriptions: React.Dispatch<React.SetStateAction<Subscription[]>>;
   hasActiveSubscription: boolean;
 };
 

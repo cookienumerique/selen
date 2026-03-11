@@ -1,16 +1,13 @@
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
 import { SubThemeCapsuleRenderItem } from '@/src/features/home/components/sub-theme-capsule-render-item';
-import { useFetchSubThemeCapsules } from '@/src/features/sub-theme-capsule/hooks/use-fetch-sub-theme-capsules';
+import { useSubThemes } from '@/src/features/home/hooks/use-sub-theme';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 
 export const TopSubThemeCapsulesFlatList = () => {
 
-  const { data: topSubThemeCapsules, isLoading } = useFetchSubThemeCapsules({
-    params: {
-      code: 'MENTAL_LOAD,BECOMING_PARENT_STORM,DIGITAL_OVERLOAD_AVOIDANCE',
-    },
-  });
+  const { getSubThemesWithProgressByCodes, isLoading } = useSubThemes();
+  const topSubThemeCapsules = getSubThemesWithProgressByCodes(['MENTAL_LOAD', 'BECOMING_PARENT_STORM', 'DIGITAL_OVERLOAD_AVOIDANCE']);
 
   return (
     <View style={{ gap: 16 }}>
@@ -37,7 +34,7 @@ export const TopSubThemeCapsulesFlatList = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 16 }}
           renderItem={({ item }) => (
-            <SubThemeCapsuleRenderItem key={item.id} subThemeCasule={item} />
+            <SubThemeCapsuleRenderItem key={item.subThemeCapsule.id} subThemesWithProgress={item} />
           )}
         />
       )}

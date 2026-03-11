@@ -5,6 +5,7 @@ import {
 import { useFetchCapsulesResponse } from '@/src/features/capsule-reponse/hooks/use-fetch-capsules-response';
 import { useFetchCapsules } from '@/src/features/capsule/hooks/use-fetch-capsules';
 import { Capsule } from '@/src/features/capsule/types/capsule.types';
+import { useFetchSubThemeCapsulesWithProgress } from '@/src/features/sub-theme-capsule/hooks/use-fetch-sub-theme-capsules-with-progress';
 import dayjs from 'dayjs';
 import { router } from 'expo-router';
 import { createContext, ReactNode, useContext } from 'react';
@@ -31,12 +32,13 @@ const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
 );
 
 export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
+  const { invalidate: invalidateSubThemeCapsulesWithProgress } = useFetchSubThemeCapsulesWithProgress();
   const { data: capsules = [], isLoading: isLoadingCapsules } =
     useFetchCapsules({ params: { subThemeCapsuleId: id } });
   const {
     data: capsulesResponses = [],
     isLoading: isLoadingCapsulesResponses,
-    refetch: refetchCapsulesResponses,
+    invalidate: invalidateCapsulesResponses,
   } = useFetchCapsulesResponse();
   const {
     mutateAsync: createCapsuleResponseMutation,
@@ -44,7 +46,8 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
   } = useCreateCapsuleResponse({
     onSuccess: async (capsuleResponse) => {
       Vibration.vibrate(800);
-      await refetchCapsulesResponses();
+      await invalidateSubThemeCapsulesWithProgress()
+      await invalidateCapsulesResponses();
       router.push({
         pathname: '/capsule/capsule-answered',
         params: { capsule: JSON.stringify(capsuleResponse) },

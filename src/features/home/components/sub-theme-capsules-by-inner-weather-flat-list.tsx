@@ -1,9 +1,9 @@
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
 import { SubThemeCapsuleRenderItem } from '@/src/features/home/components/sub-theme-capsule-render-item';
+import { useSubThemes } from '@/src/features/home/hooks/use-sub-theme';
 import { useFetchInnerWeathersResponses } from '@/src/features/inner-weather-response/hooks/use-fetch-inner-weathers-responses';
 import { getSubThemesByInnerWeatherCode } from '@/src/features/inner-weather-response/utils/get-sub-themes-by-inner-weather-code';
-import { useFetchSubThemeCapsules } from '@/src/features/sub-theme-capsule/hooks/use-fetch-sub-theme-capsules';
 import dayjs from 'dayjs';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 
@@ -13,13 +13,9 @@ export const SubThemeCapsulesByInnerWeatherFlatList = () => {
   });
   const [innerWeatherOfDay] = innerWeather || [];
   const subThemes = getSubThemesByInnerWeatherCode(innerWeatherOfDay?.innerWeather?.code);
-  const subThemesString = subThemes.join(',');
-  const { data: topSubThemeCapsules, isLoading: isLoadingSubThemeCapsules } = useFetchSubThemeCapsules({
-    params: {
-      code: subThemesString,
-    },
-  });
-  const isLoading = isLoadingInnerWeather || isLoadingSubThemeCapsules;
+  const { getSubThemesWithProgressByCodes, isLoading: isLoadingSubThemes } = useSubThemes();
+  const subThemesWithProgress = getSubThemesWithProgressByCodes(subThemes);
+  const isLoading = isLoadingInnerWeather || isLoadingSubThemes;
 
   if (!innerWeatherOfDay || !innerWeatherOfDay && !isLoading) {
     return null
@@ -44,12 +40,12 @@ export const SubThemeCapsulesByInnerWeatherFlatList = () => {
       )}
       {!isLoading && (
         <FlatList
-          data={topSubThemeCapsules}
+          data={subThemesWithProgress}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 16 }}
           renderItem={({ item }) => (
-            <SubThemeCapsuleRenderItem key={item.id} subThemeCasule={item} />
+            <SubThemeCapsuleRenderItem key={item.subThemeCapsule.id} subThemesWithProgress={item} />
           )}
         />
       )}
