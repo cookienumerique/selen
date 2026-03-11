@@ -19,8 +19,8 @@ export enum SubscriptionIosProductIdEnum {
 export enum SubscriptionIosBasePlanIdEnum {
   SELEN_PREMIUM_MONTHLY = 'selen_premium_monthly',
   SELEN_PREMIUM_YEARLY = 'selen_premium_yearly',
-  SELEN_PREMIUM_MONTHLY_FOUNDER = 'selen_premium_monthly_founder',
-  SELEN_PREMIUM_YEARLY_FOUNDER = 'selen_premium_yearly_founder',
+  SELEN_PREMIUM_MONTHLY_FOUNDER = 'selen_infini_monthly_founder',
+  SELEN_PREMIUM_YEARLY_FOUNDER = 'selen_infini_yearly_founder',
 }
 
 export enum SubscriptionStatusEnum {
@@ -52,8 +52,8 @@ export type Subscription = {
   user: User;
   provider: SubscriptionProviderEnum;
   basePlanId?:
-    | SubscriptionAndroidBasePlanIdEnum
-    | SubscriptionIosBasePlanIdEnum;
+  | SubscriptionAndroidBasePlanIdEnum
+  | SubscriptionIosBasePlanIdEnum;
   productId?: SubscriptionProductIdEnum;
   purchaseToken: string;
   status: SubscriptionStatusEnum;
