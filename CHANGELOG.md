@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.19.0] 2026-03-12
+
+### Added
+
+- new sub themes capsules added
+
 ## [1.18.0] 2026-03-11
 
 ### Added

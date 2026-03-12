@@ -7,7 +7,7 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 export const TopSubThemeCapsulesFlatList = () => {
 
   const { getSubThemesWithProgressByCodes, isLoading } = useSubThemes();
-  const topSubThemeCapsules = getSubThemesWithProgressByCodes(['MENTAL_LOAD', 'BECOMING_PARENT_STORM', 'DIGITAL_OVERLOAD_AVOIDANCE']);
+  const topSubThemeCapsules = getSubThemesWithProgressByCodes(['GRATITUDE', 'TIME_AND_URGENCY', 'MONEY_AND_WORTH']);
 
   return (
     <View style={{ gap: 16 }}>

@@ -59,11 +59,12 @@ export const SubThemeCapsuleRenderItem = ({
               height: '100%',
               padding: 8,
               backgroundColor: 'black',
-              opacity: 0.3,
+              opacity: 0.4,
             }}
           />
           <View style={{ width: '100%', padding: 8, flexDirection: 'row', gap: 4 }}>
-            <Text style={{ width: '80%', fontSize: 12, color: 'white' }}>
+            <Text style={{ flex: 1, fontSize: 10, color: 'white' }}
+            >
               {subThemeCapsule.name}
             </Text>
             <View style={{ justifyContent: 'flex-end' }}>
