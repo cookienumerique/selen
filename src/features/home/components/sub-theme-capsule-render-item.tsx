@@ -3,9 +3,11 @@ import { Text } from '@/src/components/texts';
 import { env } from '@/src/config/env';
 import { Colors } from '@/src/constants/theme';
 import { HomeCard } from '@/src/features/home/components/home-card';
+import { SubThemeCompletedModal } from '@/src/features/home/components/sub-theme-completed-modal';
 import { SubThemeCapsuleWithProgress } from '@/src/features/sub-theme-capsule/types/sub-theme-capsule-with-progress.types';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { useState } from 'react';
 
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 type SubThemeCapsuleRenderItemProps = {
@@ -15,12 +17,16 @@ export const SubThemeCapsuleRenderItem = ({
   subThemesWithProgress,
 }: SubThemeCapsuleRenderItemProps) => {
   const { subThemeCapsule, isCompleted, answeredCapsules, totalCapsules } = subThemesWithProgress;
+  const [isCompletedModalVisible, setIsCompletedModalVisible] = useState(false);
   const source = subThemeCapsule.image
     ? { uri: `${env.SELEN_API}/media/${subThemeCapsule.image}` }
     : require('@/assets/images/surprise-capsule-background.png');
 
   const handlePressOnSubThemeCapsule = () => {
-    if (isCompleted) return;
+    if (isCompleted) {
+      setIsCompletedModalVisible(true);
+      return;
+    };
     router.navigate(`/capsule/open-capsule-screen?id=${subThemeCapsule.id}`);
   };
   return (
@@ -71,6 +77,10 @@ export const SubThemeCapsuleRenderItem = ({
           </View>
         </ImageBackground>
       </HomeCard>
+      <SubThemeCompletedModal
+        visible={isCompletedModalVisible}
+        onClose={() => setIsCompletedModalVisible(false)}
+        subThemeCapsule={subThemeCapsule} />
     </TouchableOpacity>
   );
 };

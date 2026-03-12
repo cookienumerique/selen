@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.18.0] 2026-03-11
+
+### Added
+
+- home view : the progress capsule response by sub theme is displayed
+
 ## [1.17.1] 2026-03-10
 
 ### Fixed
