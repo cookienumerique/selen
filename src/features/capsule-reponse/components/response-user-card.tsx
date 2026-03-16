@@ -5,22 +5,25 @@ import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-re
 import React from 'react';
 import { View } from 'react-native';
 
-type ResponseMoonProps = {
+type ResponseUserCardProps = {
     capsuleResponse: CapsuleResponse;
     variant?: 'dark' | 'light';
 };
-export const ResponseMoon = (props: ResponseMoonProps) => {
+export const ResponseUserCard = (props: ResponseUserCardProps) => {
     const { capsuleResponse, variant = 'light' } = props;
     const backgroundColor = variant === 'dark' ? Colors.slateRoot : Colors.linenCloud;
     const color = variant === 'dark' ? Colors.linenCloud : Colors.slateRoot;
     return (
         <View
             style={{
+                borderWidth: 2,
+                borderColor: color,
                 position: 'relative',
                 backgroundColor,
                 borderRadius: 16,
                 paddingHorizontal: 40,
                 paddingVertical: 40,
+                minHeight: 220,
             }}
         >
             <Corner style={{ top: 16, left: 16, transform: [{ rotate: '270deg' }] }} color={color} />
@@ -32,10 +35,7 @@ export const ResponseMoon = (props: ResponseMoonProps) => {
             }}>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                    <View style={{ backgroundColor: Colors.sateRootLight, borderRadius: 100, width: 32, height: 32, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 12 }}>🌙</Text>
-                    </View>
-                    <Text variant="bold" family="seasons" style={{ fontSize: 16, color, textAlign: 'center' }}>La réponse de la lune {` `}</Text>
+                    <Text variant="bold" family="seasons" style={{ fontSize: 16, color, textAlign: 'center' }}>Ce que tu as écrit</Text>
                 </View>
                 <Text
                     style={{
@@ -44,7 +44,7 @@ export const ResponseMoon = (props: ResponseMoonProps) => {
                         textAlign: 'center',
                     }}
                 >
-                    &quot;{capsuleResponse?.aiResponse}&quot;
+                    &quot;{capsuleResponse?.response}&quot;
                 </Text>
             </View>
         </View >

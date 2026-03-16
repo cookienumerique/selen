@@ -6,7 +6,7 @@
 
 export const Colors = {
   sageMist: '#b8c6a9', // green
-  sageMistDark: '#889e70', // green dark
+  sageMistDark: '#70805B', // green dark
   slateRoot: '#2f3e46', // blue
   sateRootLight: '#3d4d55', // blue light
   linenCloud: '#f5e3c8', // grey
@@ -14,6 +14,7 @@ export const Colors = {
   oakHoney: '#b99779', // marron clair
   oakHoneyDark: '#5c4633', // marron foncé
   gray: '#878787',
+  grayLight: '#f5f5f5',
   orange: '#ffa500',
   gold: '#ffd700',
   red: '#C41E3A',

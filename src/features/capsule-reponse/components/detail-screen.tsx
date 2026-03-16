@@ -1,29 +1,29 @@
-import { Card } from '@/src/components/card';
 import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
-import { MoonBackground } from '@/src/components/layout/moon-background';
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
+import { ResponseMoon } from '@/src/features/capsule-answered/components/response-moon';
 import { CancelButton } from '@/src/features/capsule-reponse/components/cancel-button';
-import { CapsuleContent } from '@/src/features/capsule-reponse/components/capsule-content';
-import { CapsuleImage } from '@/src/features/capsule-reponse/components/capsule-image';
+import { CapsuleResponseInput } from '@/src/features/capsule-reponse/components/capsule-response';
 import { CapsuleTitle } from '@/src/features/capsule-reponse/components/capsule-title';
 import { MoreMenu } from '@/src/features/capsule-reponse/components/more-menu';
+import { ResponseUserCard } from '@/src/features/capsule-reponse/components/response-user-card';
 import { SaveButton } from '@/src/features/capsule-reponse/components/save-button';
+import { ThemeSubThemeBadge } from '@/src/features/capsule-reponse/components/theme-sub-theme-badge';
 import { useFetchCapsulesResponseById } from '@/src/features/capsule-reponse/hooks/use-fetch-capsules-response-by-id';
 import { useUpdateCapsuleResponse } from '@/src/features/capsule-reponse/hooks/use-update-capsule-response';
 import { PremiumModal } from '@/src/features/premium/premium-modal';
 import dayjs from 'dayjs';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import {
   ActivityIndicator,
   Keyboard,
   KeyboardAvoidingView,
-  TextInput,
+  ScrollView,
   TouchableWithoutFeedback,
-  View,
+  View
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 
@@ -62,7 +62,7 @@ export const CapsuleResponseDetailScreen = () => {
   });
 
   const { response: responseDefault } = capsuleResponse ?? {};
-
+  const capsuleAnswered = capsuleResponse?.response !== ''
   const form = useForm<{
     response: string;
   }>({
@@ -80,11 +80,6 @@ export const CapsuleResponseDetailScreen = () => {
     }
   }, [responseDefault, reset]);
 
-  const response =
-    capsuleResponse?.response === '' || capsuleResponse?.response === null
-      ? "Vous n'avez pas répondu à la capsule"
-      : `${capsuleResponse?.response}`;
-
   const handleEditCapsuleResponse = () => {
     setIsEditing(true);
   };
@@ -98,109 +93,80 @@ export const CapsuleResponseDetailScreen = () => {
   }: {
     response: string;
   }) => {
+    console.log('response', response);
     await updateCapsuleResponse({ id: Number(id), response });
   };
-
   return (
     <Container>
-      <MoonBackground />
-      <Header onGoBack={() => router.push('/(tabs)/calendar')} />
       <PremiumModal
         onClose={() => setDisplayPremiumModal(false)}
         isOpen={displayPremiumModal}
         title="Ta vérité actuelle"
         description={`Tes pensées d'hier ne sont plus forcément celles d'aujourd'hui.\n\nAvec Selen infini, garde le contrôle sur ton journal en modifiant ou supprimant tes capsules pour qu'elles reflètent toujours ta vérité actuelle.`}
       />
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView
-          behavior="padding"
-          style={{
-            flex: 1,
-            paddingVertical: 32,
-          }}
-        >
-          {isLoading && <ActivityIndicator />}
-          {capsuleResponse && (
-            <View
-              style={{
-                flex: 1,
-                gap: 32,
-              }}
-            >
-              <View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <CapsuleImage />
-              </View>
+      <View style={{ flexDirection: 'row' }}>
+        <Header onGoBack={() => router.push('/(tabs)/calendar')} />
+        <MoreMenu
+          setDisplayPremiumModal={setDisplayPremiumModal}
+          onEdit={handleEditCapsuleResponse}
+          onDelete={handleSkipCapsuleResponse}
+        />
+      </View>
 
-              <View style={{ gap: 8 }}>
-                <CapsuleTitle title={capsuleResponse.capsule?.title} />
-                <Text
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{
+          flex: 1,
+          paddingVertical: 32,
+        }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={{ gap: 16 }}>
+              {isLoading && <ActivityIndicator />}
+              {capsuleResponse && (
+                <View
                   style={{
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                    color: Colors.oakHoneyDark,
-                    textAlign: 'center',
+                    flex: 1,
+                    gap: 32,
                   }}
                 >
-                  Capsule du{' '}
-                  {dayjs(capsuleResponse.createdAt).format(
-                    'dddd D MMMM YYYY, à HH:mm',
+
+                  <View style={{ gap: 16 }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        color: Colors.oakHoneyDark,
+                        textAlign: 'center',
+                        textTransform: 'capitalize',
+                      }}
+                    >
+                      {dayjs(capsuleResponse.createdAt).format(
+                        'dddd D MMMM YYYY',
+                      )}
+                    </Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', width: '100%', }}>
+                      <ThemeSubThemeBadge subThemeCapsule={capsuleResponse.capsule?.subThemeCapsule} />
+                    </View>
+                    <CapsuleTitle title={capsuleResponse.capsule?.title} />
+                    <Text variant="italic" style={{ fontSize: 12, color: Colors.slateRoot }}>{capsuleResponse.capsule?.content}</Text>
+                  </View>
+
+                  {!isEditing && (
+                    <>
+                      {capsuleAnswered ? <ResponseUserCard capsuleResponse={capsuleResponse} variant="light" /> : <Text style={{ fontSize: 14, fontStyle: 'italic', textAlign: 'center' }}>Cette capsule a été passée.</Text>}
+                    </>
                   )}
-                </Text>
-              </View>
 
-              <CapsuleContent content={capsuleResponse.capsule?.content} />
-
-              <Card
-                style={{
-                  gap: 36,
-                  paddingHorizontal: 24,
-                  position: 'relative',
-                  minHeight: 150,
-                }}
-              >
-                <View style={{ position: 'absolute', right: 0, top: 0 }}>
-                  <MoreMenu
-                    setDisplayPremiumModal={setDisplayPremiumModal}
-                    onEdit={handleEditCapsuleResponse}
-                    onDelete={handleSkipCapsuleResponse}
-                  />
+                  {isEditing && (
+                    <CapsuleResponseInput control={form.control} />
+                  )}
+                  {capsuleResponse?.aiResponse !== '' && (
+                    <ResponseMoon capsuleResponse={capsuleResponse} variant="dark" />
+                  )}
                 </View>
-                {!isEditing && (
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: Colors.oakHoneyDark,
-                      fontStyle: 'italic',
-                    }}
-                  >
-                    {response}
-                  </Text>
-                )}
-                {isEditing && (
-                  <Controller
-                    control={form.control}
-                    name="response"
-                    rules={{
-                      required: true,
-                    }}
-                    render={({ field: { onChange, value } }) => (
-                      <TextInput
-                        style={{ marginRight: 24 }}
-                        multiline
-                        placeholder="Ne réfléchis pas trop. Écris ce qui vient, même si ce n'est pas clair."
-                        value={value}
-                        onChangeText={onChange}
-                        numberOfLines={10}
-                      />
-                    )}
-                  />
-                )}
-              </Card>
+              )}
               {isEditing && (
                 <View style={{ flexDirection: 'row', gap: 16 }}>
                   <CancelButton onPress={() => setIsEditing(false)} />
@@ -211,9 +177,9 @@ export const CapsuleResponseDetailScreen = () => {
                 </View>
               )}
             </View>
-          )}
-        </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </Container>
   );
 };

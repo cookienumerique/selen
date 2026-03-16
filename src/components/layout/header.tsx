@@ -16,27 +16,23 @@ export function Header(props: HeaderProps) {
   return (
     <View
       style={{
-        position: 'relative',
+        flex: 1,
         flexDirection: 'row',
+        alignItems: 'center',
         gap: 8,
-        width: '100%',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
       }}
     >
       {!!onGoBack && (
         <TouchableOpacity
           onPress={handleGoBack}
           style={{
-            top: 0,
-            left: 0,
-            position: 'absolute',
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: 'white',
             borderRadius: 100,
             height: 50,
             width: 50,
-            alignSelf: 'flex-start',
           }}
         >
           <Entypo name="chevron-left" size={20} color="gray" />
@@ -51,7 +47,6 @@ export function Header(props: HeaderProps) {
             gap: 8,
             backgroundColor: Colors.slateRoot,
             borderRadius: 100,
-            overflow: 'hidden',
             paddingHorizontal: 6,
             paddingVertical: 6,
             paddingRight: 25,

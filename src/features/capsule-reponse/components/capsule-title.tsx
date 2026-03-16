@@ -1,5 +1,6 @@
+import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
-import { Text } from 'react-native';
+
 type CapsuleTitleProps = {
   title: string | null;
 };
@@ -8,10 +9,10 @@ export const CapsuleTitle = ({ title }: CapsuleTitleProps) => {
   if (!title) return null;
   return (
     <Text
+      family="seasons"
+      variant="bold"
       style={{
-        fontSize: 24,
-        fontWeight: 'bold',
-        textAlign: 'center',
+        fontSize: 16,
         color: Colors.slateRoot,
       }}
     >
