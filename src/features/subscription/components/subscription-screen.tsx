@@ -24,10 +24,10 @@ export const SubscriptionScreen = () => {
       }}
     >
       <SafeAreaView>
-        <View style={{ padding: 16 }}>
-          <Header onGoBack={handleGoBack} />
+        <View >
+          <Header title="Selen infini" onPress={handleGoBack} />
           <ScrollView
-            contentContainerStyle={{ gap: 24, paddingVertical: 32 }}
+            contentContainerStyle={{ gap: 24, padding: 16 }}
             showsVerticalScrollIndicator={false}
           >
             <View

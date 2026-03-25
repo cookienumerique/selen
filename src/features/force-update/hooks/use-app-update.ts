@@ -27,7 +27,7 @@ export const useAppUpdate = () => {
           setStoreUrl(VersionByPlatform.storeUrl);
         }
       } catch (err) {
-        console.log('Version check failed:', err);
+        console.error('Version check failed:', err);
       }
     };
 

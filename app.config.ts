@@ -1,17 +1,17 @@
-const version = '1.19.0';
+const version = '1.21.0';
 
 // android
-const versionCode = 38;
+const versionCode = 40;
 const packageNameAndroid = 'com.cookienumerique.selen';
 
 // Ios
 const packageNameIos = 'com.selen.app';
-const buildNumberIos = '9';
+const buildNumberIos = '11';
 
 // API
 const selenAPI = 'https://api.instantselen.fr';
-// const selenAPI = 'http://192.168.1.25:8083';
-
+// const selenAPI = 'http://192.168.1.25:8083'; // ipconfig getifaddr en0
+// const selenAPI = 'http://192.168.1.22:8083';
 export default {
   expo: {
     name: 'Selen',

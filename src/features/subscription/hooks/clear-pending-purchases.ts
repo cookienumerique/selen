@@ -3,7 +3,6 @@ import { finishTransaction, getAvailablePurchases } from 'react-native-iap';
 export const clearPendingPurchases = async () => {
   try {
     const purchases = await getAvailablePurchases();
-    console.log('purchases', purchases);
     for (const purchase of purchases) {
       try {
         await finishTransaction({
@@ -15,7 +14,7 @@ export const clearPendingPurchases = async () => {
       }
     }
 
-    console.log('Pending purchases cleared');
+    console.info('Pending purchases cleared');
   } catch (error) {
     console.warn('Error clearing purchases', error);
   }

@@ -10,9 +10,9 @@ export const NoCapsuleAvailableScreen = () => {
     <Container>
       <MoonBackground />
       <View style={{ gap: 16 }}>
-        <Header />
+        <Header title="Capsule du jour" />
       </View>
-      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1, padding: 16 }}>
         <NoCapsuleAvailable />
       </KeyboardAvoidingView>
     </Container>

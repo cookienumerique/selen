@@ -20,7 +20,6 @@ import { useForm } from 'react-hook-form';
 import {
   ActivityIndicator,
   Keyboard,
-  KeyboardAvoidingView,
   ScrollView,
   TouchableWithoutFeedback,
   View
@@ -93,36 +92,37 @@ export const CapsuleResponseDetailScreen = () => {
   }: {
     response: string;
   }) => {
-    console.log('response', response);
     await updateCapsuleResponse({ id: Number(id), response });
   };
   return (
     <Container>
-      <PremiumModal
-        onClose={() => setDisplayPremiumModal(false)}
-        isOpen={displayPremiumModal}
-        title="Ta vérité actuelle"
-        description={`Tes pensées d'hier ne sont plus forcément celles d'aujourd'hui.\n\nAvec Selen infini, garde le contrôle sur ton journal en modifiant ou supprimant tes capsules pour qu'elles reflètent toujours ta vérité actuelle.`}
-      />
-      <View style={{ flexDirection: 'row' }}>
-        <Header onGoBack={() => router.push('/(tabs)/calendar')} />
-        <MoreMenu
-          setDisplayPremiumModal={setDisplayPremiumModal}
-          onEdit={handleEditCapsuleResponse}
-          onDelete={handleSkipCapsuleResponse}
-        />
-      </View>
+      <Header onPress={() => router.push('/(tabs)/calendar')} title="Détail de la capsule" />
+      <View style={{ flex: 1 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+          <Text
+            style={{
+              flex: 1,
+              fontSize: 12,
+              fontWeight: 'bold',
+              color: Colors.oakHoneyDark,
+              textAlign: 'center',
+              textTransform: 'capitalize',
+            }}
+          >
+            {dayjs(capsuleResponse?.createdAt).format(
+              'dddd D MMMM YYYY',
+            )}
+          </Text>
+          <MoreMenu
+            setDisplayPremiumModal={setDisplayPremiumModal}
+            onEdit={handleEditCapsuleResponse}
+            onDelete={handleSkipCapsuleResponse}
+          />
+        </View>
 
-      <KeyboardAvoidingView
-        behavior="padding"
-        style={{
-          flex: 1,
-          paddingVertical: 32,
-        }}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={{ gap: 16 }}>
+        <View style={{ padding: 16, flex: 1 }}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flex: 1, gap: 16 }}>
               {isLoading && <ActivityIndicator />}
               {capsuleResponse && (
                 <View
@@ -133,19 +133,7 @@ export const CapsuleResponseDetailScreen = () => {
                 >
 
                   <View style={{ gap: 16 }}>
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        fontWeight: 'bold',
-                        color: Colors.oakHoneyDark,
-                        textAlign: 'center',
-                        textTransform: 'capitalize',
-                      }}
-                    >
-                      {dayjs(capsuleResponse.createdAt).format(
-                        'dddd D MMMM YYYY',
-                      )}
-                    </Text>
+
                     <View style={{ flexDirection: 'row', justifyContent: 'center', width: '100%', }}>
                       <ThemeSubThemeBadge subThemeCapsule={capsuleResponse.capsule?.subThemeCapsule} />
                     </View>
@@ -168,7 +156,7 @@ export const CapsuleResponseDetailScreen = () => {
                 </View>
               )}
               {isEditing && (
-                <View style={{ flexDirection: 'row', gap: 16 }}>
+                <View style={{ flexDirection: 'row', gap: 16, marginTop: 'auto' }}>
                   <CancelButton onPress={() => setIsEditing(false)} />
                   <SaveButton
                     onPress={form.handleSubmit(handleUpdateCapsuleResponse)}
@@ -176,10 +164,16 @@ export const CapsuleResponseDetailScreen = () => {
                   />
                 </View>
               )}
-            </View>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+            </ScrollView>
+          </TouchableWithoutFeedback>
+        </View>
+      </View>
+      <PremiumModal
+        onClose={() => setDisplayPremiumModal(false)}
+        isOpen={displayPremiumModal}
+        title="Ta vérité actuelle"
+        description={`Tes pensées d'hier ne sont plus forcément celles d'aujourd'hui.\n\nAvec Selen infini, garde le contrôle sur ton journal en modifiant ou supprimant tes capsules pour qu'elles reflètent toujours ta vérité actuelle.`}
+      />
     </Container>
   );
 };

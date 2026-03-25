@@ -1,0 +1,54 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "title": "Ton sas de clarté t'attend... 🧭",
+      "body": "3 minutes pour toi. Ta capsule du jour est prête."
+    },
+    {
+      "id": 2,
+      "title": "Quel temps fait-il en toi ? 🌤",
+      "body": "Prends un instant pour explorer ta météo intérieure."
+    },
+    {
+      "id": 3,
+      "title": "Un rendez-vous rien que pour toi ✨",
+      "body": "Ta capsule du jour t'attend. Ouvre-la quand tu es prêt(e)."
+    },
+    {
+      "id": 4,
+      "title": "Pause. Respire. Ouvre. 🌿",
+      "body": "Ta capsule du jour est là. Juste quelques minutes suffisent."
+    },
+    {
+      "id": 5,
+      "title": "Ton espace de clarté t'appelle 🔮",
+      "body": "Comment se porte ton ciel intérieur aujourd'hui ?"
+    },
+    {
+      "id": 6,
+      "title": "C'est l'heure de ta capsule 💊",
+      "body": "Un regard vers toi, avant de continuer ta journée."
+    },
+    {
+      "id": 7,
+      "title": "Prends soin de toi aujourd'hui 🌱",
+      "body": "Ta capsule du jour n'attend que toi. Elle sera là autant que tu en as besoin."
+    },
+    {
+      "id": 8,
+      "title": "Un instant pour toi 🕊",
+      "body": "Pose-toi. Ta capsule est prête quand tu l'es."
+    },
+    {
+      "id": 9,
+      "title": "Selen t'a préparé quelque chose 🎁",
+      "body": "Découvre ta capsule du jour et explore ton ciel intérieur."
+    },
+    {
+      "id": 10,
+      "title": "Le moment est venu 🌊",
+      "body": "Ta capsule t'attend. Quelques minutes pour naviguer en toi."
+    }
+  ]
+}

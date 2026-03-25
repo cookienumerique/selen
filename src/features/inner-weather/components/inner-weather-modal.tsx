@@ -1,5 +1,4 @@
 import { Button } from '@/src/components/button';
-import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
 import { Colors } from '@/src/constants/theme';
 import { useCreateInnerWeatherResponse } from '@/src/features/inner-weather-response/hooks/use-create-inner-weather-response';
@@ -16,10 +15,12 @@ import { chunkArray } from '@/src/utils/array/chunk-array';
 import { Entypo } from '@expo/vector-icons';
 import { FormProvider } from 'react-hook-form';
 import { ActivityIndicator, Modal, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 export const InnerWeatherModal = () => {
   const { isVisible, setIsVisible } = useInnerWeatherModal();
+  const insets = useSafeAreaInsets();
   const { data: innerWeathers, isPending: isPendingFetchInnerWeathers } =
     useFetchInnerWeathers();
   const { invalidate: invalidateInnerWeathersResponses } =
@@ -50,21 +51,11 @@ export const InnerWeatherModal = () => {
   };
   return (
     <Modal visible={isVisible}>
-      <FormProvider {...form}>
-        <Container>
-          <ScrollView style={{ height: '100%', gap: 16 }}>
-            <Header />
-            <View
-              style={{
-                flex: 1,
-                width: '100%',
-                backgroundColor: Colors.linenCloud,
-                gap: 64,
-                borderRadius: 16,
-                paddingTop: 64,
-                paddingBottom: 16,
-              }}
-            >
+      <SafeAreaView style={{ flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom, backgroundColor: Colors.linenCloud, }} edges={['top', 'bottom']}>
+        <FormProvider {...form}>
+          <Header title="Météo intérieure" />
+          <View style={{ flex: 1, padding: 16 }}>
+            <ScrollView contentContainerStyle={{ flex: 1, gap: 16 }}>
               <Text
                 style={{
                   fontSize: 24,
@@ -94,22 +85,23 @@ export const InnerWeatherModal = () => {
                   </View>
                 ))}
               </View>
-            </View>
-          </ScrollView>
-          <Button
-            disabled={!form.formState.isValid || isPending}
-            onPress={form.handleSubmit(onSubmit)}
-            style={{
-              width: '100%',
-              marginTop: 'auto',
-            }}
-          >
-            <Text style={{ color: 'white', fontSize: 18 }}>Continuer</Text>
-            {isPending && <ActivityIndicator size="small" color="white" />}
-            <Entypo name="chevron-right" size={24} color="white" />
-          </Button>
-        </Container>
-      </FormProvider>
+            </ScrollView>
+            <Button
+              disabled={!form.formState.isValid || isPending}
+              onPress={form.handleSubmit(onSubmit)}
+              style={{
+                width: '100%',
+                marginTop: 'auto',
+              }}
+            >
+              <Text style={{ color: 'white', fontSize: 18 }}>Continuer</Text>
+              {isPending && <ActivityIndicator size="small" color="white" />}
+              <Entypo name="chevron-right" size={24} color="white" />
+            </Button>
+          </View>
+
+        </FormProvider>
+      </SafeAreaView>
     </Modal>
   );
 };

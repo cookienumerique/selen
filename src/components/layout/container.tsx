@@ -14,7 +14,6 @@ export const Container = ({ children, style }: ContainerProps) => {
           flexDirection: 'column',
           backgroundColor: Colors.warmSand,
           flex: 1,
-          padding: 16,
         },
         style,
       ]}

@@ -1,4 +1,3 @@
-import HomeButton from '@/src/components/button/home-button';
 import { Colors } from '@/src/constants/theme';
 import { Image, Text, View } from 'react-native';
 
@@ -50,7 +49,6 @@ export default function CapsuleAlreadyRespondedToday() {
           Reviens demain pour une nouvelle découverte sur toi même
         </Text>
       </View>
-      <HomeButton />
     </>
   );
 }

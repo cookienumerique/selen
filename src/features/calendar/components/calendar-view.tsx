@@ -1,9 +1,6 @@
 import { Calendar } from '@/src/components/calendar/calendar';
 import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
-import { MoonBackground } from '@/src/components/layout/moon-background';
-import { Text } from '@/src/components/texts';
-import { Colors } from '@/src/constants/theme';
 import { Encouragement } from '@/src/features/calendar/components/encouragement';
 import { LegendList } from '@/src/features/calendar/components/legends/legend-list';
 import { StatsRow } from '@/src/features/calendar/components/stats-row';
@@ -21,24 +18,14 @@ export function CalendarView() {
   } = useCalendar();
   return (
     <Container>
-      <MoonBackground />
-      <Header />
+      <Header title="Mon mois intérieur" />
 
       <ScrollView
         contentContainerStyle={{
-          paddingVertical: 24,
+          padding: 16,
           gap: 24,
         }}
       >
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: 'bold',
-            color: Colors.slateRoot,
-          }}
-        >
-          Mon mois intérieur
-        </Text>
 
         <StatsRow stats={stats} isLoading={isLoadingCapsules} />
 

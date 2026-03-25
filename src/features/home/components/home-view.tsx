@@ -14,7 +14,7 @@ import { ScrollView, View } from 'react-native';
 export const HomeView = () => {
   return (
     <SubThemesProvider>
-      <Container style={{ backgroundColor: Colors.slateRoot, gap: 16 }}>
+      <Container style={{ backgroundColor: Colors.slateRoot, gap: 16, padding: 16 }}>
         <View
           style={{
             flexDirection: 'row',

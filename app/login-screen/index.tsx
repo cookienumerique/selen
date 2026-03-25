@@ -18,7 +18,7 @@ export default function Home() {
   }, [user]);
 
   return (
-    <Container style={{ backgroundColor: Colors.slateRoot }}>
+    <Container style={{ backgroundColor: Colors.slateRoot, padding: 16 }}>
       <View
         style={{
           height: '100%',

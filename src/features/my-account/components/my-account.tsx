@@ -1,6 +1,5 @@
 import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
-import { MoonBackground } from '@/src/components/layout/moon-background';
 import { useUser } from '@/src/contexts/use-user';
 import { UserAvatarName } from '@/src/features/auth/components/user-avatar-name';
 import { DeleteAccountButtonAlert } from '@/src/features/my-account/components/delete-account-button-alert';
@@ -14,11 +13,10 @@ export const MyAccountScreen = () => {
 
   return (
     <Container>
-      <MoonBackground />
       <View style={{ gap: 16, flex: 1 }}>
-        <Header onGoBack={() => router.push('/(tabs)/settings')} />
+        <Header title="Mon compte" onPress={() => router.push('/(tabs)/settings')} />
         <UserAvatarName />
-        <View style={{ gap: 32 }}>
+        <View style={{ gap: 32, padding: 16 }}>
           <View
             style={{
               backgroundColor: 'white',

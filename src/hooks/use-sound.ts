@@ -40,7 +40,7 @@ export const useSound = (requirePath: AVPlaybackSource) => {
         try {
             await soundRef.current?.replayAsync();
         } catch (e) {
-            console.log('Sound error', e);
+            console.error('Sound error', e);
         }
     };
     const stop = async () => {
@@ -48,7 +48,7 @@ export const useSound = (requirePath: AVPlaybackSource) => {
         try {
             await soundRef.current?.stopAsync();
         } catch (e) {
-            console.log('Sound error', e);
+            console.error('Sound error', e);
         }
     };
 

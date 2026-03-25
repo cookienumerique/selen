@@ -1,9 +1,15 @@
+import { useNotificationCapsule } from '@/src/contexts/notifications/use-notification-capsule';
 import { HomeView } from '@/src/features/home/components/home-view';
 import { InnerWeatherModal } from '@/src/features/inner-weather/components/inner-weather-modal';
-import { useNotificationCapsule } from '@/src/features/notification/hooks/use-notification-capsule';
+import { useEffect } from 'react';
 
 export default function HomeScreen() {
-  useNotificationCapsule();
+  const { initSubscription } = useNotificationCapsule();
+
+  useEffect(() => {
+    initSubscription();
+  }, []);
+
   return (
     <>
       <HomeView />

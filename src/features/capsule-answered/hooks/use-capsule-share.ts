@@ -39,7 +39,7 @@ export const useCapsuleShare = () => {
                 });
             }
         } catch (error) {
-            console.log('error', error);
+            console.error('error', error);
         }
     };
 

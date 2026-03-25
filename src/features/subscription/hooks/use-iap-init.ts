@@ -7,7 +7,7 @@ export const useIapInit = (): void => {
       try {
         await initConnection();
         await clearPendingPurchases();
-        console.log('IAP connection initialized');
+        console.info('IAP connection initialized');
       } catch (error) {
         console.warn('IAP init error:', error);
       }

@@ -21,7 +21,7 @@ export default function CapsuleCompletionScreen() {
   if (!capsuleResponse) return null;
   return (
     <Container style={{ backgroundColor: Colors.slateRoot }}>
-      <ScrollView contentContainerStyle={{ flex: 1, gap: 32 }}>
+      <ScrollView contentContainerStyle={{ flex: 1, gap: 32, padding: 16 }}>
         <View style={{ gap: 32, flex: 1 }}>
           <Image source={require('@/assets/images/moon_selen_linencloud.png')} style={{ width: 150, height: 150, alignSelf: 'center', resizeMode: 'contain', }} />
           <Text family="seasons" variant="bold" style={{ fontSize: 16, color: Colors.linenCloud, textAlign: 'center' }}>{capsuleAnswred ? 'C\'est noté, gardé, précieusement.' : 'Pas besoin de répondre aujourd\'hui.\nReviens demain, la lune sera là."'}</Text>

@@ -87,12 +87,6 @@ export default function OpenCapsuleView() {
     );
   }
 
-
-
-  // if (capsuleAlreadyRespondedThisWeek) {
-  //   return <CapsuleAlreadyOpenedThisWeekScreen />;
-  // }
-
   if (capsuleAlreadyRespondedToday) {
     return <CapsuleAlreadyOpenedTodayScreen />;
   }
@@ -109,9 +103,9 @@ export default function OpenCapsuleView() {
     <Container>
       <MoonBackground />
       <View style={{ gap: 16 }}>
-        <Header />
+        <Header title="Capsule du jour" />
       </View>
-      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1, padding: 16 }}>
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,

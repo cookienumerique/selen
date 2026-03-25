@@ -1,5 +1,6 @@
 import ForceUpdateScreen from '@/app/force-update';
 import { toastConfig } from '@/src/components/toast/selen-toast';
+import { NotificationCapsuleProvider } from '@/src/contexts/notifications/use-notification-capsule';
 import { SubscriptionsProvider } from '@/src/contexts/use-subscriptions';
 import { UserProvider } from '@/src/contexts/use-user';
 import { configureGoogleSignIn } from '@/src/features/auth/config/google-signin';
@@ -71,15 +72,17 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <SubscriptionsProvider>
-        <UserProvider>
-          <PowerShakeProvider>
-            <Slot />
-            <Toast config={toastConfig} bottomOffset={200} />
-          </PowerShakeProvider>
-        </UserProvider>
-      </SubscriptionsProvider>
-    </QueryClientProvider>
+    <NotificationCapsuleProvider>
+      <QueryClientProvider client={queryClient}>
+        <SubscriptionsProvider>
+          <UserProvider>
+            <PowerShakeProvider>
+              <Slot />
+              <Toast config={toastConfig} bottomOffset={200} />
+            </PowerShakeProvider>
+          </UserProvider>
+        </SubscriptionsProvider>
+      </QueryClientProvider>
+    </NotificationCapsuleProvider>
   );
 }

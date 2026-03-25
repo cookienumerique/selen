@@ -1,7 +1,6 @@
 import { Button } from '@/src/components/button';
 import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
-import { MoonBackground } from '@/src/components/layout/moon-background';
 import { Text } from '@/src/components/texts';
 import { env } from '@/src/config/env';
 import { Colors } from '@/src/constants/theme';
@@ -10,7 +9,7 @@ import * as MailComposer from 'expo-mail-composer';
 import { router } from 'expo-router';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { TextInput, View } from 'react-native';
+import { Keyboard, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 
 type ContactUsFormValues = {
   message: string;
@@ -36,85 +35,72 @@ export const ContactUsScreen = () => {
   };
   return (
     <Container>
-      <MoonBackground />
-      <Header onGoBack={() => router.push('/(tabs)/settings')} />
+      <Header title="Contactez-nous" onPress={() => router.push('/(tabs)/settings')} />
 
-      <View
-        style={{
-          gap: 16,
-          paddingVertical: 16,
-        }}
-      >
-        <Text
-          style={{
-            fontWeight: 'bold',
-            fontSize: 24,
-            color: Colors.oakHoneyDark,
-          }}
-        >
-          Contactez-nous
-        </Text>
-        <View style={{ gap: 4 }}>
-          <Text
-            style={{
-              color: Colors.oakHoneyDark,
-            }}
-          >
-            Une question, un doute, une idée ?
-          </Text>
-          <Text
-            style={{
-              color: Colors.oakHoneyDark,
-            }}
-          >
-            Nous sommes là pour vous lire.
-          </Text>
-          <Text
-            style={{
-              color: Colors.oakHoneyDark,
-            }}
-          >
-            N&apos;hésitez pas a nous écrire pour les partager.
-          </Text>
-        </View>
-        <Controller
-          control={form.control}
-          name="message"
-          rules={{ required: true }}
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              multiline
-              placeholder="Écris ici ton message..."
-              value={value}
-              onChangeText={onChange}
-              numberOfLines={10}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{ flex: 1, padding: 16, gap: 16 }}>
+          <View style={{ gap: 4 }}>
+            <Text
               style={{
-                borderRadius: 8,
-                borderColor: Colors.oakHoneyDark,
-                backgroundColor: 'white',
-                padding: 16,
-                height: 150,
-                textAlignVertical: 'top',
+                color: Colors.oakHoneyDark,
               }}
-            />
-          )}
-        />
-        <Button
-          style={{ marginTop: 'auto' }}
-          onPress={form.handleSubmit(handleContactUs)}
-          disabled={!form.formState.isValid}
-        >
-          <FontAwesome name="send" size={14} color="white" />
-          <Text
-            style={{
-              fontSize: 14,
-              color: 'white',
-            }}
+            >
+              Une question, un doute, une idée ?
+            </Text>
+            <Text
+              style={{
+                color: Colors.oakHoneyDark,
+              }}
+            >
+              Nous sommes là pour vous lire.
+            </Text>
+            <Text
+              style={{
+                color: Colors.oakHoneyDark,
+              }}
+            >
+              N&apos;hésitez pas a nous écrire pour les partager.
+            </Text>
+          </View>
+          <Controller
+            control={form.control}
+            name="message"
+            rules={{ required: true }}
+            render={({ field: { onChange, value } }) => (
+              <TextInput
+                multiline
+                placeholder="Écris ici ton message..."
+                value={value}
+                onChangeText={onChange}
+                numberOfLines={10}
+                style={{
+                  borderRadius: 8,
+                  borderColor: Colors.oakHoneyDark,
+                  backgroundColor: 'white',
+                  padding: 16,
+                  height: 150,
+                  textAlignVertical: 'top',
+                }}
+              />
+            )}
+          />
+          <Button
+            style={{ marginTop: 'auto' }}
+            onPress={form.handleSubmit(handleContactUs)}
+            disabled={!form.formState.isValid}
           >
-            Envoyer
-          </Text>
-        </Button>
-      </View>
-    </Container>
+            <FontAwesome name="send" size={14} color="white" />
+            <Text
+              style={{
+                fontSize: 14,
+                color: 'white',
+              }}
+            >
+              Envoyer
+            </Text>
+          </Button>
+        </View>
+      </TouchableWithoutFeedback>
+    </Container >
   );
 };

@@ -28,7 +28,7 @@ export const useBreakSound = () => {
     try {
       await soundRef.current?.replayAsync();
     } catch (e) {
-      console.log('Sound error', e);
+      console.error('Sound error', e);
     }
   };
 
