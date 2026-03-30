@@ -7,7 +7,7 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 export const TopSubThemeCapsulesFlatList = () => {
 
   const { getSubThemesWithProgressByCodes, isLoading } = useSubThemes();
-  const topSubThemeCapsules = getSubThemesWithProgressByCodes(['GRATITUDE', 'TIME_AND_URGENCY', 'MONEY_AND_WORTH']);
+  const topSubThemeCapsules = getSubThemesWithProgressByCodes(['GRATITUDE', 'ADDICTIONS_AND_DEPENDENCIES', 'SELF_COMPASSION_GROWTH']);
 
   return (
     <View style={{ gap: 16 }}>
@@ -19,7 +19,7 @@ export const TopSubThemeCapsulesFlatList = () => {
           textAlign: 'left',
         }}
       >
-        Top 3 France
+        Les nouveautés
       </Text>
 
       {isLoading && (

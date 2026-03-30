@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.0] 2026-03-30
+
+### Added
+
+- sub theme capsule addiction and self_compassion were added
+- change UI of content to share on instagram
+
 ## [1.19.0] 2026-03-12
 
 ### Added
