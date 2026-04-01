@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.23.0] 2026-04-01
+
+### Added
+
+- change endpoint capsule to capsules/ranked
+
 ## [1.22.0] 2026-03-30
 
 ### Added

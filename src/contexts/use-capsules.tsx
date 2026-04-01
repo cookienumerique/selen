@@ -4,7 +4,7 @@ import {
   useCreateCapsuleResponse,
 } from '@/src/features/capsule-reponse/hooks/use-create';
 import { useFetchCapsulesResponse } from '@/src/features/capsule-reponse/hooks/use-fetch-capsules-response';
-import { useFetchCapsules } from '@/src/features/capsule/hooks/use-fetch-capsules';
+import { useFetchCapsulesRanked } from '@/src/features/capsule/hooks/use-fetch-capsules-ranked';
 import { Capsule } from '@/src/features/capsule/types/capsule.types';
 import { useFetchSubThemeCapsulesWithProgress } from '@/src/features/sub-theme-capsule/hooks/use-fetch-sub-theme-capsules-with-progress';
 import dayjs from 'dayjs';
@@ -37,7 +37,8 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
   const { subscribe, time } = useNotificationCapsule();
   const { invalidate: invalidateSubThemeCapsulesWithProgress } = useFetchSubThemeCapsulesWithProgress();
   const { data: capsules = [], isLoading: isLoadingCapsules } =
-    useFetchCapsules({ params: { subThemeCapsuleId: id } });
+    useFetchCapsulesRanked({ params: { subThemeCapsuleId: id } });
+
   const {
     data: capsulesResponses = [],
     isLoading: isLoadingCapsulesResponses,
