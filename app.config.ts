@@ -1,12 +1,12 @@
-const version = '1.23.0';
+const version = '1.23.1';
 
 // android
-const versionCode = 42;
+const versionCode = 43;
 const packageNameAndroid = 'com.cookienumerique.selen';
 
 // Ios
 const packageNameIos = 'com.selen.app';
-const buildNumberIos = '13';
+const buildNumberIos = '14';
 
 // API
 const selenAPI = 'https://api.instantselen.fr';

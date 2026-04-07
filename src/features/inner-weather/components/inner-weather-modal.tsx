@@ -55,7 +55,7 @@ export const InnerWeatherModal = () => {
         <FormProvider {...form}>
           <Header title="Météo intérieure" />
           <View style={{ flex: 1, padding: 16 }}>
-            <ScrollView contentContainerStyle={{ flex: 1, gap: 16 }}>
+            <ScrollView contentContainerStyle={{ gap: 16, }} showsVerticalScrollIndicator={false}>
               <Text
                 style={{
                   fontSize: 24,

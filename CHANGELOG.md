@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.23.1] 2026-04-07
+
+### Fixed
+
+- the inner weather modal is scrollable
+
 ## [1.23.0] 2026-04-01
 
 ### Added
