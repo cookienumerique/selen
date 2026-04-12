@@ -1,7 +1,7 @@
 import { Container } from '@/src/components/layout/container';
 import { Colors } from '@/src/constants/theme';
 import HelloGreeting from '@/src/features/auth/components/user-greeting';
-import { InnerWeatherCard } from '@/src/features/home/components/inner-weather-card';
+import { JournalCard } from '@/src/features/home/components/journal-card';
 import { MonthlyCapsuleBadge } from '@/src/features/home/components/monthly-capsule-badge';
 import { SubThemeCapsulesByInnerWeatherFlatList } from '@/src/features/home/components/sub-theme-capsules-by-inner-weather-flat-list';
 import { SubThemeOfTheMomentFlatList } from '@/src/features/home/components/sub-theme-of-the-moment-flat-list';
@@ -33,10 +33,10 @@ export const HomeView = () => {
           showsVerticalScrollIndicator={false}
         >
           <View style={{ flexDirection: 'row', gap: 16 }}>
-            <View style={{ flex: 4 }}>
-              <InnerWeatherCard />
+            <View style={{ flex: 2 }}>
+              <JournalCard />
             </View>
-            <View style={{ flex: 6 }}>
+            <View style={{ flex: 1 }}>
               <SurpriseCapsuleCard />
             </View>
           </View>

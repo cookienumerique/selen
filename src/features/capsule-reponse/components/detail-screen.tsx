@@ -2,7 +2,6 @@ import { Container } from '@/src/components/layout/container';
 import { Header } from '@/src/components/layout/header';
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
-import { ResponseMoon } from '@/src/features/capsule-answered/components/response-moon';
 import { CancelButton } from '@/src/features/capsule-reponse/components/cancel-button';
 import { CapsuleResponseInput } from '@/src/features/capsule-reponse/components/capsule-response';
 import { CapsuleTitle } from '@/src/features/capsule-reponse/components/capsule-title';
@@ -12,6 +11,7 @@ import { SaveButton } from '@/src/features/capsule-reponse/components/save-butto
 import { ThemeSubThemeBadge } from '@/src/features/capsule-reponse/components/theme-sub-theme-badge';
 import { useFetchCapsulesResponseById } from '@/src/features/capsule-reponse/hooks/use-fetch-capsules-response-by-id';
 import { useUpdateCapsuleResponse } from '@/src/features/capsule-reponse/hooks/use-update-capsule-response';
+import { ResponseMoon } from '@/src/features/moon/response-moon';
 import { PremiumModal } from '@/src/features/premium/premium-modal';
 import dayjs from 'dayjs';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -150,8 +150,8 @@ export const CapsuleResponseDetailScreen = () => {
                   {isEditing && (
                     <CapsuleResponseInput control={form.control} />
                   )}
-                  {capsuleResponse?.aiResponse !== '' && (
-                    <ResponseMoon capsuleResponse={capsuleResponse} variant="dark" />
+                  {capsuleResponse?.aiResponse && (
+                    <ResponseMoon response={capsuleResponse.aiResponse} variant="dark" />
                   )}
                 </View>
               )}

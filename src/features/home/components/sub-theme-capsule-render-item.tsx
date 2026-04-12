@@ -20,7 +20,7 @@ export const SubThemeCapsuleRenderItem = ({
   const [isCompletedModalVisible, setIsCompletedModalVisible] = useState(false);
   const source = subThemeCapsule.image
     ? { uri: `${env.SELEN_API}/media/${subThemeCapsule.image}` }
-    : require('@/assets/images/surprise-capsule-background.png');
+    : require('@/assets/images/home/random-capsule-card.png');
 
   const handlePressOnSubThemeCapsule = () => {
     if (isCompleted) {
@@ -63,8 +63,7 @@ export const SubThemeCapsuleRenderItem = ({
             }}
           />
           <View style={{ width: '100%', padding: 8, flexDirection: 'row', gap: 4 }}>
-            <Text style={{ flex: 1, fontSize: 10, color: 'white' }}
-            >
+            <Text style={{ flex: 1, fontSize: 10, color: 'white' }}>
               {subThemeCapsule.name}
             </Text>
             <View style={{ justifyContent: 'flex-end' }}>

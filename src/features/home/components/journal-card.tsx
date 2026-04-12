@@ -1,11 +1,12 @@
 import { Text } from '@/src/components/texts';
+import { Colors } from '@/src/constants/theme';
 import { HomeCard } from '@/src/features/home/components/home-card';
 import { router } from 'expo-router';
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 
-export const SurpriseCapsuleCard = () => {
+export const JournalCard = () => {
   const handlePressOnSurpriseCapsule = () => {
-    router.navigate('/capsule/open-capsule-screen');
+    router.navigate('/journal');
   };
   return (
     <TouchableOpacity
@@ -18,12 +19,11 @@ export const SurpriseCapsuleCard = () => {
           borderRadius: 16,
           overflow: 'hidden',
           height: 120,
-          width: 120,
+          width: '100%',
         }}
       >
         <ImageBackground
-          source={require('@/assets/images/home/random-capsule-card.png')}
-          resizeMode="cover"
+          source={require('@/assets/images/home/journal-card.png')}
           style={{
             height: '100%',
             width: '100%',
@@ -31,6 +31,22 @@ export const SurpriseCapsuleCard = () => {
             gap: 8,
           }}
         >
+          <Text
+            style={{
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              fontSize: 10,
+              backgroundColor: Colors.sageMist,
+              paddingHorizontal: 8,
+              paddingVertical: 4,
+              borderRadius: 8,
+              zIndex: 1,
+              color: 'black'
+            }}
+          >
+            Version bêta
+          </Text>
           <View
             style={{
               position: 'absolute',
@@ -42,17 +58,22 @@ export const SurpriseCapsuleCard = () => {
               opacity: 0.4,
             }}
           />
-          <View style={{ width: '100%', padding: 8, flexDirection: 'row', gap: 4, marginTop: 'auto' }}>
+          <View style={{ flexDirection: 'column', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
             <Text
               style={{
-                flex: 1, fontSize: 10, color: 'white'
+                textAlign: 'center',
+                fontSize: 16,
+                color: 'white',
+                fontWeight: 'bold',
+                gap: 4
               }}
             >
-              Capsule aléatoire
+              Ton journal intime
             </Text>
+            <Text style={{ fontSize: 12, color: 'white' }}>Écris et la lune te répond.</Text>
           </View>
         </ImageBackground>
       </HomeCard>
-    </TouchableOpacity>
+    </TouchableOpacity >
   );
 };

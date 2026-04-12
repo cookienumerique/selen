@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.24.0] 2026-04-08
+
+### Added
+
+- user can write in the journal 
+
 ## [1.23.1] 2026-04-07
 
 ### Fixed

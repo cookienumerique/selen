@@ -1,16 +1,15 @@
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
 import { Corner } from '@/src/features/capsule-answered/components/corner';
-import { CapsuleResponse } from '@/src/features/capsule-reponse/types/capsule-response.types';
 import React from 'react';
 import { View } from 'react-native';
 
 type ResponseMoonProps = {
-    capsuleResponse: CapsuleResponse;
+    response: string;
     variant?: 'dark' | 'light';
 };
 export const ResponseMoon = (props: ResponseMoonProps) => {
-    const { capsuleResponse, variant = 'light' } = props;
+    const { response, variant = 'light' } = props;
     const backgroundColor = variant === 'dark' ? Colors.slateRoot : Colors.linenCloud;
     const color = variant === 'dark' ? Colors.linenCloud : Colors.slateRoot;
     return (
@@ -44,7 +43,7 @@ export const ResponseMoon = (props: ResponseMoonProps) => {
                         textAlign: 'center',
                     }}
                 >
-                    &quot;{capsuleResponse?.aiResponse}&quot;
+                    &quot;{response}&quot;
                 </Text>
             </View>
         </View >
