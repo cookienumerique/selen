@@ -14,6 +14,7 @@ import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import { Slot, SplashScreen } from 'expo-router';
 import React, { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 
 dayjs.locale('fr');
@@ -77,8 +78,10 @@ export default function RootLayout() {
         <SubscriptionsProvider>
           <UserProvider>
             <PowerShakeProvider>
-              <Slot />
-              <Toast config={toastConfig} bottomOffset={200} />
+              <GestureHandlerRootView>
+                <Slot />
+                <Toast config={toastConfig} bottomOffset={200} />
+              </GestureHandlerRootView>
             </PowerShakeProvider>
           </UserProvider>
         </SubscriptionsProvider>

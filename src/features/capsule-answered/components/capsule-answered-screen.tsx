@@ -48,6 +48,10 @@ export default function CapsuleCompletionScreen() {
           />
         </ViewShot>
       </ScrollView>
+      {/* <MoonResponseFeedbackSheet
+        context="capsule"
+        contextId={capsuleResponse?.id}
+      /> */}
     </Container >
   );
 }

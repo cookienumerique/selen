@@ -1,5 +1,5 @@
 import { useAxios } from '@/src/api/use-axios';
-import { Journal } from '@/src/features/journal/types/journal.types';
+import { JournalEntry } from '@/src/features/journal/types/journal-entry.types';
 import { MutationOptions, useMutation } from '@tanstack/react-query';
 
 export type UseCreateJournalEntryPayload = {
@@ -7,17 +7,16 @@ export type UseCreateJournalEntryPayload = {
 };
 
 export const useCreateJournalEntry = (
-  props?: MutationOptions<Journal, Error, UseCreateJournalEntryPayload>,
+  props?: MutationOptions<JournalEntry, Error, UseCreateJournalEntryPayload>,
 ) => {
   const axios = useAxios();
 
-  return useMutation<Journal, Error, UseCreateJournalEntryPayload>({
+  return useMutation<JournalEntry, Error, UseCreateJournalEntryPayload>({
     mutationFn: async ({ content }) => {
-      const { data } = await axios.post<{ item: Journal }>(
+      const { data } = await axios.post<{ item: JournalEntry }>(
         `/journal-entry`,
         { content },
       );
-      console.log('XXXXX', data)
       return data.item;
     },
     ...props,

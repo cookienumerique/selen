@@ -4,6 +4,7 @@ import { Header } from "@/src/components/layout/header";
 import { Text } from "@/src/components/texts";
 import { Colors } from "@/src/constants/theme";
 import { useCreateJournalEntry } from "@/src/features/journal/components/hooks/use-create-journal-entry";
+import { JournalEntry } from "@/src/features/journal/types/journal-entry.types";
 import { ResponseMoon } from "@/src/features/moon/response-moon";
 import { Feather } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -17,7 +18,7 @@ type JournalFormValues = {
 };
 
 export const JournalScreen = () => {
-    const [moonResponse, setMoonResponse] = useState<string | null>(null);
+    const [journalEntry, setJournalEntry] = useState<JournalEntry | null>();
 
     const form = useForm<JournalFormValues>({
         defaultValues: { content: '' },
@@ -26,7 +27,7 @@ export const JournalScreen = () => {
 
     const { mutateAsync: createJournalEntry, isPending } = useCreateJournalEntry({
         onSuccess: (journalEntry) => {
-            setMoonResponse(journalEntry.aiResponse);
+            setJournalEntry(journalEntry);
             form.reset();
         },
         onError: (error) => {
@@ -41,8 +42,6 @@ export const JournalScreen = () => {
     });
 
     const handleSubmit = async ({ content }: JournalFormValues) => {
-        console.log('content', content);
-
         await createJournalEntry({ content });
     };
 
@@ -93,7 +92,7 @@ export const JournalScreen = () => {
                         </Text>
                     </View>
 
-                    {!moonResponse && (
+                    {!journalEntry?.aiResponse && (
                         <Controller
                             control={form.control}
                             name="content"
@@ -121,20 +120,20 @@ export const JournalScreen = () => {
 
                     )}
 
-                    {moonResponse && (
+                    {journalEntry?.aiResponse && (
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <ResponseMoon response={moonResponse} variant="dark" />
+                            <ResponseMoon response={journalEntry?.aiResponse} variant="dark" />
                         </View>
                     )}
 
                 </ScrollView>
 
                 <View style={{ paddingHorizontal: 16 }}>
-                    {moonResponse && (
+                    {journalEntry && (
                         <View style={{ paddingHorizontal: 16 }}>
                             <Button
                                 onPress={() => {
-                                    setMoonResponse(null);
+                                    setJournalEntry(null);
                                     form.reset();
                                 }}
                             >
@@ -154,7 +153,8 @@ export const JournalScreen = () => {
                             </Button>
                         </View>
                     )}
-                    {!moonResponse && (
+
+                    {!journalEntry && (
                         <Button
                             onPress={form.handleSubmit(handleSubmit)}
                             disabled={isPending || !form.formState.isValid}
@@ -169,8 +169,14 @@ export const JournalScreen = () => {
                             </Text>
                         </Button>
                     )}
-                </View>
 
+                </View>
+                {/* {journalEntry && (
+                    <MoonResponseFeedbackSheet
+                        context="journal"
+                        contextId={journalEntry?.id}
+                    />
+                )} */}
             </KeyboardAvoidingView>
         </Container>
     );
