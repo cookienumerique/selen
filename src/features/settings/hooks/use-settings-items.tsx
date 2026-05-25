@@ -28,6 +28,17 @@ export const useSettingsItems = (): SettingsItem[] => {
       route: '/notification',
       icon: <MaterialDesignIcons name="bell" size={24} color="gray" />,
     },
+  );
+
+  if (user) {
+    items.push({
+      label: 'Confidentialité',
+      route: '/privacy',
+      icon: <MaterialDesignIcons name="shield-lock" size={24} color="gray" />,
+    });
+  }
+
+  items.push(
     {
       label: 'À propos de nous',
       route: '/about-us',

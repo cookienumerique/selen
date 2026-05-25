@@ -7,6 +7,7 @@
 - écran de consentement RGPD bloquant au démarrage (politique, données santé art. 9, opt-in IA)
 - POST /users/consent côté API + refresh du user en contexte
 - l'app fonctionne sans opt-in IA (la « réponse de la lune » est désactivée)
+- menu "Confidentialité" dans les paramètres : toggle pour activer/désactiver la réponse de la lune à tout moment
 
 ## [1.24.0] 2026-04-08
 
