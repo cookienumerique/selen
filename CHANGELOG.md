@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.25.0] 2026-05-26
+
+### Added
+
+- écran de consentement RGPD bloquant au démarrage (politique, données santé art. 9, opt-in IA)
+- POST /users/consent côté API + refresh du user en contexte
+- l'app fonctionne sans opt-in IA (la « réponse de la lune » est désactivée)
+
 ## [1.24.0] 2026-04-08
 
 ### Added

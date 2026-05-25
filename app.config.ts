@@ -1,4 +1,4 @@
-const version = '1.24.0';
+const version = '1.25.0';
 
 // android
 const versionCode = 44;

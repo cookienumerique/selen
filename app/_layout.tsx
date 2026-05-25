@@ -4,6 +4,8 @@ import { NotificationCapsuleProvider } from '@/src/contexts/notifications/use-no
 import { SubscriptionsProvider } from '@/src/contexts/use-subscriptions';
 import { UserProvider } from '@/src/contexts/use-user';
 import { configureGoogleSignIn } from '@/src/features/auth/config/google-signin';
+import { ConsentScreen } from '@/src/features/consent/components/consent-screen';
+import { useNeedsConsent } from '@/src/features/consent/hooks/use-needs-consent';
 import { useAppUpdate } from '@/src/features/force-update/hooks/use-app-update';
 import { PowerShakeProvider } from '@/src/features/power-shake/power-shake-provider';
 import { useIapInit } from '@/src/features/subscription/hooks/use-iap-init';
@@ -14,6 +16,7 @@ import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import { Slot, SplashScreen } from 'expo-router';
 import React, { useEffect } from 'react';
+import { Modal } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 
@@ -79,7 +82,7 @@ export default function RootLayout() {
           <UserProvider>
             <PowerShakeProvider>
               <GestureHandlerRootView>
-                <Slot />
+                <AppGate />
                 <Toast config={toastConfig} bottomOffset={200} />
               </GestureHandlerRootView>
             </PowerShakeProvider>
@@ -87,5 +90,22 @@ export default function RootLayout() {
         </SubscriptionsProvider>
       </QueryClientProvider>
     </NotificationCapsuleProvider>
+  );
+}
+
+function AppGate() {
+  const showConsent = useNeedsConsent();
+
+  return (
+    <>
+      <Slot />
+      <Modal
+        visible={showConsent}
+        animationType="fade"
+        onRequestClose={() => {}}
+      >
+        <ConsentScreen />
+      </Modal>
+    </>
   );
 }

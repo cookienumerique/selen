@@ -8,4 +8,5 @@ export type User = {
   firstName: string | null;
   picture?: string | null;
   createdAt: string;
+  consentAiOptin: boolean | null;
 };
