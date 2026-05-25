@@ -79,8 +79,9 @@ export default function PrivacyScreen() {
               value={aiOptin}
               onValueChange={handleToggle}
               disabled={isPending}
-              trackColor={{ false: Colors.slateRoot, true: Colors.oakHoneyDark }}
+              trackColor={{ false: Colors.gray, true: Colors.capsule }}
               thumbColor="white"
+              ios_backgroundColor={Colors.gray}
             />
           </View>
         </Card>
