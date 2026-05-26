@@ -21,8 +21,8 @@ export default {
     icon: './assets/images/icon_selen_512.png',
     splash: {
       image: './assets/images/splash.png',
-      resizeMode: 'contain',
-      backgroundColor: '#FFFFFF',
+      resizeMode: 'cover',
+      backgroundColor: '#2f3e46',
     },
     android: {
       package: packageNameAndroid,

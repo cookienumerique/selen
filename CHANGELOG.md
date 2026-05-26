@@ -8,6 +8,7 @@
 - POST /users/consent côté API + refresh du user en contexte
 - l'app fonctionne sans opt-in IA (la « réponse de la lune » est désactivée)
 - menu "Confidentialité" dans les paramètres : toggle pour activer/désactiver la réponse de la lune à tout moment
+- confirmation visible dans le journal après envoi quand la « réponse de la lune » est désactivée
 
 ## [1.24.0] 2026-04-08
 

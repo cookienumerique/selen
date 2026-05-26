@@ -3,12 +3,9 @@ import { Container } from '@/src/components/layout/container';
 import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
 import { useSaveConsent } from '@/src/features/consent/hooks/use-save-consent';
-import * as WebBrowser from 'expo-web-browser';
+import { openPolicy } from '@/src/features/consent/utils/open-policy';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import Toast from 'react-native-toast-message';
-
-const PRIVACY_POLICY_URL = 'https://instantselen.fr/politique-de-confidentialite';
 
 export const ConsentScreen = () => {
   const { mutate, isPending } = useSaveConsent();
@@ -23,19 +20,6 @@ export const ConsentScreen = () => {
     mutate({ aiOptin: false });
   };
 
-  const handleOpenPolicy = async () => {
-    try {
-      await WebBrowser.openBrowserAsync(PRIVACY_POLICY_URL);
-    } catch {
-      Toast.show({
-        type: 'info',
-        text1: 'Aucun navigateur disponible',
-        text2: PRIVACY_POLICY_URL,
-        position: 'bottom',
-      });
-    }
-  };
-
   return (
     <Container style={{ backgroundColor: Colors.slateRoot }}>
       <ScrollView
@@ -45,7 +29,12 @@ export const ConsentScreen = () => {
           justifyContent: 'space-between',
         }}
       >
-        <View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+          }}
+        >
           <Text
             family="seasons"
             style={{
@@ -56,7 +45,7 @@ export const ConsentScreen = () => {
               marginTop: 16,
             }}
           >
-            Avant de continuer
+            Un instant avant d&apos;entrer
           </Text>
 
           <Text
@@ -68,8 +57,9 @@ export const ConsentScreen = () => {
               opacity: 0.85,
             }}
           >
-            Selen traite tes réponses émotionnelles. La loi nous demande ton
-            consentement avant de continuer.
+            Selen reçoit ce que tu écris dans tes capsules et ton journal. Avant
+            d&apos;aller plus loin, on a besoin de ton accord, c&apos;est ton
+            droit, et c&apos;est la loi.
           </Text>
 
           <Text
@@ -82,9 +72,9 @@ export const ConsentScreen = () => {
               fontSize: 14,
             }}
           >
-            La « réponse de la lune » est générée par un service d'intelligence
-            artificielle (OpenAI, USA). Tu peux choisir de l'activer ou non —
-            l'app fonctionne dans les deux cas.
+            La réponse de la lune est un court résumé-miroir, écrit par une
+            intelligence artificielle. Tu choisis de l&apos;activer ou non.
+            L&apos;app fonctionne dans les deux cas.
           </Text>
         </View>
 
@@ -99,7 +89,7 @@ export const ConsentScreen = () => {
             }}
           >
             <Text style={{ color: Colors.slateRoot }} variant="bold">
-              J'accepte tout (avec la réponse de la lune)
+              J&apos;accepte tout (avec la réponse de la lune)
             </Text>
           </Button>
 
@@ -120,7 +110,7 @@ export const ConsentScreen = () => {
           </Button>
 
           <Text
-            onPress={handleOpenPolicy}
+            onPress={openPolicy}
             style={{
               color: Colors.warmSand,
               fontSize: 13,
@@ -130,7 +120,7 @@ export const ConsentScreen = () => {
               opacity: 0.85,
             }}
           >
-            Voir la politique de confidentialité
+            Lire la politique de confidentialité
           </Text>
         </View>
       </ScrollView>

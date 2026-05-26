@@ -92,7 +92,7 @@ export const JournalScreen = () => {
                         </Text>
                     </View>
 
-                    {!journalEntry?.aiResponse && (
+                    {!journalEntry && (
                         <Controller
                             control={form.control}
                             name="content"
@@ -123,6 +123,35 @@ export const JournalScreen = () => {
                     {journalEntry?.aiResponse && (
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <ResponseMoon response={journalEntry?.aiResponse} variant="dark" />
+                        </View>
+                    )}
+
+                    {journalEntry && !journalEntry.aiResponse && (
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <View
+                                style={{
+                                    backgroundColor: Colors.slateRoot,
+                                    borderRadius: 16,
+                                    paddingHorizontal: 32,
+                                    paddingVertical: 32,
+                                    alignItems: 'center',
+                                    gap: 12,
+                                }}
+                            >
+                                <Feather name="check-circle" size={28} color={Colors.linenCloud} />
+                                <Text
+                                    variant="bold"
+                                    family="seasons"
+                                    style={{ fontSize: 18, color: Colors.linenCloud, textAlign: 'center' }}
+                                >
+                                    C&apos;est posé.
+                                </Text>
+                                <Text
+                                    style={{ fontSize: 13, color: Colors.linenCloud, textAlign: 'center', opacity: 0.85, lineHeight: 20 }}
+                                >
+                                    Ce que tu viens d&apos;écrire reste ici, rien que pour toi.
+                                </Text>
+                            </View>
                         </View>
                     )}
 

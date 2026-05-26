@@ -5,13 +5,10 @@ import { Text } from '@/src/components/texts';
 import { Colors } from '@/src/constants/theme';
 import { useUser } from '@/src/contexts/use-user';
 import { useSaveConsent } from '@/src/features/consent/hooks/use-save-consent';
-import * as WebBrowser from 'expo-web-browser';
+import { openPolicy } from '@/src/features/consent/utils/open-policy';
 import { router } from 'expo-router';
 import React from 'react';
 import { Switch, View } from 'react-native';
-import Toast from 'react-native-toast-message';
-
-const PRIVACY_POLICY_URL = 'https://instantselen.fr/politique-de-confidentialite';
 
 export default function PrivacyScreen() {
   const { user } = useUser();
@@ -22,19 +19,6 @@ export default function PrivacyScreen() {
   const handleToggle = (value: boolean) => {
     if (isPending) return;
     mutate({ aiOptin: value });
-  };
-
-  const handleOpenPolicy = async () => {
-    try {
-      await WebBrowser.openBrowserAsync(PRIVACY_POLICY_URL);
-    } catch {
-      Toast.show({
-        type: 'info',
-        text1: 'Aucun navigateur disponible',
-        text2: PRIVACY_POLICY_URL,
-        position: 'bottom',
-      });
-    }
   };
 
   return (
@@ -60,19 +44,29 @@ export default function PrivacyScreen() {
                   color: Colors.oakHoneyDark,
                 }}
               >
-                Réponse de la lune (IA)
+                Réponse de la lune
+              </Text>
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: Colors.oakHoneyDark,
+                  marginTop: 2,
+                  opacity: 0.7,
+                }}
+              >
+                Générée par une IA
               </Text>
               <Text
                 style={{
                   fontSize: 12,
                   color: Colors.slateRoot,
-                  marginTop: 4,
+                  marginTop: 8,
                   lineHeight: 18,
                 }}
               >
-                Si activé, tes réponses sont transmises à un service
-                d&apos;intelligence artificielle (OpenAI, USA) pour générer un
-                résumé-miroir en 2 phrases.
+                Quand c&apos;est activé, ce que tu écris est analysé par une
+                intelligence artificielle pour générer un court miroir de 2
+                phrases. Tu peux désactiver à tout moment.
               </Text>
             </View>
             <Switch
@@ -87,7 +81,7 @@ export default function PrivacyScreen() {
         </Card>
 
         <Text
-          onPress={handleOpenPolicy}
+          onPress={openPolicy}
           style={{
             fontSize: 14,
             color: Colors.slateRoot,
