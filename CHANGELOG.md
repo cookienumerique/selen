@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.26.0] 2026-05-29
+
+### Added
+
+- parcours d'onboarding à la première connexion : accueil, consentement RGPD, intention d'inscription (« Qu'est-ce qui t'amène ici ? »), prise en main
+- écran de refus de consentement (l'accès reste bloqué tant que le consentement RGPD n'est pas accepté)
+- modale d'opt-in IA contextuelle, déclenchée à la première capsule, au premier journal ou depuis les paramètres
+- rafraîchissement de la notification de capsule au retour de l'app au premier plan
+
+### Changed
+
+- l'opt-in IA n'est plus demandé au démarrage : il est proposé au moment où la « réponse de la lune » est réellement utilisée
+
+### Removed
+
+- ancien écran de consentement bloquant au démarrage (remplacé par le parcours d'onboarding)
+- modale de découverte du power shake
+
 ## [1.25.0] 2026-05-26
 
 ### Added

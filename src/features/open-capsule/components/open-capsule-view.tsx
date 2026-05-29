@@ -6,6 +6,7 @@ import { MoonBackground } from '@/src/components/layout/moon-background';
 import { Colors } from '@/src/constants/theme';
 import { useCapsules } from '@/src/contexts/use-capsules';
 import { useUser } from '@/src/contexts/use-user';
+import { AiConsentModal } from '@/src/features/consent/components/ai-consent-modal';
 import { CapsuleAlreadyOpenedTodayScreen } from '@/src/features/open-capsule/components/capsule-already-opened-today-screen';
 import { NoCapsuleAvailableScreen } from '@/src/features/open-capsule/components/no-capsule-available-screen';
 import { FontAwesome6 } from '@expo/vector-icons';
@@ -101,6 +102,7 @@ export default function OpenCapsuleView() {
 
   return (
     <Container>
+      <AiConsentModal trigger="first_capsule" />
       <MoonBackground />
       <View style={{ gap: 16 }}>
         <Header title="Capsule du jour" />

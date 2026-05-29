@@ -7,6 +7,8 @@ export type UseSaveConsentPayload = {
   aiOptin: boolean;
 };
 
+// TODO (cleanup) : façon legacy d'enregistrer l'opt-in IA via /users/consent. Remplacée par useSaveAiConsent (/users/consent-ai)
+// et useSaveOnboarding (/users/onboarding). À supprimer avec son appel dans privacy-screen.tsx.
 export const useSaveConsent = (
   props?: MutationOptions<User, Error, UseSaveConsentPayload>,
 ) => {

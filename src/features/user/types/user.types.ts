@@ -9,4 +9,10 @@ export type User = {
   picture?: string | null;
   createdAt: string;
   consentAiOptin: boolean | null;
+  // Date du consentement RGPD (ISO). null = onboarding pas validé, app bloquée.
+  consentAt: string | null;
+  // Intention déclarée à l'inscription (valeur anglaise de l'enum back-end), null si jamais renseignée.
+  signupIntent: string | null;
+  // Version de l'onboarding suivi (ex: "1.26").
+  onboardingVersion: string | null;
 };

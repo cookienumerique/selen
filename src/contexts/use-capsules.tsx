@@ -1,4 +1,3 @@
-import { useNotificationCapsule } from '@/src/contexts/notifications/use-notification-capsule';
 import {
   CreateCapsuleResponsePayload,
   useCreateCapsuleResponse,
@@ -11,7 +10,6 @@ import dayjs from 'dayjs';
 import { router } from 'expo-router';
 import { createContext, ReactNode, useContext } from 'react';
 import { Vibration } from 'react-native';
-import { messages } from './notifications/notification-message.json';
 
 type CapsulesContextReturn = {
   capsuleOfTheDay: Capsule | undefined;
@@ -34,7 +32,6 @@ const CapsulesContext = createContext<CapsulesContextReturn | undefined>(
 );
 
 export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
-  const { subscribe, time } = useNotificationCapsule();
   const { invalidate: invalidateSubThemeCapsulesWithProgress } = useFetchSubThemeCapsulesWithProgress();
   const { data: capsules = [], isLoading: isLoadingCapsules } =
     useFetchCapsulesRanked({ params: { subThemeCapsuleId: id } });
@@ -52,8 +49,6 @@ export function CapsulesProvider({ children, id }: CapsulesProviderProps) {
       Vibration.vibrate(800);
       await invalidateSubThemeCapsulesWithProgress()
       await invalidateCapsulesResponses();
-      const message = messages[Math.floor(Math.random() * messages.length)];
-      await subscribe({ title: message.title, body: message.body, ...time });
       router.push({
         pathname: '/capsule/capsule-answered',
         params: { capsule: JSON.stringify(capsuleResponse) },

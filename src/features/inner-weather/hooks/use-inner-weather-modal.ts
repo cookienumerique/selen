@@ -1,5 +1,5 @@
 import { useUser } from '@/src/contexts/use-user';
-import { useNeedsConsent } from '@/src/features/consent/hooks/use-needs-consent';
+import { useNeedsOnboarding } from '@/src/features/onboarding/hooks/use-needs-onboarding';
 import { useFetchInnerWeathersResponses } from '@/src/features/inner-weather-response/hooks/use-fetch-inner-weathers-responses';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -13,7 +13,7 @@ export const useInnerWeatherModal = (): UseInnerWeatherModalReturn => {
   const [isVisible, setIsVisible] = useState(false);
 
   const { user, isLoadingUser, bearerTokenSelen } = useUser();
-  const needsConsent = useNeedsConsent();
+  const needsOnboarding = useNeedsOnboarding();
 
   const { data, isPending, isFetched } = useFetchInnerWeathersResponses({
     params: {
@@ -29,7 +29,7 @@ export const useInnerWeatherModal = (): UseInnerWeatherModalReturn => {
     isFetched &&
     !isPending &&
     !!bearerTokenSelen &&
-    !needsConsent;
+    !needsOnboarding;
 
   useEffect(() => {
     if (!isReady) return;

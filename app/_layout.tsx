@@ -1,12 +1,13 @@
 import ForceUpdateScreen from '@/app/force-update';
 import { toastConfig } from '@/src/components/toast/selen-toast';
 import { NotificationCapsuleProvider } from '@/src/contexts/notifications/use-notification-capsule';
+import { useRefreshCapsuleNotification } from '@/src/contexts/notifications/use-refresh-capsule-notification';
 import { SubscriptionsProvider } from '@/src/contexts/use-subscriptions';
 import { UserProvider } from '@/src/contexts/use-user';
 import { configureGoogleSignIn } from '@/src/features/auth/config/google-signin';
-import { ConsentScreen } from '@/src/features/consent/components/consent-screen';
-import { useNeedsConsent } from '@/src/features/consent/hooks/use-needs-consent';
 import { useAppUpdate } from '@/src/features/force-update/hooks/use-app-update';
+import { OnboardingFlow } from '@/src/features/onboarding/components/onboarding-flow';
+import { useNeedsOnboarding } from '@/src/features/onboarding/hooks/use-needs-onboarding';
 import { PowerShakeProvider } from '@/src/features/power-shake/power-shake-provider';
 import { useIapInit } from '@/src/features/subscription/hooks/use-iap-init';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -94,17 +95,18 @@ export default function RootLayout() {
 }
 
 function AppGate() {
-  const showConsent = useNeedsConsent();
+  const showOnboarding = useNeedsOnboarding();
+  useRefreshCapsuleNotification();
 
   return (
     <>
       <Slot />
       <Modal
-        visible={showConsent}
+        visible={showOnboarding}
         animationType="fade"
         onRequestClose={() => {}}
       >
-        <ConsentScreen />
+        <OnboardingFlow />
       </Modal>
     </>
   );

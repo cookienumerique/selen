@@ -3,6 +3,7 @@ import { Container } from "@/src/components/layout/container";
 import { Header } from "@/src/components/layout/header";
 import { Text } from "@/src/components/texts";
 import { Colors } from "@/src/constants/theme";
+import { AiConsentModal } from "@/src/features/consent/components/ai-consent-modal";
 import { useCreateJournalEntry } from "@/src/features/journal/components/hooks/use-create-journal-entry";
 import { JournalEntry } from "@/src/features/journal/types/journal-entry.types";
 import { ResponseMoon } from "@/src/features/moon/response-moon";
@@ -47,6 +48,7 @@ export const JournalScreen = () => {
 
     return (
         <Container>
+            <AiConsentModal trigger="first_journal" />
             <Header title="Journal" onPress={() => router.push('/(tabs)/home')} />
             <KeyboardAvoidingView
                 style={{ flex: 1 }}
